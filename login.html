@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cadastro - LUCEM</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #fdeedd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    display: flex;
+    background: #fff7ef;
+    width: 80%;
+    max-width: 1200px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* LADO ESQUERDO */
+  .left {
+    flex: 1.3;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .left img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 25px;
+  }
+
+  .left h1 {
+    font-size: 32px;
+    color: #3b2c2c;
+    margin-bottom: 10px;
+  }
+
+  .left p {
+    font-size: 18px;
+    color: #5d4b4b;
+    max-width: 450px;
+  }
+
+  /* LADO DIREITO */
+  .right {
+    flex: 0.7;
+    background: #fff1dd;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .right h2 {
+    color: #5a4238;
+    margin-bottom: 5px;
+    font-size: 26px;
+  }
+
+  .right p {
+    color: #6a5e57;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  form {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .right input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #c9b7a4;
+    background: #fff;
+    font-size: 15px;
+  }
+
+  .btn {
+    background: #6a4fb6;
+    color: white;
+    border: none;
+    padding: 13px;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background: #523c91;
+  }
+
+  .login-link {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .login-link a {
+    color: #6a4fb6;
+    text-decoration: none;
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- LADO ESQUERDO -->
+  <div class="left">
+    <img src="lucem.png" alt="Ilustração LUCEM" />
+    <h1>Bem-vindo(a) ao LUCEM ☀️</h1>
+    <p>Seu espaço de equilíbrio e autocuidado. Cuide da mente, respire fundo e comece hoje.</p>
+  </div>
+
+  <!-- LADO DIREITO -->
+  <div class="right">
+    <h2>Crie sua conta</h2>
+    <p>Crie sua conta grátis e simples.</p>
+
+<form action="sessao.php" method="POST">
+  <input type="email" name="email" placeholder="E-mail" required />
+  <input type="password" name="senha" placeholder="Senha" required />
+
+  <button class="btn" type="submit">Cadastrar</button>
+</form>
+
+<p class="login-link">Já tem uma conta? <a href="cadastro.html">Entrar</a></p>
+  </div>
+
+</div>
+</body>
+</html>
