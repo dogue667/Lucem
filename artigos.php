@@ -259,23 +259,23 @@ session_start();
 <body>
 
   <!-- ---------- MENU ---------- -->
-  <header>
+   <header>
   <div class="logo">🌞 LUCEM</div>
   <nav>
     <ul>
 
-      <li><a href="index.php">Sobre</a></li>
+      <li><a href="index.php"style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
       <?php if(!isset($_SESSION['usuario_id'])): ?>
 
-      <!-- VISITANTE NÃO LOGADO -->
-      <li><a href="cadastro.html">Criar Conta</a></li>
-      <li><a href="login.html">Entrar</a></li>
+      <!-- VISÍVEL PARA VISITANTES -->
+     <li><a href="cadastro.html">Criar Conta</a></li>
+     <li><a href="login.php">Fazer login</a></li>
 
       <?php else: ?>
 
-      <!-- USUÁRIO LOGADO -->
-      <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+      <!-- VISÍVEL SOMENTE PARA LOGADOS -->
+      <li><a href="emocoes.php">Registrar Emoções</a></li>
       <li><a href="atendimento.php">Atendimento Psicológico</a></li>
       <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
       <li><a href="metas.php">Exercícios & Metas</a></li>
