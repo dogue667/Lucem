@@ -350,7 +350,7 @@ session_start();
           <li><a href="cadastro.html"style="font-weight:600; color:var(--roxo);">Criar Conta</a></li>
           <li><a href="login.php"style="font-weight:600; color:var(--roxo);">Fazer login</a></li>
         <?php else: ?>
-          <li><a href="emocoes.php">Registrar Emoções</a></li>
+          <li><a href="registra_emocoes.phps">Registrar Emoções</a></li>
           <li><a href="atendimento.php">Atendimento Psicológico</a></li>
           <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
           <li><a href="metas.php">Exercícios & Metas</a></li>
