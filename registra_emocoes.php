@@ -7,12 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #F9F0E6;
-      --card: #FFF2EA;
-      --text: #4A3A33;
-      --accent: #E3A999;
-      --radius: 12px;
-      font-family: 'Poppins', sans-serif;
+      --bg:#F9F0E6;
+      --card:#FFF2EA;
+      --text:#4A3A33;
+      --accent:#E3A999;
+      font-family:'Poppins',sans-serif;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
@@ -33,22 +32,8 @@
       max-width:1000px;
       width:90%;
     }
-    form{
-      flex:1;
-    }
-    h2{
-      font-weight:600;
-      margin-bottom:10px;
-    }
-    .btn-primary{
-      background:var(--accent);
-      color:white;
-      border:none;
-      padding:10px 16px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:500;
-    }
+    form{flex:1;}
+    h2{font-weight:600;margin-bottom:10px;}
     .week{
       display:flex;
       gap:10px;
@@ -72,7 +57,6 @@
     .chip[data-color="#F2B3AE"]{background:#F2B3AE}
     .chip[data-color="#BFD5F0"]{background:#BFD5F0}
     .chip[data-color="#F6EDE6"]{background:#F6EDE6}
-
     textarea{
       width:100%;
       min-height:80px;
@@ -84,7 +68,6 @@
       font-family:inherit;
       margin:10px 0 20px;
     }
-
     .factors{
       display:flex;
       gap:14px;
@@ -138,40 +121,40 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
   $descricao=strip_tags($_POST['descricao']??'');
   $fatores=$_POST['fatores']??[];
   $fatores=array_map('strip_tags',$fatores);
-  $entry=\"---\\nData: \".date('Y-m-d H:i:s').\"\\nEmoção: \".($emocao?:'Não informada').\"\\nDescrição:\\n\".($descricao?:'—').\"\\n\\nFatores:\\n\".(count($fatores)?('- '.implode(\"\\n- \",$fatores)):\"—\").\"\\n---\\n\\n\";
+  $entry="---\nData: ".date('Y-m-d H:i:s')."\nEmoção: ".($emocao?:'Não informada')."\nDescrição:\n".($descricao?:'—')."\n\nFatores:\n".(count($fatores)?('- '.implode("\n- ",$fatores)):"—")."\n---\n\n";
   file_put_contents($file,$entry,FILE_APPEND|LOCK_EX);
-  echo \"<script>alert('Registro salvo com sucesso!');</script>\";
+  echo "<script>alert('Registro salvo com sucesso!');</script>";
 }
 ?>
 
-<div class=\"card\">
-  <form method=\"post\">
+<div class="card">
+  <form method="post">
     <h2>Seu Mapa Emocional da Semana</h2>
-    <div class=\"week\">
-      <div class=\"chip\" data-emotion=\"Calmo\" data-color=\"#F6D7A8\">Seg<br><span>Calmo</span></div>
-      <div class=\"chip\" data-emotion=\"Triste\" data-color=\"#E6C6D0\">Ter<br><span>Triste</span></div>
-      <div class=\"chip\" data-emotion=\"Grato\" data-color=\"#CDE7B8\">Qua<br><span>Grato</span></div>
-      <div class=\"chip\" data-emotion=\"Ansioso\" data-color=\"#F2B3AE\">Qui<br><span>Ansioso</span></div>
-      <div class=\"chip\" data-emotion=\"Feliz\" data-color=\"#BFD5F0\">Sex<br><span>Feliz</span></div>
-      <div class=\"chip\" data-emotion=\"\" data-color=\"#F6EDE6\">Sáb<br><span>—</span></div>
+    <div class="week">
+      <div class="chip" data-emotion="Calmo" data-color="#F6D7A8">Seg<br><span>Calmo</span></div>
+      <div class="chip" data-emotion="Triste" data-color="#E6C6D0">Ter<br><span>Triste</span></div>
+      <div class="chip" data-emotion="Grato" data-color="#CDE7B8">Qua<br><span>Grato</span></div>
+      <div class="chip" data-emotion="Ansioso" data-color="#F2B3AE">Qui<br><span>Ansioso</span></div>
+      <div class="chip" data-emotion="Feliz" data-color="#BFD5F0">Sex<br><span>Feliz</span></div>
+      <div class="chip" data-emotion="" data-color="#F6EDE6">Sáb<br><span>—</span></div>
     </div>
 
     <h3>Descreva seu dia em palavras</h3>
-    <input type=\"hidden\" name=\"emocao\" id=\"emocaoInput\">
-    <textarea name=\"descricao\" placeholder=\"Descreva seu dia em palavras\"></textarea>
+    <input type="hidden" name="emocao" id="emocaoInput">
+    <textarea name="descricao" placeholder="Descreva seu dia em palavras"></textarea>
 
     <h3>O que ajudou ou piorou seu humor?</h3>
-    <div class=\"factors\">
-      <label><input type=\"checkbox\" name=\"fatores[]\" value=\"Amigos\"> Amigos</label>
-      <label><input type=\"checkbox\" name=\"fatores[]\" value=\"Trabalho\"> Trabalho</label>
-      <label><input type=\"checkbox\" name=\"fatores[]\" value=\"Sono\"> Sono</label>
-      <label><input type=\"checkbox\" name=\"fatores[]\" value=\"Alimentação\"> Alimentação</label>
+    <div class="factors">
+      <label><input type="checkbox" name="fatores[]" value="Amigos"> Amigos</label>
+      <label><input type="checkbox" name="fatores[]" value="Trabalho"> Trabalho</label>
+      <label><input type="checkbox" name="fatores[]" value="Sono"> Sono</label>
+      <label><input type="checkbox" name="fatores[]" value="Alimentação"> Alimentação</label>
     </div>
 
-    <button type=\"submit\" class=\"btn-save\">Salvar registro</button>
+    <button type="submit" class="btn-save">Salvar registro</button>
   </form>
 
-  <div class=\"sidebox\">
+  <div class="sidebox">
     <h4>Resumo da Semana</h4>
     <p>Você se sentiu mais calmo(a) em 3 dias</p>
 
