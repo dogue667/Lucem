@@ -345,31 +345,25 @@ session_start();
   <!-- ---------- MENU SUPERIOR ---------- -->
  <header>
   <div class="logo">🌞 LUCEM</div>
-   <ul>
-
-      <li><a href="index.php"style="font-weight:600; color:var(--roxo);">Sobre</a></li>
+  <nav>
+    <ul>
+      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
       <?php if(!isset($_SESSION['usuario_id'])): ?>
-
-      <!-- VISÍVEL PARA VISITANTES -->
-     <li><a href="cadastro.html">Criar Conta</a></li>
-     <li><a href="login.php">Fazer login</a></li>
-
+        <!-- VISÍVEL PARA VISITANTES -->
+        <li><a href="cadastro.html">Criar Conta</a></li>
+        <li><a href="login.php">Fazer login</a></li>
       <?php else: ?>
-
-      <!-- VISÍVEL SOMENTE PARA LOGADOS -->
-      <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-      <li><a href="atendimento.php"style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
-      <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
-      <li><a href="metas.php">Exercícios & Metas</a></li>
-      <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
+        <!-- VISÍVEL SOMENTE PARA LOGADOS -->
+        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+        <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
+        <li><a href="metas.php">Exercícios & Metas</a></li>
+        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
       <?php endif; ?>
-
     </ul>
   </nav>
 </header>
-
 
 
 
