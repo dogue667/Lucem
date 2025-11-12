@@ -354,7 +354,7 @@ session_start();
 
       <!-- VISÍVEL PARA VISITANTES -->
      <li><a href="cadastro.html">Criar Conta</a></li>
-     <li><a href="login.html">Fazer login</a></li>
+     <li><a href="login.php">Fazer login</a></li>
 
       <?php else: ?>
 
