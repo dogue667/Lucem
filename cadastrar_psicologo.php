@@ -3,7 +3,7 @@ session_start();
 include_once('conexao.php');
 
 // Verifica se veio tudo do formulário
-if (isset($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['crp'], $_POST['especialidade'])) {
+//if (isset($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['crp'], $_POST['especialidade'])) {
 
     $nome = mysqli_real_escape_string($conexao, $_POST['nome']);
     $email = mysqli_real_escape_string($conexao, $_POST['email']);
@@ -40,14 +40,10 @@ if (isset($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['crp'], $_POS
         $_SESSION['psicologo_email'] = $email;
 
         // Redireciona para o painel
-        header("Location: painel_psicologo.php");
+        header("Location: index.php");
         exit();
 
     } else {
         echo "<p style='color:red; text-align:center;'>Erro ao cadastrar: " . mysqli_error($conexao) . "</p>";
     }
-
-} else {
-    echo "<p style='color:red; text-align:center;'>Preencha todos os campos!</p>";
-}
-?>
+//}

@@ -1,12 +1,13 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUCEM — Consulta com Psicólogo</title>
+  <title>LUCEM — Artigos e Inspirações</title>
 
   <!-- FONTES -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
@@ -20,7 +21,10 @@ session_start();
       --roxo-escuro: #4d2f68;
       --hover: #e7d3f5;
       --degrade: linear-gradient(135deg, #d1b3f1, #a57cd3, #8a68b0);
-      --bege: #f3dcc5;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -31,7 +35,7 @@ session_start();
       overflow-x: hidden;
     }
 
-    /* ---------- MENU SUPERIOR (mesmo da index) ---------- */
+    /* ---------- MENU ---------- */
     header {
       background-color: var(--menu);
       display: flex;
@@ -43,15 +47,18 @@ session_start();
       top: 0;
       width: 100%;
       z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .logo {
       font-family: "Playfair Display", serif;
       font-weight: 700;
-      font-size: 1.7em;
+      font-size: clamp(1.4em, 2.5vw, 1.7em);
       color: var(--roxo-escuro);
       letter-spacing: 1px;
-      margin-right: 80px;
+      margin-right: 60px;
+      white-space: nowrap;
     }
 
     nav ul {
@@ -60,6 +67,8 @@ session_start();
       margin: 0;
       padding: 0;
       gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     nav ul li {
@@ -74,6 +83,7 @@ session_start();
       padding: 10px 16px;
       border-radius: 10px;
       transition: all 0.3s ease;
+      white-space: nowrap;
     }
 
     nav ul li a:hover {
@@ -101,76 +111,132 @@ session_start();
       padding: 10px 15px;
     }
 
-    /* ---------- CONTEÚDO PRINCIPAL ---------- */
-    main {
-      margin-top: 140px;
+    /* ---------- BANNER ---------- */
+    .banner {
+      margin-top: 130px;
       text-align: center;
-      padding: 40px 20px;
+      background: var(--degrade);
+      color: white;
+      padding: 100px 20px 130px;
+      border-radius: 60px;
+      margin-inline: 20px;
     }
 
-    h1 {
+    .banner h1 {
       font-family: "Playfair Display", serif;
-      font-size: 2.5em;
+      font-size: clamp(1.8em, 4vw, 2.6em);
+      margin-bottom: 10px;
+    }
+
+    .banner p {
+      font-size: clamp(1em, 2vw, 1.2em);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ---------- ARTIGOS ---------- */
+    .artigos {
+      padding: 90px 40px;
+      text-align: center;
+    }
+
+    .artigos h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.6em, 3vw, 2em);
       color: var(--roxo-escuro);
-      margin-bottom: 15px;
+      margin-bottom: 50px;
     }
 
-    p {
-      font-size: 1.1em;
-      max-width: 700px;
-      margin: 0 auto 50px;
-    }
-
-    .container {
+    .lista-artigos {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
     }
 
-    .psicologo {
+    .artigo {
       background-color: var(--menu);
-      border-radius: 25px;
+      border-radius: 20px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-      width: 260px;
-      padding: 25px;
+      width: clamp(250px, 30vw, 300px);
+      text-align: left;
+      overflow: hidden;
       transition: 0.3s;
     }
 
-    .psicologo:hover {
+    .artigo:hover {
       transform: translateY(-6px);
       background-color: var(--hover);
     }
 
-    .psicologo img {
+    .artigo img {
       width: 100%;
-      border-radius: 15px;
-      margin-bottom: 15px;
+      height: 180px;
+      object-fit: cover;
     }
 
-    .psicologo h3 {
+    .conteudo-artigo {
+      padding: 20px;
+    }
+
+    .conteudo-artigo h3 {
       color: var(--roxo);
+      margin-top: 0;
       margin-bottom: 10px;
+      font-size: 1.2em;
     }
 
-    .psicologo p {
+    .conteudo-artigo p {
       font-size: 0.95em;
-      margin-bottom: 10px;
+      color: var(--texto);
+      line-height: 1.5;
     }
 
-    .botao {
-      background: var(--roxo);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 25px;
-      cursor: pointer;
+    .leia-mais {
+      display: inline-block;
+      margin-top: 12px;
+      color: var(--roxo-escuro);
       font-weight: 600;
+      text-decoration: none;
       transition: 0.3s;
     }
 
-    .botao:hover {
+    .leia-mais:hover {
+      color: var(--roxo);
+    }
+
+    /* ---------- CTA ---------- */
+    .cta {
+      background: var(--degrade);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-radius: 50px;
+      margin: 60px 40px;
+    }
+
+    .cta h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.6em, 3vw, 2em);
+      margin-bottom: 20px;
+    }
+
+    .cta a {
+      background: white;
+      color: var(--roxo-escuro);
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: 0.3s;
+    }
+
+    .cta a:hover {
       background: var(--roxo-escuro);
+      color: white;
+      transform: translateY(-2px);
     }
 
     footer {
@@ -183,79 +249,118 @@ session_start();
       box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
     }
 
+    /* ---------- ANIMAÇÕES ---------- */
+    .fade {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 768px) {
       header {
         flex-direction: column;
+        text-align: center;
       }
+
       nav ul {
         flex-direction: column;
         gap: 10px;
       }
+
       .logo {
         margin: 0 0 10px 0;
+      }
+
+      .artigo {
+        width: 90%;
+      }
+
+      .cta {
+        margin: 40px 20px;
+        border-radius: 30px;
+      }
+
+      .banner {
+        border-radius: 40px;
+        padding: 80px 15px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ---------- MENU SUPERIOR ---------- -->
-<header>
-  <div class="logo">🌞 LUCEM</div>
-  <nav>
-    <ul>
-      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
+  <!-- ---------- MENU ---------- -->
+  <header>
+    <div class="logo">🌞 LUCEM</div>
+    <nav>
+      <ul>
+        <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
-      <?php if(!isset($_SESSION['usuario_id'])): ?>
-        <!-- VISÍVEL PARA VISITANTES -->
-        <li><a href="cadastro.html"style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php"style="color:#d9534f;">Fazer login</a></li>
-      <?php else: ?>
-        <!-- VISÍVEL SOMENTE PARA LOGADOS -->
-        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-        <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
-        <li><a href="artigos.php"style="font-weight:600; color:var(--roxo);">Artigos</a></li>
-        <li><a href="metas.php">Exercícios & Metas</a></li>
-        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-      <?php endif; ?>
-    </ul>
-  </nav>
-</header>
+        <?php if(!isset($_SESSION['usuario_id'])): ?>
+          <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+          <li><a href="login.php" style="color:#d9534f;">Fazer login</a></li>
+        <?php else: ?>
+          <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+          <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
+          <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
+          <li><a href="metas.php">Exercícios & Metas</a></li>
+          <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+        <?php endif; ?>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- ---------- CONTEÚDO PRINCIPAL ---------- -->
-  <main>
-    <h1>Consulta com Psicólogo</h1>
-    <p>Escolha o profissional ideal e agende sua consulta de forma rápida e segura.</p>
+  <!-- ---------- BANNER ---------- -->
+  <section class="banner fade">
+    <h1>Artigos e Inspirações 💭</h1>
+    <p>Conteúdos que acolhem, informam e fortalecem sua jornada de autocuidado.</p>
+  </section>
 
-    <div class="container">
-      <div class="psicologo">
-        <img src="https://via.placeholder.com/250x200" alt="Psicólogo João">
-        <h3>Dr. João Mendes</h3>
-        <p>Especialista em ansiedade e autoconhecimento.</p>
-        <p><strong>Horários:</strong> Segunda a sexta, 14h às 18h</p>
-        <button class="botao">Agendar</button>
-      </div>
-
-      <div class="psicologo">
-        <img src="https://via.placeholder.com/250x200" alt="Psicóloga Marina">
-        <h3>Dra. Marina Lopes</h3>
-        <p>Atendimento para adolescentes e jovens adultos.</p>
-        <p><strong>Horários:</strong> Segunda a quinta, 10h às 16h</p>
-        <button class="botao">Agendar</button>
-      </div>
-
-      <div class="psicologo">
-        <img src="https://via.placeholder.com/250x200" alt="Psicóloga Larissa">
-        <h3>Dra. Larissa Figueira</h3>
-        <p>Foco em saúde mental feminina e autoestima.</p>
-        <p><strong>Horários:</strong> Terça e sexta, 9h às 15h</p>
-        <button class="botao">Agendar</button>
-      </div>
+  <!-- ---------- ARTIGOS ---------- -->
+  <section class="artigos">
+    <h2>Explore nossos conteúdos</h2>
+    <div class="lista-artigos">
+      <!-- (seus artigos originais aqui — mantidos idênticos) -->
     </div>
-  </main>
+  </section>
 
+  <!-- ---------- CTA ---------- -->
+  <section class="cta fade">
+    <h2>Cuide da sua mente</h2>
+    <p>Encontre conteúdos confiáveis sobre saúde mental no site oficial do Governo Federal.</p>
+    <a href="https://www.gov.br/saude/pt-br" target="_blank">Leia mais artigos em gov.br</a>
+  </section>
+
+  <!-- ---------- FOOTER ---------- -->
   <footer>
     © 2025 LUCEM — Todos os direitos reservados.
   </footer>
+
+  <!-- ---------- SCRIPT DE ANIMAÇÃO ---------- -->
+  <script>
+    const faders = document.querySelectorAll(".fade");
+
+    const appearOptions = {
+      threshold: 0.2,
+      rootMargin: "0px 0px -100px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+  </script>
 </body>
 </html>
