@@ -2,13 +2,16 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consulta com Psicólogo</title>
+  <title>LUCEM — Consulta com Psicólogo</title>
+
+  <!-- FONTES -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
   <style>
-    /* ---------- CORES ---------- */
     :root {
       --bg: #f9efe4;
       --menu: #ffffff;
@@ -28,7 +31,7 @@ session_start();
       overflow-x: hidden;
     }
 
-    /* ---------- MENU SUPERIOR ---------- */
+    /* ---------- MENU SUPERIOR (mesmo da index) ---------- */
     header {
       background-color: var(--menu);
       display: flex;
@@ -78,7 +81,27 @@ session_start();
       color: var(--roxo);
     }
 
-    /* ---------- CONTEÚDO ---------- */
+    nav ul ul {
+      display: none;
+      position: absolute;
+      background-color: var(--menu);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      top: 45px;
+      padding: 10px 0;
+      min-width: 160px;
+    }
+
+    nav ul li:hover > ul {
+      display: block;
+    }
+
+    nav ul ul li a {
+      display: block;
+      padding: 10px 15px;
+    }
+
+    /* ---------- CONTEÚDO PRINCIPAL ---------- */
     main {
       margin-top: 140px;
       text-align: center;
@@ -150,6 +173,16 @@ session_start();
       background: var(--roxo-escuro);
     }
 
+    footer {
+      background-color: var(--menu);
+      text-align: center;
+      padding: 25px;
+      font-size: 0.9em;
+      color: #866b95;
+      margin-top: 60px;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    }
+
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -166,28 +199,30 @@ session_start();
 </head>
 <body>
 
- <header>
-  <div class="logo">🌞 LUCEM</div>
-  <nav>
-    <ul>
-      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
+  <!-- ---------- MENU SUPERIOR ---------- -->
+  <header>
+    <div class="logo">🌞 LUCEM</div>
+    <nav>
+      <ul>
+        <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
-      <?php if(!isset($_SESSION['usuario_id'])): ?>
-        <!-- VISÍVEL PARA VISITANTES -->
-        <li><a href="cadastro.html"style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php"style="color:#d9534f;">Fazer login</a></li>
-      <?php else: ?>
-        <!-- VISÍVEL SOMENTE PARA LOGADOS -->
-        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-        <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
-        <li><a href="artigos.php"style="color:#d9534f;">Artigos</a></li>
-        <li><a href="metas.php">Exercícios & Metas</a></li>
-        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-      <?php endif; ?>
-    </ul>
-  </nav>
-</header>
-  <!-- CONTEÚDO PRINCIPAL -->
+        <?php if(!isset($_SESSION['usuario_id'])): ?>
+          <!-- VISÍVEL PARA VISITANTES -->
+          <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+          <li><a href="login.php" style="color:#d9534f;">Fazer login</a></li>
+        <?php else: ?>
+          <!-- VISÍVEL SOMENTE PARA LOGADOS -->
+          <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+          <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
+          <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
+          <li><a href="metas.php">Exercícios & Metas</a></li>
+          <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+        <?php endif; ?>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ---------- CONTEÚDO PRINCIPAL ---------- -->
   <main>
     <h1>Consulta com Psicólogo</h1>
     <p>Escolha o profissional ideal e agende sua consulta de forma rápida e segura.</p>
@@ -219,5 +254,8 @@ session_start();
     </div>
   </main>
 
+  <footer>
+    © 2025 LUCEM — Todos os direitos reservados.
+  </footer>
 </body>
 </html>
