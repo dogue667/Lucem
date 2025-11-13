@@ -23,14 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         margin: 0;
         padding: 40px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    h2 {
-        color: #6b3e26;
-        font-size: 1.6em;
-        margin-bottom: 15px;
+        justify-content: center;
     }
 
     .container {
@@ -38,23 +31,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         padding: 30px;
         border-radius: 20px;
         width: 90%;
-        max-width: 700px;
+        max-width: 600px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        text-align: left;
+    }
+
+    h2 {
+        color: #6b3e26;
+        text-align: left;
+        margin-bottom: 20px;
     }
 
     .semana {
         display: flex;
         justify-content: space-between;
-        margin: 20px 0;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
     }
 
     .dia {
-        width: 14%;
+        flex: 1;
         text-align: center;
-        padding: 15px 0;
-        border-radius: 12px;
+        padding: 10px 0;
+        border: none;
+        border-radius: 10px;
         color: white;
         font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .dia:hover {
+        transform: scale(1.05);
     }
 
     .calmo { background-color: #f2b179; }
@@ -62,17 +71,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     .grato { background-color: #b4cf8b; }
     .ansioso { background-color: #de8c8c; }
     .feliz { background-color: #93b7d3; }
-    .vazio { background-color: #e6d9c6; }
+    .outro { background-color: #d4ed9f; }
 
-    textarea {
+    input[type="text"], textarea {
         width: 100%;
         border: none;
         border-radius: 10px;
         padding: 10px;
-        font-size: 1em;
         background-color: #fff2e6;
+        font-size: 1em;
+        margin-top: 5px;
+    }
+
+    textarea {
         resize: none;
-        margin-top: 10px;
         height: 80px;
     }
 
@@ -85,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         font-size: 0.95em;
     }
 
-    button {
+    button[type="submit"] {
         background-color: #e49b84;
         color: white;
         border: none;
@@ -96,16 +108,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         transition: background-color 0.3s ease;
     }
 
-    button:hover {
+    button[type="submit"]:hover {
         background-color: #cf836d;
-    }
-
-    .resumo {
-        background-color: #fcefdc;
-        padding: 15px;
-        border-radius: 15px;
-        margin-top: 25px;
-        font-size: 0.95em;
     }
 
     .mensagem {
@@ -123,17 +127,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <h2>Seu Mapa Emocional da Semana</h2>
 
     <div class="semana">
-        <div class="dia calmo" button type="submit">Calmo</button></div>
-        <div class="dia triste">Triste</div>
-        <div class="dia grato">Grato</div>
-        <div class="dia ansioso">Ansioso</div>
-        <div class="dia feliz">Feliz</div>
-        <div class="dia vazio"></div>
+        <button type="button" class="dia calmo">Calmo</button>
+        <button type="button" class="dia triste">Triste</button>
+        <button type="button" class="dia grato">Grato</button>
+        <button type="button" class="dia ansioso">Ansioso</button>
+        <button type="button" class="dia feliz">Feliz</button>
+        <button type="button" class="dia outro">Outro</button>
     </div>
 
     <form method="POST">
-        <label for="emocao"><b>Como você está se sentindo hoje?</b></label><br><br>
-        <input type="text" name="emocao" id="emocao" placeholder="Digite sua emoção" style="width:100%;padding:10px;border-radius:10px;border:none;background-color:#fff2e6;">
+        <label for="emocao"><b>Como você está se sentindo hoje?</b></label>
+        <input type="text" name="emocao" id="emocao" placeholder="Digite sua emoção">
 
         <h3>Descreva seu dia em palavras</h3>
         <textarea name="descricao" placeholder="Descreva seu dia em palavras..."></textarea>
@@ -154,15 +158,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php echo $mensagem; ?>
         </div>
     <?php endif; ?>
-
-    <div class="resumo">
-        <b>Resumo da Semana</b><br><br>
-        Você se sentiu mais calmo(a) em 3 dias.<br><br>
-        <b>Sugestão Lucem:</b><br>
-        Experimente o exercício de respiração 4x4 hoje.<br><br>
-        <b>Sugestão Lucem:</b><br>
-        Ouça uma meditação guiada de 1 minuto.
-    </div>
 </div>
 
 </body>
