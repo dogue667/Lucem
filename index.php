@@ -343,7 +343,7 @@ session_start();
 <body>
 
   <!-- ---------- MENU SUPERIOR ---------- -->
- <header>
+  <header>
   <div class="logo">🌞 LUCEM</div>
   <nav>
     <ul>
@@ -351,13 +351,16 @@ session_start();
 
       <?php if(!isset($_SESSION['usuario_id'])): ?>
         <!-- VISÍVEL PARA VISITANTES -->
-        <li><a href="cadastro.html"style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php"style="color:#d9534f;">Fazer login</a></li>
+        <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+        <li><a href="login.php" style="color:#d9534f;">Fazer login</a></li>
+        <li><a href="login_psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+        <li><a href="cadastro_psicologo.php" style="color:#d9534f;">Cadastrar Psicólogo</a></li>
       <?php else: ?>
         <!-- VISÍVEL SOMENTE PARA LOGADOS -->
         <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+        <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
         <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
-        <li><a href="artigos.php"style="font-weight:600; color:var(--roxo);">Artigos</a></li>
+        <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
         <li><a href="metas.php">Exercícios & Metas</a></li>
         <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
       <?php endif; ?>
