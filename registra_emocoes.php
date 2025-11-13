@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $emocao = $_POST["emocao"] ?? "";
     $descricao = $_POST["descricao"] ?? "";
     $fatores = isset($_POST["fatores"]) ? implode(", ", $_POST["fatores"]) : "Nenhum";
-    $mensagem = "Emoção registrada: $emocao<br>Descrição: $descricao<br>Fatores: $fatores";
+    $mensagem = "Emoções registradas: $emocao<br>Descrição: $descricao<br>Fatores: $fatores";
 }
 ?>
 
@@ -33,12 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         width: 90%;
         max-width: 600px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        text-align: left;
     }
 
     h2 {
         color: #6b3e26;
-        text-align: left;
         margin-bottom: 20px;
     }
 
@@ -59,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         color: white;
         font-weight: bold;
         cursor: pointer;
-        transition: transform 0.2s ease;
+        transition: transform 0.2s ease, opacity 0.3s ease;
     }
 
     .dia:hover {
@@ -72,6 +70,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     .ansioso { background-color: #de8c8c; }
     .feliz { background-color: #93b7d3; }
     .outro { background-color: #d4ed9f; }
+
+    /* Cor de destaque quando selecionado */
+    .selecionado {
+        outline: 3px solid #6b3e26;
+        opacity: 0.9;
+    }
 
     input[type="text"], textarea {
         width: 100%;
@@ -127,17 +131,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <h2>Seu Mapa Emocional da Semana</h2>
 
     <div class="semana">
-        <button type="button" class="dia calmo">Calmo</button>
-        <button type="button" class="dia triste">Triste</button>
-        <button type="button" class="dia grato">Grato</button>
-        <button type="button" class="dia ansioso">Ansioso</button>
-        <button type="button" class="dia feliz">Feliz</button>
-        <button type="button" class="dia outro">Outro</button>
+        <button type="button" class="dia calmo" onclick="alternarEmocao(this, 'Calmo')">Calmo</button>
+        <button type="button" class="dia triste" onclick="alternarEmocao(this, 'Triste')">Triste</button>
+        <button type="button" class="dia grato" onclick="alternarEmocao(this, 'Grato')">Grato</button>
+        <button type="button" class="dia ansioso" onclick="alternarEmocao(this, 'Ansioso')">Ansioso</button>
+        <button type="button" class="dia feliz" onclick="alternarEmocao(this, 'Feliz')">Feliz</button>
+        <button type="button" class="dia outro" onclick="alternarEmocao(this, 'Outro')">Outro</button>
     </div>
 
     <form method="POST">
         <label for="emocao"><b>Como você está se sentindo hoje?</b></label>
-        <input type="text" name="emocao" id="emocao" placeholder="Digite sua emoção">
+        <input type="text" name="emocao" id="emocao" placeholder="Selecione uma ou mais emoções" readonly>
 
         <h3>Descreva seu dia em palavras</h3>
         <textarea name="descricao" placeholder="Descreva seu dia em palavras..."></textarea>
@@ -159,6 +163,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     <?php endif; ?>
 </div>
+
+<script>
+let selecionadas = [];
+
+function alternarEmocao(botao, emocao) {
+    // Se a emoção já estiver na lista, remove
+    const index = selecionadas.indexOf(emocao);
+    if (index > -1) {
+        selecionadas.splice(index, 1);
+        botao.classList.remove('selecionado');
+    } else {
+        selecionadas.push(emocao);
+        botao.classList.add('selecionado');
+    }
+
+    // Atualiza o campo de texto com todas as emoções
+    document.getElementById('emocao').value = selecionadas.join(", ");
+}
+</script>
 
 </body>
 </html>
