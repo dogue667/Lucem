@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="dia grato">Grato</div>
         <div class="dia ansioso">Ansioso</div>
         <div class="dia feliz">Feliz</div>
-        <div class="dia vazio"></div>
+        <div class="dia vazio">Outro</div>
     </div>
 
     <form method="POST">
