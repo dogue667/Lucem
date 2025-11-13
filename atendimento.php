@@ -213,6 +213,7 @@ session_start();
         <?php else: ?>
           <!-- VISÍVEL SOMENTE PARA LOGADOS -->
           <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+          <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
           <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
           <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
           <li><a href="metas.php">Exercícios & Metas</a></li>
