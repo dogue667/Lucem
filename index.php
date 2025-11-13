@@ -351,10 +351,10 @@ session_start();
 
       <?php if(!isset($_SESSION['usuario_id'])): ?>
         <!-- VISÍVEL PARA VISITANTES -->
-        <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php" style="color:#d9534f;">Fazer login</a></li>
-        <li><a href="login_psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-        <li><a href="cadastro_psicologo.php" style="color:#d9534f;">Cadastrar Psicólogo</a></li>
+        <li><a href="cadastro.html">Criar Conta</a></li>
+        <li><a href="login.php">Fazer login</a></li>
+        <li><a href="login_psicologo.php">Login Psicólogo</a></li>
+        <li><a href="cadastro_psicologo.php">Cadastrar Psicólogo</a></li>
       <?php else: ?>
         <!-- VISÍVEL SOMENTE PARA LOGADOS -->
         <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
