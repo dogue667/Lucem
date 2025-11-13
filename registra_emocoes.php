@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <h2>Seu Mapa Emocional da Semana</h2>
 
     <div class="semana">
-        <div class="dia calmo">Calmo</div>
+        <div class="dia calmo" button type="submit">Calmo</button></div>
         <div class="dia triste">Triste</div>
         <div class="dia grato">Grato</div>
         <div class="dia ansioso">Ansioso</div>
