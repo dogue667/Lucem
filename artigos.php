@@ -1,16 +1,18 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUCEM | Artigos</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <title>LUCEM — Artigos e Inspirações</title>
+
+  <!-- FONTES -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
   <style>
-    /* ---------- CORES ---------- */
     :root {
       --bg: #f9efe4;
       --menu: #ffffff;
@@ -19,7 +21,6 @@ session_start();
       --roxo-escuro: #4d2f68;
       --hover: #e7d3f5;
       --degrade: linear-gradient(135deg, #d1b3f1, #a57cd3, #8a68b0);
-      --bege: #f3dcc5;
     }
 
     body {
@@ -27,10 +28,9 @@ session_start();
       font-family: "Inter", sans-serif;
       background-color: var(--bg);
       color: var(--texto);
-      overflow-x: hidden;
     }
 
-    /* ---------- MENU SUPERIOR ---------- */
+    /* ---------- MENU ---------- */
     header {
       background-color: var(--menu);
       display: flex;
@@ -61,6 +61,10 @@ session_start();
       gap: 25px;
     }
 
+    nav ul li {
+      position: relative;
+    }
+
     nav ul li a {
       text-decoration: none;
       color: var(--roxo-escuro);
@@ -76,33 +80,66 @@ session_start();
       color: var(--roxo);
     }
 
-    /* ---------- CONTEÚDO PRINCIPAL ---------- */
-    main {
-      margin-top: 140px;
-      padding: 40px 20px 80px;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
+    nav ul ul {
+      display: none;
+      position: absolute;
+      background-color: var(--menu);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      top: 45px;
+      padding: 10px 0;
+      min-width: 160px;
     }
 
-    main h1 {
+    nav ul li:hover > ul {
+      display: block;
+    }
+
+    nav ul ul li a {
+      display: block;
+      padding: 10px 15px;
+    }
+
+    /* ---------- BANNER ---------- */
+    .banner {
+      margin-top: 130px;
+      text-align: center;
+      background: var(--degrade);
+      color: white;
+      padding: 100px 20px 130px;
+      border-radius: 60px;
+    }
+
+    .banner h1 {
       font-family: "Playfair Display", serif;
-      font-size: 2.5em;
-      color: var(--roxo-escuro);
+      font-size: 2.6em;
       margin-bottom: 10px;
     }
 
-    main p {
+    .banner p {
       font-size: 1.2em;
-      color: var(--texto);
-      margin-bottom: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
     }
 
-    /* ---------- GRID DE ARTIGOS ---------- */
-    .artigos-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    /* ---------- ARTIGOS ---------- */
+    .artigos {
+      padding: 90px 40px;
+      text-align: center;
+    }
+
+    .artigos h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 2em;
+      color: var(--roxo-escuro);
+      margin-bottom: 50px;
+    }
+
+    .lista-artigos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 30px;
     }
 
@@ -110,6 +147,8 @@ session_start();
       background-color: var(--menu);
       border-radius: 20px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      width: 300px;
+      text-align: left;
       overflow: hidden;
       transition: 0.3s;
     }
@@ -125,36 +164,67 @@ session_start();
       object-fit: cover;
     }
 
-    .artigo-content {
+    .conteudo-artigo {
       padding: 20px;
     }
 
-    .artigo-content h3 {
+    .conteudo-artigo h3 {
       color: var(--roxo);
+      margin-top: 0;
       margin-bottom: 10px;
-      font-size: 1.3em;
+      font-size: 1.2em;
     }
 
-    .artigo-content p {
+    .conteudo-artigo p {
       font-size: 0.95em;
       color: var(--texto);
       line-height: 1.5;
     }
 
-    .botao {
+    .leia-mais {
       display: inline-block;
-      margin-top: 15px;
-      background: var(--degrade);
-      color: white;
-      padding: 10px 25px;
-      border-radius: 25px;
-      text-decoration: none;
+      margin-top: 12px;
+      color: var(--roxo-escuro);
       font-weight: 600;
+      text-decoration: none;
       transition: 0.3s;
     }
 
-    .botao:hover {
-      transform: scale(1.05);
+    .leia-mais:hover {
+      color: var(--roxo);
+    }
+
+    /* ---------- CTA ---------- */
+    .cta {
+      background: var(--degrade);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-radius: 50px;
+      margin: 60px 40px;
+    }
+
+    .cta h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .cta a {
+      background: white;
+      color: var(--roxo-escuro);
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: 0.3s;
+    }
+
+    .cta a:hover {
+      background: var(--roxo-escuro);
+      color: white;
+      transform: translateY(-2px);
     }
 
     footer {
@@ -163,71 +233,186 @@ session_start();
       padding: 25px;
       font-size: 0.9em;
       color: #866b95;
-      margin-top: 50px;
+      margin-top: 60px;
       box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ---------- ANIMAÇÕES ---------- */
+    .fade {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; }
+      nav ul { flex-direction: column; gap: 10px; }
+      .logo { margin: 0 0 10px 0; }
+      .artigo { width: 90%; }
     }
   </style>
 </head>
-
 <body>
-  <!-- NAVBAR IGUAL AO INDEX -->
+
+  <!-- ---------- MENU ---------- -->
   <header>
-    <div class="logo">🌞 LUCEM</div>
-    <nav>
-      <ul>
-        <li><a href="index.php">Sobre</a></li>
+  <div class="logo">🌞 LUCEM</div>
+  <nav>
+    <ul>
+      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
-        <?php if(!isset($_SESSION['usuario_id'])): ?>
-          <li><a href="cadastro.html">Criar Conta</a></li>
-          <li><a href="login.php">Fazer login</a></li>
-        <?php else: ?>
-          <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-          <li><a href="atendimento.php">Atendimento Psicológico</a></li>
-          <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
-          <li><a href="metas.php">Exercícios & Metas</a></li>
-          <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-        <?php endif; ?>
-      </ul>
-    </nav>
-  </header>
+      <?php if(!isset($_SESSION['usuario_id'])): ?>
+        <!-- VISÍVEL PARA VISITANTES -->
+        <li><a href="cadastro.html"style="color:#d9534f;">Criar Conta</a></li>
+        <li><a href="login.php"style="color:#d9534f;">Fazer login</a></li>
+      <?php else: ?>
+        <!-- VISÍVEL SOMENTE PARA LOGADOS -->
+        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+        <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
+        <li><a href="artigos.php"style="font-weight:600; color:var(--roxo);">Artigos</a></li>
+        <li><a href="metas.php">Exercícios & Metas</a></li>
+        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+      <?php endif; ?>
+    </ul>
+  </nav>
+</header>
 
-  <!-- CONTEÚDO -->
-  <main>
-    <h1>📰 Artigos sobre Saúde Mental</h1>
-    <p>Explore conteúdos cuidadosamente selecionados para o seu bem-estar emocional e crescimento pessoal.</p>
+  <!-- ---------- BANNER ---------- -->
+  <section class="banner fade">
+    <h1>Artigos e Inspirações 💭</h1>
+    <p>Conteúdos que acolhem, informam e fortalecem sua jornada de autocuidado.</p>
+  </section>
 
-    <div class="artigos-container">
-      <div class="artigo">
-        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" alt="Mindfulness">
-        <div class="artigo-content">
-          <h3>O poder do Mindfulness</h3>
-          <p>Descubra como a atenção plena pode reduzir o estresse e melhorar sua qualidade de vida.</p>
-          <a href="#" class="botao">Ler mais</a>
-        </div>
-      </div>
+  <section class="artigos">
+  <h2>Explore nossos conteúdos</h2>
+  <div class="lista-artigos">
 
-      <div class="artigo">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Autoconhecimento">
-        <div class="artigo-content">
-          <h3>Autoconhecimento e Emoções</h3>
-          <p>Aprenda a identificar e lidar com suas emoções para alcançar equilíbrio emocional.</p>
-          <a href="#" class="botao">Ler mais</a>
-        </div>
-      </div>
-
-      <div class="artigo">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" alt="Sono e bem-estar">
-        <div class="artigo-content">
-          <h3>O impacto do sono no bem-estar</h3>
-          <p>Compreenda a importância do sono na saúde mental e física, e veja como melhorar sua rotina.</p>
-          <a href="#" class="botao">Ler mais</a>
-        </div>s
+    <!-- ARTIGOS ORIGINAIS -->
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Meditação">
+      <div class="conteudo-artigo">
+        <h3>O Poder da Respiração Consciente</h3>
+        <p>Descubra como pequenas pausas e respirações profundas podem transformar seu dia e aliviar a ansiedade.</p>
+        <a href="https://integrativa.pt/transforme-a-sua-vida-com-a-respiracao-consciente-como-integrar-esta-pratica-poderosa-no-seu-dia-a-dia/" target="_blank" class="leia-mais">Leia mais →</a>
       </div>
     </div>
-  </main>
 
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Autoestima">
+      <div class="conteudo-artigo">
+        <h3>Reconstruindo a Autoestima</h3>
+        <p>Entenda como a autocompaixão é um passo essencial para fortalecer sua autoestima e bem-estar emocional.</p>
+        <a href="https://www.conexasaude.com.br/blog/a-autocompaixao/" target="_blank" class="leia-mais">Leia mais →</a>
+      </div>
+    </div>
+
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Rotina saudável">
+      <div class="conteudo-artigo">
+        <h3>Rotina Saudável, Mente Equilibrada</h3>
+        <p>Como pequenos hábitos diários, como o sono e a alimentação, impactam sua saúde mental.</p>
+        <a href="https://avancebsb.com.br/equilibrio-o-segredo-para-uma-vida-saudavel-mente-e-corpo" target="_blank" class="leia-mais">Leia mais →</a>
+      </div>
+    </div>
+
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80" alt="Terapia">
+      <div class="conteudo-artigo">
+        <h3>Por que buscar ajuda profissional?</h3>
+        <p>Desmistificando a terapia: entenda como ela pode ser uma aliada poderosa no seu processo de cura.</p>
+        <a href="http://sandramarisadasilva.com/desmistificando-a-terapia-mitos-e-verdades-sobre-o-processo-terapeutico/" target="_blank" class="leia-mais">Leia mais →</a>
+      </div>
+    </div>
+
+    <!-- NOVOS ARTIGOS -->
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?auto=format&fit=crop&w=800&q=80" alt="Gratidão">
+      <div class="conteudo-artigo">
+        <h3>Praticando a Gratidão no Dia a Dia</h3>
+        <p>Saiba como cultivar a gratidão pode melhorar seu humor, fortalecer relacionamentos e aumentar o bem-estar.</p>
+        <a href="https://institutoacorde.org.br/a-importancia-da-gratidao-em-nossas-vidas/" target="_blank" class="leia-mais">Leia mais →</a>
+      </div>
+    </div>
+
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=800&q=80" alt="Mindfulness">
+      <div class="conteudo-artigo">
+        <h3>Depressão: Compreendendo e Superando a Tristeza Profunda</h3>
+        <p>Aprenda a reconhecer os sinais da depressão e descubra formas de cuidar da mente e recuperar o equilíbrio emocional.</p>
+        <a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/depressao" target="_blank" class="leia-mais">Leia mais →</a>
+      </div>
+    </div>
+
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1522205408450-add114ad53fe?auto=format&fit=crop&w=800&q=80" alt="Relacionamentos saudáveis">
+      <div class="conteudo-artigo">
+        <h3>Relacionamentos Saudáveis</h3>
+        <p>Aprenda como o respeito, a confiança e o diálogo fortalecem laços e promovem relações mais leves e verdadeiras.</p>
+        <a href="https://www.casadosaber.com.br/blog/relacionamento-saudavel-pilares-dicas-e-praticas-diarias#:~:text=O%20que%20%C3%A9%20um%20relacionamento,v%C3%ADnculo%20que%20sustenta%20as%20diferen%C3%A7as." target="_blank" class="leia-mais">Leia mais →</a>
+      </div>
+    </div>
+
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?auto=format&fit=crop&w=800&q=80" alt="Autoconhecimento">
+      <div class="conteudo-artigo">
+        <h3>Autoconhecimento e Propósito no Trabalho</h3>
+        <p>Explore como conhecer a si mesmo — seus valores, forças e paixões — pode revelar seu propósito e tornar o trabalho uma fonte de felicidade.</p>
+        <a href="https://talentosconsultoria.com.br/dicas/como-autoconhecimento-e-proposito-estao-relacionados-com-felicidade-no-trabalho/" target="_blank" class="leia-mais">Leia mais →</a>
+      </div>
+    </div>
+
+    <div class="artigo fade">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80" alt="Sono e saúde mental">
+      <div class="conteudo-artigo">
+        <h3>Sono e Saúde Mental</h3>
+        <p>Entenda como a qualidade do sono influencia o equilíbrio emocional e por que a insônia pode ser um sinal de alerta para a saúde mental.</p>
+        <a href="https://www.saude.ce.gov.br/2023/03/16/sono-e-saude-mental-insonia-pode-ser-indicio-de-algum-transtorno-psiquiatrico/#:~:text=Uma%20boa%20noite%20de%20sono,um%20desafio%20para%20muitas%20pessoas." target="_blank" class="leia-mais">Leia mais →</a>
+      </div>
+    </div>
+
+  </div>
+  </section>
+    </div>
+  </section>
+
+  <!-- ---------- CTA ---------- -->
+  <section class="cta fade">
+    <h2>Cuide da sua mente</h2>
+    <p>Encontre conteúdos confiáveis sobre saúde mental no site oficial do Governo Federal.</p>
+    <a href="https://www.gov.br/saude/pt-br" target="_blank">Leia mais artigos em gov.br</a>
+  </section>
+
+  <!-- ---------- FOOTER ---------- -->
   <footer>
-    <p>© 2025 LUCEM — Promovendo saúde emocional com empatia e tecnologia 💜</p>
+    © 2025 LUCEM — Todos os direitos reservados.
   </footer>
+
+  <!-- ---------- SCRIPT DE ANIMAÇÃO ---------- -->
+  <script>
+    const faders = document.querySelectorAll(".fade");
+
+    const appearOptions = {
+      threshold: 0.2,
+      rootMargin: "0px 0px -100px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+  </script>
 </body>
 </html>
+

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LUCEM - Cadastro</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #fdf4eb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .card {
+        background-color: #fff3e4;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 50px 40px;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 26px;
+        color: #4b2b12;
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 14px;
+        color: #5a3a1f;
+        margin-bottom: 25px;
+      }
+
+      .google-btn {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        margin: 0 auto 15px auto;
+        transition: all 0.3s ease;
+      }
+
+      .google-btn:hover {
+        background-color: #f1f1f1;
+      }
+
+      .divider {
+        text-align: center;
+        color: #b09172;
+        font-size: 14px;
+        margin: 10px 0 20px 0;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      form input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d9b89c;
+        border-radius: 8px;
+        background-color: #fff;
+        font-size: 14px;
+      }
+
+      .remember {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #5a3a1f;
+      }
+
+      .remember input {
+        margin-right: 8px;
+      }
+
+      .btn {
+        background-color: #6d4af0;
+        color: #fff;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #5b39d0;
+      }
+
+      .login-link {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #4b2b12;
+      }
+
+      .login-link a {
+        color: #6d4af0;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <h3>Crie sua conta psicologo</h3>
+     <form action="cadastrar_psicologo.php" method="POST">
+        <input type="text" name="nome" placeholder="Nome completo" required>
+        <input type="email" name="email" placeholder="E-mail profissional" required>
+        <input type="text" name="crp" placeholder="Número do CRP" required>
+        <input type="password" name="senha" placeholder="Crie uma senha" required>
+        <button class="btn" type="submit">Cadastrar</button>
+      </form>
+
+      <div class="login-link">
+        Já tem uma conta? <a href="login_psicologo.php">Entrar</a>
+      </div>
+    </div>
+  </body>
+</html>
+
