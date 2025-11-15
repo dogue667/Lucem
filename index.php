@@ -360,7 +360,7 @@ nav ul ul li a {
       <?php if (isset($_SESSION['psicologo_id'])):
         //para psicologo ?>
         <li><a href="painel_psicologo.php">Painel</a></li>
-        <li><a href="lista_pacientes.php">Meus Pacientes</a></li>
+        <li><a href="lista_paciente.php">Meus Pacientes</a></li>
         <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
         <li><a href="config_psicologo.php">Configurações</a></li>
         <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
