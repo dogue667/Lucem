@@ -10,7 +10,7 @@ session_start();
 
   <!-- FONTES ELEGANTES -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="darkmode.css">
   <style>
     /* ---------- CORES ---------- */
     :root {
@@ -357,32 +357,36 @@ nav ul ul li a {
     <ul>
       <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
-      <?php if (isset($_SESSION['psicologo_id'])):
-        //para psicologo ?>
+      <?php if (isset($_SESSION['psicologo_id'])): ?>
         <li><a href="painel_psicologo.php">Painel</a></li>
         <li><a href="lista_paciente.php">Meus Pacientes</a></li>
-        <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
         <li><a href="config_psicologo.php">Configurações</a></li>
         <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
 
-      <?php elseif (isset($_SESSION['usuario_id'])): 
-        //usuario normal logado?>
+      <?php elseif (isset($_SESSION['usuario_id'])): ?>
         <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
         <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
         <li><a href="atendimento.php">Atendimento Psicológico</a></li>
-        <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
         <li><a href="metas.php">Exercícios & Metas</a></li>
         <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
 
-      <?php else: 
-        //sem login?>
+      <?php else: ?>
         <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php" style="color:#d9534f;">Fazer login</a></li>
+        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
         <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
         <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
       <?php endif; ?>
+
     </ul>
   </nav>
+
+  <!-- BOTÃO DE MODO ESCURO-->
+  <button onclick="toggleDarkMode()" 
+    style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
+    🌓
+  </button>
 </header>
 
   <!-- ---------- CONTEÚDO ---------- -->
@@ -471,5 +475,6 @@ nav ul ul li a {
       appearOnScroll.observe(fader);
     });
   </script>
+   <script src="darkmode.js"></script>
 </body>
 </html>
