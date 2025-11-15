@@ -10,7 +10,10 @@ session_start();
 
   <!-- FONTES ELEGANTES -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="darkmode.css">
+
+  <!-- DARK MODE -->
+  <link rel="stylesheet" href="darkmode.css">
+
   <style>
     /* ---------- CORES ---------- */
     :root {
@@ -32,8 +35,7 @@ session_start();
       overflow-x: hidden;
     }
 
-    /* ---------- MENU SUPERIOR ---------- */
-  /* ---------- MENU ---------- */
+    /* ---------- MENU ---------- */
 header {
   background-color: var(--menu);
   display: flex;
@@ -83,7 +85,7 @@ nav ul li a:hover {
   color: var(--roxo);
 }
 
-/* Submenu (se quiser igual ao da página de artigos) */
+/* Submenu */
 nav ul ul {
   display: none;
   position: absolute;
@@ -104,12 +106,12 @@ nav ul ul li a {
   padding: 10px 15px;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   header { flex-direction: column; }
   nav ul { flex-direction: column; gap: 10px; }
   .logo { margin: 0 0 10px 0; }
 }
+
     /* ---------- SEÇÃO INICIAL ---------- */
    .inicio {
   margin-top: 130px;
@@ -117,14 +119,9 @@ nav ul ul li a {
   background: var(--degrade);
   color: white;
   padding: 120px 20px 160px;
-  border-top-left-radius: 70px;     /* 🔹 arredonda o topo esquerdo */
-  border-top-right-radius: 70px;    /* 🔹 arredonda o topo direito */
-  border-bottom-left-radius: 70px;  /* 🔹 arredonda o fundo esquerdo */
-  border-bottom-right-radius: 70px; /* 🔹 arredonda o fundo direito */
+  border-radius: 70px;
   overflow: hidden;
 }
-
-    
 
     .inicio img:hover {
       transform: scale(1.03);
@@ -185,7 +182,7 @@ nav ul ul li a {
       line-height: 1.6;
     }
 
-    /* ---------- SEÇÃO FUNÇÕES ---------- */
+    /* ---------- FUNÇÕES ---------- */
     .funcoes {
       text-align: center;
       padding: 70px 20px;
@@ -229,7 +226,7 @@ nav ul ul li a {
       color: var(--texto);
     }
 
-    /* ---------- SAÚDE MENTAL ---------- */
+    /* ---------- SAÚDE ---------- */
     .saude {
       background: var(--degrade);
       color: white;
@@ -252,16 +249,7 @@ nav ul ul li a {
       font-size: 1.1em;
     }
 
-    footer {
-      background-color: var(--menu);
-      text-align: center;
-      padding: 25px;
-      font-size: 0.9em;
-      color: #866b95;
-      margin-top: 50px;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
-    }
-/* ---------- SEÇÃO SEGURANÇA ---------- */
+    /* ---------- SEGURANÇA ---------- */
     .seguranca {
       background-color: var(--menu);
       text-align: center;
@@ -319,6 +307,7 @@ nav ul ul li a {
       margin-top: 50px;
       box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
     }
+
     /* ---------- ANIMAÇÕES ---------- */
     .fade {
       opacity: 0;
@@ -332,19 +321,7 @@ nav ul ul li a {
     }
 
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-      }
-      nav ul {
-        flex-direction: column;
-        gap: 10px;
-      }
-      .logo {
-        margin: 0 0 10px 0;
-      }
-      .inicio img {
-        width: 250px;
-      }
+      .inicio img { width: 250px; }
     }
   </style>
 </head>
@@ -382,7 +359,7 @@ nav ul ul li a {
     </ul>
   </nav>
 
-  <!-- BOTÃO DE MODO ESCURO-->
+  <!-- BOTÃO DE MODO ESCURO -->
   <button onclick="toggleDarkMode()" 
     style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
     🌓
@@ -391,12 +368,13 @@ nav ul ul li a {
 
   <!-- ---------- CONTEÚDO ---------- -->
   <section class="inicio fade">
-   <img src="lucem.png" alt="Ilustração LUCEM — menina acolhedora">
+    <img src="lucem.png" alt="Ilustração LUCEM — menina acolhedora">
     <h1>Bem-vindo(a) ao LUCEM 🌞</h1>
     <p>Seu espaço de equilíbrio e autocuidado.<br>Cuide da mente, respire fundo e comece hoje.</p>
+
     <?php if(!isset($_SESSION['usuario_id'])): ?>
-    <a href="cadastro.html" class="botao">Comece agora</a>
-<?php endif; ?>
+      <a href="cadastro.html" class="botao">Comece agora</a>
+    <?php endif; ?>
   </section>
 
   <section class="sobre fade">
@@ -434,15 +412,11 @@ nav ul ul li a {
     resiliência e bem-estar. O LUCEM foi criado para te acompanhar nessa jornada — passo a passo,
     com empatia, ciência e acolhimento.</p>
   </section>
-<!-- ---------- SEÇÃO SEGURANÇA ---------- -->
+
   <section class="seguranca fade">
     <h2>Sua Segurança em Primeiro Lugar 🔒</h2>
     <p>No LUCEM, a sua privacidade é prioridade. Todos os seus registros emocionais e informações pessoais
-    são armazenados de forma segura e confidencial, utilizando tecnologias de criptografia e protocolos
-    que protegem seus dados contra acesso não autorizado.</p>
-
-    <p>Nosso compromisso é oferecer um espaço de autocuidado livre de julgamentos e totalmente seguro.
-    Você tem total controle sobre o que compartilha e pode acessar ou excluir suas informações a qualquer momento.</p>
+    são armazenados de forma segura e confidencial.</p>
 
     <div class="seguranca-destaque">
       <h3>✔️ Proteção de Dados</h3>
@@ -450,6 +424,7 @@ nav ul ul li a {
       <h3>🧠 Ambiente Confiável</h3>
     </div>
   </section>
+
   <footer>
     © 2025 LUCEM — Todos os direitos reservados.
   </footer>
@@ -475,6 +450,9 @@ nav ul ul li a {
       appearOnScroll.observe(fader);
     });
   </script>
-   <script src="darkmode.js"></script>
+
+  <!-- DARK MODE SCRIPT -->
+  <script src="darkmode.js"></script>
+
 </body>
 </html>
