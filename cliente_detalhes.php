@@ -1,61 +1,30 @@
 <?php
-// Dados simulados (em vez de banco de dados)
-$historico = [
-    1 => [
-        "nome" => "Ana Souza",
-        "idade" => 29,
-        "registros" => [
-            ["data" => "10/11/2025", "emocao" => "Ansiosa", "descricao" => "Dia cheio de trabalho, um pouco sobrecarregada.", "fatores" => "Trabalho, Sono"],
-            ["data" => "07/11/2025", "emocao" => "Grata", "descricao" => "Consegui terminar um projeto importante.", "fatores" => "Trabalho, Amigos"]
-        ]
-    ],
-    2 => [
-        "nome" => "Bruno Lima",
-        "idade" => 34,
-        "registros" => [
-            ["data" => "09/11/2025", "emocao" => "Grato", "descricao" => "Passei um ótimo fim de semana com a família.", "fatores" => "Amigos, Alimentação"]
-        ]
-    ],
-    3 => [
-        "nome" => "Carla Mendes",
-        "idade" => 41,
-        "registros" => [
-            ["data" => "12/11/2025", "emocao" => "Triste", "descricao" => "Senti falta de tempo para mim mesma.", "fatores" => "Trabalho, Sono"]
-        ]
-    ],
-    4 => [
-        "nome" => "Diego Rocha",
-        "idade" => 22,
-        "registros" => [
-            ["data" => "08/11/2025", "emocao" => "Feliz", "descricao" => "Dia de lazer com amigos, me senti leve.", "fatores" => "Amigos"]
-        ]
-    ],
-    5 => [
-        "nome" => "Eduarda Reis",
-        "idade" => 27,
-        "registros" => [
-            ["data" => "11/11/2025", "emocao" => "Calma", "descricao" => "Dia tranquilo, consegui descansar bem.", "fatores" => "Sono"]
-        ]
-    ]
-];
+// CONFIGURAÇÃO DE BANCO DE DADOS
+$host = "localhost";
+$user = "root";      // coloque o usuário do seu MySQL
+$pass = "";          // coloque a senha do seu MySQL
+$dbname = "emocao_app";
 
-// Verifica ID do cliente
+$conn = new mysqli($host, $user, $pass, $dbname);
+
+if ($conn->connect_error) {
+    die("Erro ao conectar ao banco: " . $conn->connect_error);
+}
+
+// Verifica se existe um ID selecionado
 $id = $_GET["id"] ?? null;
-$cliente = $historico[$id] ?? null;
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Detalhes do Cliente</title>
+<title>Sistema Emocional</title>
+
 <style>
     body {
-        font-family: 'Arial', sans-serif;
+        font-family: Arial, sans-serif;
         background-color: #fff8f0;
-        color: #4a3b2a;
-        margin: 0;
         padding: 40px;
         display: flex;
         justify-content: center;
@@ -66,93 +35,127 @@ $cliente = $historico[$id] ?? null;
         padding: 30px;
         border-radius: 20px;
         width: 90%;
-        max-width: 700px;
+        max-width: 750px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    h2 {
-        color: #6b3e26;
-        margin-bottom: 20px;
-    }
+    h2 { color: #6b3e26; }
 
-    .info {
-        margin-bottom: 20px;
+    .cliente {
         background-color: #fcefdc;
-        padding: 15px;
+        padding: 12px;
         border-radius: 12px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
     .registro {
         background-color: #fff8f0;
-        border-radius: 12px;
         padding: 15px;
+        border-radius: 12px;
         margin-bottom: 15px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
-    .data {
-        color: #6b3e26;
-        font-weight: bold;
-    }
+    .data { font-weight: bold; color: #6b3e26; }
 
     .emocao {
         padding: 5px 10px;
-        border-radius: 8px;
+        border-radius: 6px;
         color: white;
         font-weight: bold;
-        font-size: 0.9em;
         display: inline-block;
-        min-width: 70px;
     }
 
-    .Calma { background-color: #f2b179; }
-    .Triste { background-color: #b08bb8; }
-    .Grato { background-color: #b4cf8b; }
-    .Ansiosa { background-color: #de8c8c; }
-    .Feliz { background-color: #93b7d3; }
+    .Ansiosa { background: #de8c8c; }
+    .Grata, .Grato { background: #b4cf8b; }
+    .Triste { background: #b08bb8; }
+    .Feliz { background: #93b7d3; }
+    .Calma { background: #f2b179; }
 
     .botao-voltar {
         display: inline-block;
-        margin-top: 25px;
+        margin-top: 20px;
         background-color: #e49b84;
         color: white;
-        text-decoration: none;
-        padding: 10px 25px;
+        padding: 10px 20px;
         border-radius: 10px;
+        text-decoration: none;
         font-weight: bold;
-        transition: background-color 0.3s ease;
     }
 
-    .botao-voltar:hover {
-        background-color: #cf836d;
-    }
 </style>
 </head>
+
 <body>
-
 <div class="container">
-    <?php if ($cliente): ?>
-        <h2>Histórico de <?php echo htmlspecialchars($cliente["nome"]); ?></h2>
-        <div class="info">
-            <b>Idade:</b> <?php echo $cliente["idade"]; ?><br>
-            <b>Total de registros:</b> <?php echo count($cliente["registros"]); ?>
+
+<?php
+// ===============================
+//   SE UM CLIENTE FOI SELECIONADO
+// ===============================
+if ($id) {
+
+    // Buscar cliente
+    $sql = "SELECT * FROM clientes WHERE id = $id";
+    $res = $conn->query($sql);
+
+    if ($res->num_rows == 0) {
+        echo "<h2>Cliente não encontrado</h2>";
+        echo '<a href="index.php" class="botao-voltar">← Voltar</a>';
+    } else {
+
+        $cliente = $res->fetch_assoc();
+
+        echo "<h2>Histórico de {$cliente['nome']}</h2>";
+
+        // Buscar registros
+        $sql2 = "SELECT * FROM registros WHERE cliente_id = $id ORDER BY data_registro DESC";
+        $reg = $conn->query($sql2);
+
+        echo "<div class='cliente'>
+                <b>Idade:</b> {$cliente['idade']}<br>
+                <b>Total de registros:</b> {$reg->num_rows}
+              </div>";
+
+        if ($reg->num_rows > 0) {
+            while ($r = $reg->fetch_assoc()) {
+                echo "
+                <div class='registro'>
+                    <div class='data'>".date('d/m/Y', strtotime($r['data_registro']))."</div>
+                    <div class='emocao {$r['emocao']}'>{$r['emocao']}</div>
+                    <p><b>Descrição:</b> {$r['descricao']}</p>
+                    <p><b>Fatores:</b> {$r['fatores']}</p>
+                </div>";
+            }
+        } else {
+            echo "<p>Nenhum registro encontrado.</p>";
+        }
+
+        echo '<a href="index.php" class="botao-voltar">← Voltar à lista</a>';
+    }
+
+} else {
+
+// ===============================
+//     EXIBE LISTA DE CLIENTES
+// ===============================
+    echo "<h2>Lista de Clientes</h2>";
+
+    $sql = "SELECT * FROM clientes ORDER BY nome";
+    $res = $conn->query($sql);
+
+    while ($c = $res->fetch_assoc()) {
+        echo "
+        <div class='cliente'>
+            <a href='index.php?id={$c['id']}'>
+                {$c['nome']} — {$c['idade']} anos
+            </a>
         </div>
+        ";
+    }
+}
+?>
 
-        <?php foreach ($cliente["registros"] as $r): ?>
-            <div class="registro">
-                <div class="data"><?php echo $r["data"]; ?></div>
-                <div class="emocao <?php echo $r["emocao"]; ?>"><?php echo $r["emocao"]; ?></div>
-                <p><b>Descrição:</b> <?php echo $r["descricao"]; ?></p>
-                <p><b>Fatores:</b> <?php echo $r["fatores"]; ?></p>
-            </div>
-        <?php endforeach; ?>
-
-        <a href="clientes.php" class="botao-voltar">← Voltar à lista</a>
-    <?php else: ?>
-        <h2>Cliente não encontrado</h2>
-        <a href="clientes.php" class="botao-voltar">← Voltar à lista</a>
-    <?php endif; ?>
 </div>
-
 </body>
 </html>
