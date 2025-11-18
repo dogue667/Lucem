@@ -14,7 +14,7 @@ session_start();
 
 <style>
 
-/* Cores do site */
+/* ---------- CORES ---------- */
 :root {
   --bg: #f9efe4;
   --menu: #ffffff;
@@ -25,6 +25,7 @@ session_start();
   --bege: #f3dcc5;
 }
 
+/* Geral */
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -32,7 +33,7 @@ body {
   color: var(--texto);
 }
 
-/* MENU IGUAL AO INDEX */
+/* ---------- NAVBAR RECRIAÇÃO COMPLETA ---------- */
 header {
   background-color: var(--menu);
   display: flex;
@@ -56,34 +57,53 @@ header {
 }
 
 nav ul {
-  display: flex;
-  gap: 25px;
   list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 25px;
 }
 
-nav a {
+nav ul li a {
   text-decoration: none;
   color: var(--roxo-escuro);
+  font-weight: 500;
+  font-size: 1em;
   padding: 10px 16px;
   border-radius: 10px;
-  transition: .3s;
-  font-weight: 500;
+  transition: 0.3s ease;
 }
 
-nav a:hover {
-  background: var(--hover);
+nav ul li a:hover {
+  background-color: var(--hover);
   color: var(--roxo);
 }
 
-/* BOTÃO DARK */
-#darkToggle {
-  margin-left: 20px;
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
+/* Ícone ⚙️ com animação */
+.nav-icons a {
+  font-size: 1.6rem;
+  color: var(--roxo-escuro);
+  transition: transform 0.4s ease, color 0.2s ease;
+  text-decoration: none;
+  margin-left: 25px;
 }
 
-/* ---- CONTEÚDO ---- */
+.nav-icons a:hover {
+  transform: rotate(180deg) scale(1.15);
+  color: var(--roxo);
+}
+
+.nav-icons a:active {
+  animation: pulse .3s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.20); }
+  100% { transform: scale(1); }
+}
+
+/* Conteúdo */
 .container {
   max-width: 900px;
   margin: 140px auto 60px;
@@ -99,7 +119,7 @@ h1 {
   color: var(--roxo-escuro);
 }
 
-/* ---- BOTÕES ACORDEÃO ---- */
+/* Acordeão */
 .acordeon {
   background: var(--menu);
   padding: 18px 22px;
@@ -116,9 +136,7 @@ h1 {
   transition: .3s;
 }
 
-.acordeon:hover {
-  background: var(--hover);
-}
+.acordeon:hover { background: var(--hover); }
 
 .acordeon:after {
   content: "▼";
@@ -126,11 +144,8 @@ h1 {
   transition: .3s;
 }
 
-.acordeon.active:after {
-  transform: rotate(180deg);
-}
+.acordeon.active:after { transform: rotate(180deg); }
 
-/* Conteúdo do acordeão */
 .painel {
   max-height: 0;
   overflow: hidden;
@@ -140,11 +155,7 @@ h1 {
   padding: 0 22px;
 }
 
-/* Campos internos */
-.painel form,
-.painel div {
-  padding: 20px 0;
-}
+.painel form, .painel div { padding: 20px 0; }
 
 label {
   font-weight: 500;
@@ -178,26 +189,54 @@ button.salvar:hover {
 </head>
 <body>
 
+<!-- NAV COMPLETO -->
 <header>
   <div class="logo">🌞 LUCEM</div>
+
   <nav>
     <ul>
-      <li><a href="index.php">Início</a></li>
-      <li><a href="artigos.php">Artigos</a></li>
-      <li><a href="metas.php">Exercícios</a></li>
-      <li><a href="configuracoes.php" style="font-weight:600; color:var(--roxo)">Configurações</a></li>
-      <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+      <li><a href="index.php">Sobre</a></li>
+
+      <?php if (isset($_SESSION['psicologo_id'])): ?>
+
+        <li><a href="painel_psicologo.php">Painel</a></li>
+        <li><a href="lista_paciente.php">Meus Pacientes</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
+        <li><a href="config_psicologo.php" style="font-weight:600; color:var(--roxo);">Configurações</a></li>
+        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
+      <?php elseif (isset($_SESSION['usuario_id'])): ?>
+
+        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+        <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
+        <li><a href="atendimento.php">Atendimento Psicológico</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
+        <li><a href="metas.php">Exercícios & Metas</a></li>
+        <li><a href="configuracoes.php" style="font-weight:600; color:var(--roxo);">Configurações</a></li>
+        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
+      <?php else: ?>
+
+        <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
+        <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+        <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
+
+      <?php endif; ?>
+
     </ul>
   </nav>
 
-  <button id="darkToggle" onclick="toggleDarkMode()">🌓</button>
+  <div class="nav-icons">
+    <a href="configuracoes.php">⚙️</a>
+  </div>
 </header>
 
-
+<!-- CONTEÚDO -->
 <div class="container">
   <h1>Configurações</h1>
 
-  <!-- Visual -->
+  <!-- VISUAL -->
   <button class="acordeon">🎨 Visual</button>
   <div class="painel">
     <div>
@@ -206,42 +245,80 @@ button.salvar:hover {
     </div>
 
     <div>
-      <p><strong>Modo Daltônico (protanopia / deuteranopia / tritanopia):</strong></p>
+      <p><strong>Modo Daltônico:</strong></p>
       <button class="salvar">Ativar (em produção)</button>
     </div>
 
     <div>
-      <p><strong>Modo com texto maior:</strong></p>
+      <p><strong>Texto maior:</strong></p>
       <button class="salvar">Aumentar fonte (em produção)</button>
     </div>
   </div>
 
-  <!-- Acessibilidade -->
+  <!-- ACESSIBILIDADE -->
   <button class="acordeon">♿ Acessibilidade</button>
   <div class="painel">
     <p><strong>Audiodescrição:</strong> (em produção)</p>
-    <p><strong>Leitura automática de botões:</strong> (em produção)</p>
+    <p><strong>Leitura de botões:</strong> (em produção)</p>
   </div>
 
-  <!-- Segurança -->
-  <button class="acordeon">🔒 Segurança</button>
-  <div class="painel">
-    <form>
-      <label>Novo E-mail:</label>
-      <input type="email" placeholder="Digite seu novo e-mail">
-      
-      <label>Senha Atual:</label>
-      <input type="password">
+<!-- SEGURANÇA -->
+<button class="acordeon">🔒 Segurança</button>
+<div class="painel">
 
-      <label>Nova Senha:</label>
-      <input type="password">
+  <!-- DETECTA SE É USUÁRIO OU PSICÓLOGO -->
+  <?php
+    $isPsicologo = isset($_SESSION['psicologo_id']);
+  ?>
 
-      <button class="salvar">Salvar Alterações</button>
-    </form>
-  </div>
+  <!-- ===================== TROCAR SENHA ===================== -->
+  <h3 style="margin-top: 20px; color: var(--roxo-escuro); font-family: 'Inter', sans-serif;">
+    🔑 Trocar Senha
+  </h3>
+
+  <form 
+    action="<?php echo $isPsicologo ? 'trocar_senha_psicologo.php' : 'trocar_senha.php'; ?>" 
+    method="POST" 
+    style="margin-bottom: 30px;"
+  >
+
+    <label>Senha Atual:</label>
+    <input type="password" name="senha_atual" placeholder="Digite sua senha atual" required>
+
+    <label>Nova Senha:</label>
+    <input type="password" name="senha_nova" placeholder="Digite sua nova senha" required>
+
+    <label>Confirmar Nova Senha:</label>
+    <input type="password" name="senha_confirmar" placeholder="Repita a nova senha" required>
+
+    <button class="salvar" type="submit">Atualizar Senha</button>
+  </form>
+
+  <hr style="border: 0; height: 1px; background: #ddd; margin: 25px 0;">
+
+
+  <!-- ===================== TROCAR EMAIL ======================= -->
+  <h3 style="margin-top: 20px; color: var(--roxo-escuro); font-family: 'Inter', sans-serif;">
+    📧 Trocar E-mail
+  </h3>
+
+  <form 
+    action="<?php echo $isPsicologo ? 'trocar_email_psicologo.php' : 'trocar_email.php'; ?>" 
+    method="POST"
+  >
+
+    <label>Novo E-mail:</label>
+    <input type="email" name="email_novo" placeholder="Digite o novo e-mail" required>
+
+    <label>Senha Atual:</label>
+    <input type="password" name="senha_atual" placeholder="Confirme sua senha atual" required>
+
+    <button class="salvar" type="submit">Atualizar E-mail</button>
+  </form>
+
 </div>
 
-<!-- Script accordion -->
+<!-- SCRIPT ACORDEÃO -->
 <script>
 const acc = document.querySelectorAll(".acordeon");
 acc.forEach(btn => {
