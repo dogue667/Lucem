@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUCEM — Equilíbrio e Autocuidado</title>
 
-  <style>
-    /* ---------- CORES ---------- */
-    :root {
-      --bg: #f9efe4;
-      --menu: #ffffff;
-      --texto: #5b3a70;
-      --roxo: #9b6bc2;
-      --roxo-escuro: #4d2f68;
-      --hover: #e7d3f5;
-      --degrade: linear-gradient(135deg, #d1b3f1, #a57cd3, #8a68b0);
-      --bege: #f3dcc5;
-    }
+    <style>
+        /* ---------- CORES ---------- */
+        :root {
+            --bg: #f9efe4;
+            --menu: #ffffff;
+            --texto: #5b3a70;
+            --roxo: #9b6bc2;
+            --roxo-escuro: #4d2f68;
+            --hover: #e7d3f5;
+            --degrade: linear-gradient(135deg, #d1b3f1, #a57cd3, #8a68b0);
+            --bege: #f3dcc5;
+        }
 
         body {
             margin: 0;
@@ -58,10 +58,6 @@
             gap: 25px;
         }
 
-        nav ul li {
-            position: relative;
-        }
-
         nav ul li a {
             text-decoration: none;
             color: var(--roxo-escuro);
@@ -78,6 +74,10 @@
         }
 
         /* Submenu */
+        nav ul li {
+            position: relative;
+        }
+
         nav ul ul {
             display: none;
             position: absolute;
@@ -93,16 +93,34 @@
             display: block;
         }
 
-        nav ul ul li a {
-            display: block;
-            padding: 10px 15px;
+        /* Ícone de configurações */
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-@media (max-width: 768px) {
-  header { flex-direction: column; }
-  nav ul { flex-direction: column; gap: 10px; }
-  .logo { margin: 0 0 10px 0; }
-}
+        .config-icon {
+            font-size: 1.5rem;
+            color: var(--roxo-escuro);
+            transition: 0.3s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .config-icon:hover {
+            transform: rotate(20deg);
+            color: var(--roxo);
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; }
+            nav ul { flex-direction: column; gap: 10px; }
+            .logo { margin: 0 0 10px 0; }
+        }
 
         /* ---------- SEÇÃO INICIAL ---------- */
         .inicio {
@@ -112,17 +130,13 @@
             color: white;
             padding: 120px 20px 160px;
             border-radius: 70px;
-            overflow: hidden;
         }
 
-        .inicio img:hover {
-            transform: scale(1.03);
-        }
+        .inicio img:hover { transform: scale(1.03); }
 
         .inicio h1 {
             font-family: "Playfair Display", serif;
             font-size: 2.6em;
-            margin-bottom: 10px;
         }
 
         .inicio p {
@@ -132,16 +146,16 @@
             line-height: 1.6;
         }
 
-    .botao {
-      background: var(--menu);
-      color: var(--roxo-escuro);
-      padding: 14px 34px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      transition: 0.3s;
-    }
+        .botao {
+            background: var(--menu);
+            color: var(--roxo-escuro);
+            padding: 14px 34px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: 0.3s;
+        }
 
         .botao:hover {
             background: var(--roxo-escuro);
@@ -163,14 +177,12 @@
             font-family: "Playfair Display", serif;
             font-size: 2em;
             color: var(--roxo-escuro);
-            margin-bottom: 15px;
         }
 
         .sobre p {
             max-width: 700px;
             margin: 0 auto;
             font-size: 1.1em;
-            color: var(--texto);
             line-height: 1.6;
         }
 
@@ -184,7 +196,6 @@
             font-family: "Playfair Display", serif;
             font-size: 2em;
             color: var(--roxo-escuro);
-            margin-bottom: 40px;
         }
 
         .cards {
@@ -194,14 +205,14 @@
             gap: 25px;
         }
 
-    .card {
-      background-color: var(--menu);
-      border-radius: 20px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-      width: 250px;
-      padding: 25px;
-      transition: 0.3s;
-    }
+        .card {
+            background-color: var(--menu);
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            width: 250px;
+            padding: 25px;
+            transition: 0.3s;
+        }
 
         .card:hover {
             transform: translateY(-6px);
@@ -210,12 +221,10 @@
 
         .card h3 {
             color: var(--roxo);
-            margin-bottom: 10px;
         }
 
         .card p {
             font-size: 0.95em;
-            color: var(--texto);
         }
 
         /* ---------- SAÚDE ---------- */
@@ -226,19 +235,6 @@
             padding: 90px 20px;
             border-radius: 60px;
             margin: 70px 0;
-        }
-
-        .saude h2 {
-            font-family: "Playfair Display", serif;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .saude p {
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-            font-size: 1.1em;
         }
 
         /* ---------- SEGURANÇA ---------- */
@@ -252,21 +248,6 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .seguranca h2 {
-            font-family: "Playfair Display", serif;
-            font-size: 2em;
-            color: var(--roxo-escuro);
-            margin-bottom: 20px;
-        }
-
-        .seguranca p {
-            max-width: 750px;
-            margin: 0 auto 20px;
-            font-size: 1.1em;
-            color: var(--texto);
-            line-height: 1.6;
-        }
-
         .seguranca-destaque {
             display: flex;
             flex-wrap: wrap;
@@ -275,29 +256,14 @@
             margin-top: 30px;
         }
 
-        .seguranca-destaque h3 {
-            background: var(--degrade);
-            color: white;
-            padding: 16px 28px;
-            border-radius: 40px;
-            font-size: 1.05em;
-            font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .seguranca-destaque h3:hover {
-            transform: translateY(-4px);
-        }
-
         footer {
             background-color: var(--menu);
             text-align: center;
             padding: 25px;
             font-size: 0.9em;
-            color: #866b95;
             margin-top: 50px;
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+            color: #866b95;
         }
 
         /* ---------- ANIMAÇÕES ---------- */
@@ -307,151 +273,142 @@
             transition: all 1s ease;
         }
 
-        .fade.visible {
+        .visible {
             opacity: 1;
             transform: translateY(0);
         }
 
         @media (max-width: 768px) {
-            .inicio img {
-                width: 250px;
-            }
+            .inicio img { width: 250px; }
         }
     </style>
-</head>
 
+</head>
 <body>
 
- <!-- ---------- MENU SUPERIOR ---------- -->
 <header>
-  <div class="logo">🌞 LUCEM</div>
-  <nav>
-    <ul>
-      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
+    <div class="logo">🌞 LUCEM</div>
 
-      <?php if (isset($_SESSION['psicologo_id'])): ?>
-        <li><a href="painel_psicologo.php">Painel</a></li>
-        <li><a href="lista_paciente.php">Meus Pacientes</a></li>
-        <li><a href="artigos.php">Artigos</a></li>
-        <li><a href="config_psicologo.php">Configurações</a></li>
-        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+    <nav>
+        <ul>
+            <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
-      <?php elseif (isset($_SESSION['usuario_id'])): ?>
-        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-        <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-        <li><a href="atendimento.php">Atendimento Psicológico</a></li>
-        <li><a href="artigos.php">Artigos</a></li>
-        <li><a href="metas.php">Exercícios & Metas</a></li>
-        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+            <?php if (isset($_SESSION['psicologo_id'])): ?>
+                <li><a href="painel_psicologo.php">Painel</a></li>
+                <li><a href="lista_paciente.php">Meus Pacientes</a></li>
+                <li><a href="artigos.php">Artigos</a></li>
+                <li><a href="config_psicologo.php">Configurações</a></li>
+                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
 
-      <?php else: ?>
-        <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-        <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-        <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-      <?php endif; ?>
+            <?php elseif (isset($_SESSION['usuario_id'])): ?>
+                <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+                <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
+                <li><a href="atendimento.php">Atendimento Psicológico</a></li>
+                <li><a href="artigos.php">Artigos</a></li>
+                <li><a href="metas.php">Exercícios & Metas</a></li>
+                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
 
-    </ul>
-  </nav>
+            <?php else: ?>
+                <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+                <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
+                <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+                <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
+            <?php endif; ?>
 
-  <!-- BOTÃO DE MODO ESCURO -->
-  <button onclick="toggleDarkMode()" 
-    style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
-    🌓
-  </button>
+        </ul>
+    </nav>
+
+    <div class="nav-icons">
+        <a href="configuracoes.php" class="config-icon">⚙️</a>
+    </div>
+
+    <!-- BOTÃO DARK MODE -->
+    <button onclick="toggleDarkMode()" 
+        style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">🌓</button>
 </header>
 
-    <!-- ---------- CONTEÚDO ---------- -->
-    <section class="inicio fade">
-        <img src="lucem.png" alt="Ilustração LUCEM — menina acolhedora">
-        <h1>Bem-vindo(a) ao LUCEM 🌞</h1>
-        <p>Seu espaço de equilíbrio e autocuidado.<br>Cuide da mente, respire fundo e comece hoje.</p>
+<section class="inicio fade">
+    <img src="lucem.png" alt="Ilustração LUCEM — menina acolhedora">
 
-        <?php if (!isset($_SESSION['usuario_id'])): ?>
-            <a href="cadastro.html" class="botao">Comece agora</a>
-        <?php endif; ?>
-    </section>
+    <h1>Bem-vindo(a) ao LUCEM 🌞</h1>
+    <p>Seu espaço de equilíbrio e autocuidado.<br>Cuide da mente, respire fundo e comece hoje.</p>
 
-  <section class="sobre fade">
+    <?php if (!isset($_SESSION['usuario_id'])): ?>
+        <a href="cadastro.html" class="botao">Comece agora</a>
+    <?php endif; ?>
+</section>
+
+<section class="sobre fade">
     <h2>Nosso Projeto</h2>
-    <p>O LUCEM é um espaço digital criado para ajudar pessoas a acompanharem suas emoções,
-    encontrarem apoio psicológico acessível e aprenderem sobre saúde mental de forma leve e acolhedora.
-    Acreditamos que cuidar da mente deve ser tão natural quanto cuidar do corpo.</p>
-  </section>
+    <p>
+        O LUCEM é um espaço digital criado para ajudar pessoas a acompanharem suas emoções,
+        encontrarem apoio psicológico acessível e aprenderem sobre saúde mental de forma acolhedora.
+    </p>
+</section>
 
-    <section class="funcoes fade">
-        <h2>O que o LUCEM oferece</h2>
+<section class="funcoes fade">
+    <h2>O que o LUCEM oferece</h2>
 
-        <div class="cards">
-            <div class="card">
-                <h3>🌤️ Mapa Emocional</h3>
-                <p>Acompanhe suas emoções e entenda como seus sentimentos evoluem ao longo da semana.</p>
-            </div>
-
-            <div class="card">
-                <h3>🧘‍♀️ Exercícios Terapêuticos</h3>
-                <p>Meditações e práticas que ajudam a aliviar o estresse e melhorar o foco.</p>
-            </div>
-
-            <div class="card">
-                <h3>💬 Atendimento Psicológico</h3>
-                <p>Converse com psicólogos parceiros em um ambiente seguro e confidencial.</p>
-            </div>
-
-            <div class="card">
-                <h3>📚 Conteúdo Educativo</h3>
-                <p>Artigos e dicas sobre saúde mental, autoestima e equilíbrio emocional.</p>
-            </div>
+    <div class="cards">
+        <div class="card">
+            <h3>🌤️ Mapa Emocional</h3>
+            <p>Acompanhe suas emoções ao longo da semana.</p>
         </div>
-    </section>
 
-  <section class="saude fade">
+        <div class="card">
+            <h3>🧘‍♀️ Exercícios Terapêuticos</h3>
+            <p>Práticas e meditações guiadas.</p>
+        </div>
+
+        <div class="card">
+            <h3>💬 Atendimento Psicológico</h3>
+            <p>Converse com especialistas.</p>
+        </div>
+
+        <div class="card">
+            <h3>📚 Conteúdo Educativo</h3>
+            <p>Dicas e artigos sobre saúde mental.</p>
+        </div>
+    </div>
+</section>
+
+<section class="saude fade">
     <h2>Por que cuidar da saúde mental?</h2>
-    <p>Cuidar da mente é um ato de amor-próprio. A saúde mental é a base para viver com leveza,
-    resiliência e bem-estar. O LUCEM foi criado para te acompanhar nessa jornada — passo a passo,
-    com empatia, ciência e acolhimento.</p>
-  </section>
+    <p>
+        Cuidar da mente é fundamental para uma vida leve e equilibrada.  
+        O LUCEM te acompanha nessa jornada com ciência, empatia e acolhimento.
+    </p>
+</section>
 
-  <section class="seguranca fade">
+<section class="seguranca fade">
     <h2>Sua Segurança em Primeiro Lugar 🔒</h2>
-    <p>No LUCEM, a sua privacidade é prioridade. Todos os seus registros emocionais e informações pessoais
-    são armazenados de forma segura e confidencial.</p>
 
-        <div class="seguranca-destaque">
-            <h3>✔️ Proteção de Dados</h3>
-            <h3>🔐 Confidencialidade Total</h3>
-            <h3>🧠 Ambiente Confiável</h3>
-        </div>
-    </section>
+    <p>Suas informações são guardadas com total privacidade e segurança.</p>
 
-    <footer>
-        © 2025 LUCEM — Todos os direitos reservados.
-    </footer>
+    <div class="seguranca-destaque">
+        <h3>✔️ Proteção de Dados</h3>
+        <h3>🔐 Confidencialidade Total</h3>
+        <h3>🧠 Ambiente Confiável</h3>
+    </div>
+</section>
 
-    <!-- ---------- SCRIPT DE ANIMAÇÃO ---------- -->
-    <script>
-        const faders = document.querySelectorAll(".fade");
+<footer>© 2025 LUCEM — Todos os direitos reservados.</footer>
 
-        const appearOptions = {
-            threshold: 0.2,
-            rootMargin: "0px 0px -100px 0px"
-        };
+<script>
+const faders = document.querySelectorAll(".fade");
 
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add("visible");
         observer.unobserve(entry.target);
-      });
-    }, appearOptions);
+    });
+}, { threshold: 0.2 });
 
-        faders.forEach(fader => {
-            appearOnScroll.observe(fader);
-        });
-    </script>
+faders.forEach(el => appearOnScroll.observe(el));
+</script>
 
-  <!-- DARK MODE SCRIPT -->
-  <script src="darkmode.js"></script>
+<script src="darkmode.js"></script>
 
 </body>
 </html>

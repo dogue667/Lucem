@@ -30,18 +30,25 @@ session_start();
       color: var(--texto);
     }
 
-    /* ---------- MENU ---------- */
+    /* ===== NAV NOVA (VERSÃO 1) ===== */
     header {
-      background-color: var(--menu);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 18px 40px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      background: #ffffffd0;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e5e5;
       position: fixed;
       top: 0;
-      width: 100%;
       z-index: 100;
+    }
+
+    nav {
+      max-width: 1250px;
+      height: 75px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
     }
 
     .logo {
@@ -49,30 +56,27 @@ session_start();
       font-weight: 700;
       font-size: 1.7em;
       color: var(--roxo-escuro);
-      letter-spacing: 1px;
-      margin-right: 80px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     nav ul {
       list-style: none;
       display: flex;
+      align-items: center;
+      gap: 28px;
       margin: 0;
       padding: 0;
-      gap: 25px;
-    }
-
-    nav ul li {
-      position: relative;
     }
 
     nav ul li a {
       text-decoration: none;
       color: var(--roxo-escuro);
       font-weight: 500;
-      font-size: 1em;
-      padding: 10px 16px;
-      border-radius: 10px;
-      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: 0.2s;
     }
 
     nav ul li a:hover {
@@ -80,24 +84,21 @@ session_start();
       color: var(--roxo);
     }
 
-    nav ul ul {
-      display: none;
-      position: absolute;
-      background-color: var(--menu);
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      top: 45px;
-      padding: 10px 0;
-      min-width: 160px;
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
 
-    nav ul li:hover > ul {
-      display: block;
+    .nav-icons a {
+      text-decoration: none;
+      font-size: 1.3rem;
+      color: var(--roxo-escuro);
+      transition: 0.2s;
     }
 
-    nav ul ul li a {
-      display: block;
-      padding: 10px 15px;
+    .nav-icons a:hover {
+      color: var(--roxo);
     }
 
     /* ---------- BANNER ---------- */
@@ -237,7 +238,6 @@ session_start();
       box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
     }
 
-    /* ---------- ANIMAÇÕES ---------- */
     .fade {
       opacity: 0;
       transform: translateY(40px);
@@ -250,37 +250,40 @@ session_start();
     }
 
     @media (max-width: 768px) {
-      header { flex-direction: column; }
       nav ul { flex-direction: column; gap: 10px; }
-      .logo { margin: 0 0 10px 0; }
       .artigo { width: 90%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ---------- MENU ---------- -->
-  <header>
-  <div class="logo">🌞 LUCEM</div>
+<!-- ===== NAV NOVA (VERSÃO 1) ===== -->
+<header>
   <nav>
-    <ul>
-      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
+    <div class="logo">☀ LUCEM</div>
 
-      <?php if(!isset($_SESSION['usuario_id'])): ?>
-        <!-- VISÍVEL PARA VISITANTES -->
-        <li><a href="cadastro.html"style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php"style="color:#d9534f;">Fazer login</a></li>
-      <?php else: ?>
-        <!-- VISÍVEL SOMENTE PARA LOGADOS -->
-        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-        <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
-        <li><a href="artigos.php"style="font-weight:600; color:var(--roxo);">Artigos</a></li>
-        <li><a href="metas.php">Exercícios & Metas</a></li>
-        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+    <ul>
+      <li><a href="index.php">Início</a></li>
+      <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+      <li><a href="artigos.php">Artigos e Inspirações</a></li>
+      <li><a href="metas.php">Exercícios & Metas</a></li>
+      <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] === "psicologo"): ?>
+        <li><a href="dashboard_psicologo.php">Área do Psicólogo</a></li>
       <?php endif; ?>
     </ul>
+
+    <div class="nav-icons">
+      <?php if(isset($_SESSION['usuario_id'])): ?>
+        <a href="configuracoes.php">⚙️</a>
+        <a href="logout.php">⎋</a>
+      <?php else: ?>
+        <a href="login.php">Entrar</a>
+      <?php endif; ?>
+    </div>
   </nav>
 </header>
+
+<!-- ============================= -->
 
   <!-- ---------- BANNER ---------- -->
   <section class="banner fade">
@@ -377,8 +380,6 @@ session_start();
 
   </div>
   </section>
-    </div>
-  </section>
 
   <!-- ---------- CTA ---------- -->
   <section class="cta fade">
@@ -415,4 +416,3 @@ session_start();
   </script>
 </body>
 </html>
-
