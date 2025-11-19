@@ -17,7 +17,8 @@ if (isset($_SESSION['usuario_id'])) {
   body {
     margin: 0;
     font-family: "Poppins", sans-serif;
-    background: #fdeedd;
+    background-color: var(--bg);
+    color: var(--texto);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,10 +85,155 @@ if (isset($_SESSION['usuario_id'])) {
     color: red;
     margin-bottom: 15px;
   }
+
+  <style>
+    /* ---------- CORES ---------- */
+    :root {
+      --bg: #f9efe4;
+      --menu: #ffffff;
+      --texto: #5b3a70;
+      --roxo: #9b6bc2;
+      --roxo-escuro: #4d2f68;
+      --hover: #e7d3f5;
+      --degrade: linear-gradient(135deg, #d1b3f1, #a57cd3, #8a68b0);
+      --bege: #f3dcc5;
+    }
+
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background-color: var(--bg);
+            color: var(--texto);
+            overflow-x: hidden;
+        }
+
+        /* ---------- MENU ---------- */
+        header {
+            background-color: var(--menu);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 40px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+            font-size: 1.7em;
+            color: var(--roxo-escuro);
+            letter-spacing: 1px;
+            margin-right: 80px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--roxo-escuro);
+            font-weight: 500;
+            font-size: 1em;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--hover);
+            color: var(--roxo);
+        }
+
 </style>
 </head>
 
 <body>
+  <header>
+  <div class="logo">🌞 LUCEM</div>
+  <nav>
+    <ul>
+      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
+
+      <?php if (isset($_SESSION['psicologo_id'])): ?>
+        <li><a href="painel_psicologo.php">Painel</a></li>
+        <li><a href="lista_paciente.php">Meus Pacientes</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
+        <li><a href="config_psicologo.php">Configurações</a></li>
+        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
+      <?php elseif (isset($_SESSION['usuario_id'])): ?>
+        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+        <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
+        <li><a href="atendimento.php">Atendimento Psicológico</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
+        <li><a href="metas.php">Exercícios & Metas</a></li>
+        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
+      <?php else: ?>
+        <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
+        <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+        <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
+      <?php endif; ?>
+
+    </ul>
+  </nav>
+
+  <!-- BOTÃO DE MODO ESCURO -->
+  <button onclick="toggleDarkMode()" 
+    style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
+    🌓
+  </button>
+</header><header>
+  <div class="logo">🌞 LUCEM</div>
+  <nav>
+    <ul>
+      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
+
+      <?php if (isset($_SESSION['psicologo_id'])): ?>
+        <li><a href="painel_psicologo.php">Painel</a></li>
+        <li><a href="lista_paciente.php">Meus Pacientes</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
+        <li><a href="config_psicologo.php">Configurações</a></li>
+        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
+      <?php elseif (isset($_SESSION['usuario_id'])): ?>
+        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+        <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
+        <li><a href="atendimento.php">Atendimento Psicológico</a></li>
+        <li><a href="artigos.php">Artigos</a></li>
+        <li><a href="metas.php">Exercícios & Metas</a></li>
+        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
+      <?php else: ?>
+        <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
+        <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+        <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
+      <?php endif; ?>
+
+    </ul>
+  </nav>
+
+  <!-- BOTÃO DE MODO ESCURO -->
+  <button onclick="toggleDarkMode()" 
+    style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
+    🌓
+  </button>
+</header>
 <div class="container">
 
   <div class="left">
