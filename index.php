@@ -509,6 +509,6 @@
     </script>
 
     <!-- DARK MODE SCRIPT -->
-   c
+   <script src="darkmode.js"></script>
 </body>
 </html>
