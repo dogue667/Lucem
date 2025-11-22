@@ -10,7 +10,7 @@ session_start();
     <title>LUCEM — Configurações</title>
 
     <style>
-        /* ===================== CORES PADRÃO (MESMAS DA INDEX) ===================== */
+        /* ===================== CORES PADRÃO ===================== */
         :root {
             --bg: #f9efe4;
             --menu: #ffffff;
@@ -77,81 +77,62 @@ session_start();
             color: var(--roxo);
         }
 
-        /* Ícone de engrenagem */
-        .nav-icons {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .config-icon {
-            font-size: 1.5rem;
+        /* Ícone ⚙️ */
+        .nav-icons a {
+            font-size: 1.6rem;
             color: var(--roxo-escuro);
+            transition: transform 0.4s ease, color 0.2s ease;
             text-decoration: none;
-            transition: 0.3s;
+            margin-left: 25px;
         }
 
-        .config-icon:hover {
-            transform: rotate(20deg);
+        .nav-icons a:hover {
+            transform: rotate(180deg) scale(1.15);
             color: var(--roxo);
         }
 
-        /* ===================== CONTAINER ===================== */
         .container {
-            margin-top: 140px;
             max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
             background: var(--menu);
+            margin: 140px auto 60px;
             padding: 40px;
             border-radius: 30px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            transition: 0.3s;
         }
 
-        h2 {
-            font-family: "Playfair Display", serif;
-            color: var(--roxo-escuro);
-            margin-bottom: 15px;
-        }
-
-        .grupo {
-            margin-bottom: 40px;
-        }
-
-        .box {
-            background: var(--bege);
-            padding: 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
+        /* ===================== ACORDEÃO ===================== */
+        .acordeon {
+            background: var(--menu);
+            padding: 18px 22px;
+            width: 100%;
+            text-align: left;
+            border-radius: 12px;
+            border: none;
+            font-size: 1.1em;
             font-weight: 600;
+            color: var(--roxo-escuro);
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: .3s;
         }
 
-        .box:hover {
-            transform: translateY(-4px);
+        .acordeon:hover {
+            background: var(--hover);
         }
 
-        .conteudo {
-            display: none;
-            background: #ffffff;
-            padding: 25px;
-            margin-top: 12px;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            animation: abrir 0.3s ease;
+        .painel {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--menu);
+            border-radius: 0 0 12px 12px;
+            transition: max-height .4s ease;
+            padding: 0 22px;
         }
 
-        @keyframes abrir {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .painel form,
+        .painel div {
+            padding: 20px 0;
         }
 
         label {
@@ -160,8 +141,7 @@ session_start();
             margin: 12px 0 6px;
         }
 
-        input,
-        select {
+        input {
             width: 100%;
             padding: 12px;
             border-radius: 12px;
@@ -170,12 +150,11 @@ session_start();
             outline: none;
         }
 
-        input:focus,
-        select:focus {
+        input:focus {
             border-color: var(--roxo);
         }
 
-        button {
+        button.salvar {
             margin-top: 20px;
             background: var(--roxo);
             color: white;
@@ -187,7 +166,7 @@ session_start();
             transition: 0.3s;
         }
 
-        button:hover {
+        button.salvar:hover {
             background: var(--roxo-escuro);
         }
 
@@ -207,23 +186,13 @@ session_start();
 
         .dark-mode nav ul li a:hover {
             background-color: #333 !important;
-            color: #fff !important;
         }
 
         .dark-mode .container {
             background-color: #1e1e1e !important;
         }
 
-        .dark-mode .box {
-            background-color: #2b2b2b !important;
-        }
-
-        .dark-mode .conteudo {
-            background-color: #242424 !important;
-        }
-
-        .dark-mode input,
-        .dark-mode select {
+        .dark-mode input {
             background-color: #303030;
             color: #fff;
             border: 1px solid #666;
@@ -232,30 +201,24 @@ session_start();
         .dark-mode button {
             background: #8b5bb5;
         }
-
-        .dark-mode button:hover {
-            background: #6e4690;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-      <header>
+    <!-- NAVBAR FINAL LIMPA -->
+    <header>
         <div class="logo">🌞 LUCEM</div>
 
         <nav>
             <ul>
-                <li>
-                    <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
-                </li>
+                <li><a href="index.php">Sobre</a></li>
 
                 <?php if (isset($_SESSION['psicologo_id'])): ?>
                     <li><a href="painel_psicologo.php">Painel</a></li>
                     <li><a href="lista_paciente.php">Meus Pacientes</a></li>
                     <li><a href="artigos.php">Artigos</a></li>
-                    <li><a href="config_psicologo.php">Configurações</a></li>
+                    <li><a href="config_psicologo.php" style="font-weight:600; color:var(--roxo);">Configurações</a></li>
                     <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
 
                 <?php elseif (isset($_SESSION['usuario_id'])): ?>
@@ -264,6 +227,7 @@ session_start();
                     <li><a href="atendimento.php">Atendimento Psicológico</a></li>
                     <li><a href="artigos.php">Artigos</a></li>
                     <li><a href="metas.php">Exercícios & Metas</a></li>
+                    <li><a href="configuracoes.php" style="font-weight:600; color:var(--roxo);">Configurações</a></li>
                     <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
 
                 <?php else: ?>
@@ -276,91 +240,95 @@ session_start();
         </nav>
 
         <div class="nav-icons">
-            <a href="configuracoes.php" class="config-icon">⚙️</a>
+            <a href="configuracoes.php">⚙️</a>
         </div>
     </header>
 
     <!-- CONTEÚDO -->
     <div class="container">
 
-        <h2>Configurações da Conta</h2>
+        <h1>Configurações</h1>
 
         <!-- VISUAL -->
-        <div class="grupo">
-            <div class="box" onclick="toggleBox('visual')">🎨 Configurações de Visual</div>
-            <div id="visual" class="conteudo">
+        <button class="acordeon">🎨 Visual</button>
+        <div class="painel">
+            <div>
+                <p><strong>Modo Escuro:</strong></p>
+                <button class="salvar" onclick="toggleDarkMode()">Ativar / Desativar Dark Mode</button>
+            </div>
 
-                <label for="darkmode">Modo Escuro</label>
-                <button onclick="toggleDarkMode()">Alternar Modo Escuro</button>
-
-                <br><br>
-
-                <label>Modo Daltonismo</label>
-                <select id="daltonismo">
-                    <option value="">Selecione…</option>
-                    <option value="protanopia">Protanopia</option>
-                    <option value="deuteranopia">Deuteranopia</option>
-                    <option value="tritanopia">Tritanopia</option>
-                </select>
-
+            <div>
+                <p><strong>Modo Daltônico:</strong></p>
+                <button class="salvar">Ativar (em produção)</button>
             </div>
         </div>
 
-        <!-- ALTERAR EMAIL -->
-        <h2>Segurança</h2>
-<!-- ALTERAR E-MAIL -->
-<div class="grupo">
-    <div class="box" onclick="toggleBox('email')">📧 Alterar E-mail</div>
+        <!-- ACESSIBILIDADE -->
+        <button class="acordeon">♿ Acessibilidade</button>
+        <div class="painel">
+            <p><strong>Audiodescrição:</strong> (em produção)</p>
+            <p><strong>Leitura de botões:</strong> (em produção)</p>
+        </div>
 
-    <div id="email" class="conteudo">
-        <form action="alteraemail.php" method="POST">
+        <!-- SEGURANÇA -->
+        <button class="acordeon">🔒 Segurança</button>
+        <div class="painel">
 
-            <label for="email_atual">E-mail atual</label>
-            <input type="email" id="email_atual" name="email_atual" required>
+            <?php $isPsicologo = isset($_SESSION['psicologo_id']); ?>
 
-            <label for="novo_email">Novo e-mail</label>
-            <input type="email" id="novo_email" name="novo_email" required>
+            <h3>🔑 Trocar Senha</h3>
 
-            <label for="senha_email">Senha atual (obrigatória)</label>
-            <input type="password" id="senha_email" name="senha_email" required>
+            <form action="<?= $isPsicologo ? 'trocar_senha_psicologo.php' : 'trocar_senha.php'; ?>" method="POST">
 
-            <button type="submit" name="atualizar_email">Atualizar E-mail</button>
-        </form>
+                <label>Senha Atual:</label>
+                <input type="password" name="senha_atual" required>
+
+                <label>Nova Senha:</label>
+                <input type="password" name="senha_nova" required>
+
+                <label>Confirmar Nova Senha:</label>
+                <input type="password" name="senha_confirmar" required>
+
+                <button class="salvar" type="submit">Atualizar Senha</button>
+            </form>
+
+            <hr style="border:0;height:1px;background:#ddd;margin:25px 0;">
+
+            <h3>📧 Trocar E-mail</h3>
+
+            <form action="<?= $isPsicologo ? 'trocar_email_psicologo.php' : 'trocar_email.php'; ?>" method="POST">
+
+                <label>Novo E-mail:</label>
+                <input type="email" name="email_novo" required>
+
+                <label>Senha Atual:</label>
+                <input type="password" name="senha_atual" required>
+
+                <button class="salvar" type="submit">Atualizar E-mail</button>
+            </form>
+        </div>
+
     </div>
-</div>
 
-
-<!-- ALTERAR SENHA -->
-<div class="grupo">
-    <div class="box" onclick="toggleBox('senha')">🔒 Alterar Senha</div>
-
-    <div id="senha" class="conteudo">
-        <form action="alterasenha.php" method="POST">
-
-            <label for="senha_atual">Senha atual</label>
-            <input type="password" id="senha_atual" name="senha_atual" required>
-
-            <label for="nova_senha">Nova senha</label>
-            <input type="password" id="nova_senha" name="nova_senha" required>
-
-            <label for="confirmar_senha">Confirmar nova senha</label>
-            <input type="password" id="confirmar_senha" name="confirmar_senha" required>
-
-            <button type="submit" name="atualizar_senha">Atualizar Senha</button>
-        </form>
-    </div>
-</div>
-
-
-    <!-- SCRIPT DAS CAIXAS -->
+    <!-- SCRIPT ACORDEÃO -->
     <script>
-        function toggleBox(id) {
-            const box = document.getElementById(id);
-            box.style.display = (box.style.display === "block") ? "none" : "block";
-        }
+        const acc = document.querySelectorAll(".acordeon");
+
+        acc.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+                const painel = btn.nextElementSibling;
+
+                if (painel.style.maxHeight) {
+                    painel.style.maxHeight = null;
+                } else {
+                    painel.style.maxHeight = painel.scrollHeight + "px";
+                }
+            });
+        });
     </script>
 
-    <!-- SCRIPT DO DARK MODE GLOBAL -->
+    <!-- SCRIPT DARK MODE -->
     <script>
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
@@ -375,5 +343,5 @@ session_start();
     </script>
 
 </body>
-
 </html>
+
