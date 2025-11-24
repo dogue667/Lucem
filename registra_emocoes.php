@@ -237,3 +237,4 @@ function alternarEmocao(botao, emocao) {
 
 </body>
 </html>
+ 
