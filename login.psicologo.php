@@ -1,8 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['usuario_id'])) {
-  // Se já está logado, vai direto pra página inicial
-  header("Location: index.php");
+if (isset($_SESSION['psicologo_id'])) {
+  header("Location: painel_psicologo.php");
   exit;
 }
 ?>
@@ -12,88 +11,165 @@ if (isset($_SESSION['usuario_id'])) {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Login - LUCEM</title>
+<title>Login Psicólogo - LUCEM</title>
 
 <style>
-  body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    background: #fdeedd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+/* ---------- CORES ---------- */
+:root {
+  --bg: #f9efe4;
+  --menu: #ffffff;
+  --texto: #5b3a70;
+  --roxo: #9b6bc2;
+  --roxo-escuro: #4d2f68;
+  --hover: #e7d3f5;
+}
 
-  .container {
-    display: flex;
-    background: #fff7ef;
-    width: 80%;
-    max-width: 1200px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  }
+/* ---------- AJUSTES GERAIS ---------- */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  padding-top: 90px; /* impede sobreposição do menu */
+  display: flex;
+  justify-content: center;
+}
 
-  .left {
-    flex: 1.3;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+/* ---------- MENU SUPERIOR ---------- */
+header {
+  background-color: var(--menu);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 40px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
-  .left img {
-    width: 100%;
-    max-width: 350px;
-    margin-bottom: 25px;
-  }
+.logo {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 1.7em;
+  color: var(--roxo-escuro);
+  margin-right: 80px;
+}
 
-  .right {
-    flex: 0.7;
-    background: #fff1dd;
-    padding: 60px 40px;
-    text-align: center;
-  }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
 
-  .right input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 8px;
-    border: 1px solid #c9b7a4;
-  }
+nav ul li a {
+  text-decoration: none;
+  color: var(--roxo-escuro);
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
 
-  .btn {
-    background: #6a4fb6;
-    color: white;
-    border: none;
-    padding: 13px;
-    width: 100%;
-    border-radius: 8px;
-    margin-top: 12px;
-    cursor: pointer;
-  }
+nav ul li a:hover {
+  background-color: var(--hover);
+  color: var(--roxo);
+}
 
-  .btn:hover {
-    background: #523c91;
-  }
+/* ---------- LOGIN BOX ---------- */
+.container {
+  display: flex;
+  background: #fff7ef;
+  width: 80%;
+  max-width: 1200px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
 
-  .erro {
-    color: red;
-    margin-bottom: 15px;
-  }
+.left {
+  flex: 1.3;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.left img {
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 25px;
+}
+
+.right {
+  flex: 0.7;
+  background: #fff1dd;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.right input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #c9b7a4;
+}
+
+.btn {
+  background: #6a4fb6;
+  color: white;
+  border: none;
+  padding: 13px;
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #523c91;
+}
+
+.erro {
+  color: red;
+  margin-bottom: 15px;
+}
 </style>
+
 </head>
 
 <body>
+
+<!-- MENU SUPERIOR -->
+<header>
+  <div class="logo">🌞 LUCEM</div>
+
+  <nav>
+    <ul>
+      <li><a href="index.php">Sobre</a></li>
+      <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+      <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
+      <li><a href="login.psicologo.php" style="color:#9b6bc2; font-weight:600;">Login Psicólogo</a></li>
+      <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
+    </ul>
+  </nav>
+
+  <button onclick="toggleDarkMode()" 
+    style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
+    🌓
+  </button>
+</header>
+
+<!-- CAIXA DE LOGIN -->
 <div class="container">
 
   <div class="left">
     <img src="lucem.png" alt="Logo Lucem" />
-    <h1>Bem-vindo(a) ao login de psicologo☀️</h1>
+    <h1>Login de Psicólogo ☀️</h1>
     <p>Entre e continue sua jornada de equilíbrio.</p>
   </div>
 
@@ -111,9 +187,12 @@ if (isset($_SESSION['usuario_id'])) {
       <button class="btn" type="submit">Entrar</button>
     </form>
 
-    <p class="login-link">Não possui conta?<a href="cadastro_psicologo.html">Cadastrar</a></p>
+    <p class="login-link">Não possui conta?
+      <a href="cadastro_psicologo.html">Cadastrar</a>
+    </p>
   </div>
 
 </div>
+
 </body>
 </html>
