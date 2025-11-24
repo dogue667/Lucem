@@ -1,167 +1,149 @@
 <?php
 session_start();
 if (isset($_SESSION['usuario_id'])) {
-  // Se já está logado, vai direto pra página inicial
   header("Location: index.php");
   exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Login - LUCEM</title>
+
 <style>
-  body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    background-color: var(--bg);
-    color: var(--texto);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+/* ---------- CORES ---------- */
+:root {
+  --bg: #f9efe4;
+  --menu: #ffffff;
+  --texto: #5b3a70;
+  --roxo: #9b6bc2;
+  --roxo-escuro: #4d2f68;
+  --hover: #e7d3f5;
+}
 
-  .container {
-    display: flex;
-    background: #fff7ef;
-    width: 80%;
-    max-width: 1200px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  }
+/* ---------- AJUSTE GERAL ---------- */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: var(--texto);
+  padding-top: 90px; /* IMPORTANTE → evita sobreposição do menu */
+}
 
-  .left {
-    flex: 1.3;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+/* ---------- MENU ---------- */
+header {
+  background-color: var(--menu);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 40px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
-  .left img {
-    width: 100%;
-    max-width: 350px;
-    margin-bottom: 25px;
-  }
+.logo {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 1.7em;
+  color: var(--roxo-escuro);
+  letter-spacing: 1px;
+  margin-right: 80px;
+}
 
-  .right {
-    flex: 0.7;
-    background: #fff1dd;
-    padding: 60px 40px;
-    text-align: center;
-  }
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 25px;
+}
 
-  .right input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 8px;
-    border: 1px solid #c9b7a4;
-  }
+nav ul li a {
+  text-decoration: none;
+  color: var(--roxo-escuro);
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+nav ul li a:hover {
+  background-color: var(--hover);
+  color: var(--roxo);
+}
 
-  .btn {
-    background: #6a4fb6;
-    color: white;
-    border: none;
-    padding: 13px;
-    width: 100%;
-    border-radius: 8px;
-    margin-top: 12px;
-    cursor: pointer;
-  }
+/* ---------- CONTAINER PRINCIPAL ---------- */
+.container {
+  display: flex;
+  background: #fff7ef;
+  width: 80%;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
 
-  .btn:hover {
-    background: #523c91;
-  }
+.left {
+  flex: 1.3;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
-  .erro {
-    color: red;
-    margin-bottom: 15px;
-  }
+.left img {
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 25px;
+}
 
-  <style>
-    /* ---------- CORES ---------- */
-    :root {
-      --bg: #f9efe4;
-      --menu: #ffffff;
-      --texto: #5b3a70;
-      --roxo: #9b6bc2;
-      --roxo-escuro: #4d2f68;
-      --hover: #e7d3f5;
-      --degrade: linear-gradient(135deg, #d1b3f1, #a57cd3, #8a68b0);
-      --bege: #f3dcc5;
-    }
+.right {
+  flex: 0.7;
+  background: #fff1dd;
+  padding: 60px 40px;
+  text-align: center;
+}
 
-        body {
-            margin: 0;
-            font-family: "Inter", sans-serif;
-            background-color: var(--bg);
-            color: var(--texto);
-            overflow-x: hidden;
-        }
+/* ---------- FORM LOGIN ---------- */
+.right input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #c9b7a4;
+}
 
-        /* ---------- MENU ---------- */
-        header {
-            background-color: var(--menu);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 18px 40px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-        }
+.btn {
+  background: #6a4fb6;
+  color: white;
+  border: none;
+  padding: 13px;
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #523c91;
+}
 
-        .logo {
-            font-family: "Playfair Display", serif;
-            font-weight: 700;
-            font-size: 1.7em;
-            color: var(--roxo-escuro);
-            letter-spacing: 1px;
-            margin-right: 80px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-            gap: 25px;
-        }
-
-        nav ul li {
-            position: relative;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--roxo-escuro);
-            font-weight: 500;
-            font-size: 1em;
-            padding: 10px 16px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            background-color: var(--hover);
-            color: var(--roxo);
-        }
-
+.erro {
+  color: red;
+  margin-bottom: 15px;
+}
 </style>
 </head>
 
 <body>
-  <header>
+
+<header>
   <div class="logo">🌞 LUCEM</div>
   <nav>
     <ul>
@@ -192,48 +174,13 @@ if (isset($_SESSION['usuario_id'])) {
     </ul>
   </nav>
 
-  <!-- BOTÃO DE MODO ESCURO -->
-  <button onclick="toggleDarkMode()" 
-    style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
-    🌓
-  </button>
-</header><header>
-  <div class="logo">🌞 LUCEM</div>
-  <nav>
-    <ul>
-      <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
-
-      <?php if (isset($_SESSION['psicologo_id'])): ?>
-        <li><a href="painel_psicologo.php">Painel</a></li>
-        <li><a href="lista_paciente.php">Meus Pacientes</a></li>
-        <li><a href="artigos.php">Artigos</a></li>
-        <li><a href="config_psicologo.php">Configurações</a></li>
-        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-      <?php elseif (isset($_SESSION['usuario_id'])): ?>
-        <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-        <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-        <li><a href="atendimento.php">Atendimento Psicológico</a></li>
-        <li><a href="artigos.php">Artigos</a></li>
-        <li><a href="metas.php">Exercícios & Metas</a></li>
-        <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-      <?php else: ?>
-        <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-        <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-        <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-      <?php endif; ?>
-
-    </ul>
-  </nav>
-
-  <!-- BOTÃO DE MODO ESCURO -->
   <button onclick="toggleDarkMode()" 
     style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
     🌓
   </button>
 </header>
+
+<!-- CONTEÚDO -->
 <div class="container">
 
   <div class="left">
@@ -260,5 +207,6 @@ if (isset($_SESSION['usuario_id'])) {
   </div>
 
 </div>
+
 </body>
 </html>
