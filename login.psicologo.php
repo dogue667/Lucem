@@ -158,10 +158,9 @@ nav ul li a:hover {
     </ul>
   </nav>
 
-  <button onclick="toggleDarkMode()" 
-    style="margin-left:20px; padding:8px 14px; border-radius:10px; cursor:pointer;">
-    🌓
-  </button>
+   <div class="nav-icons">
+            <a href="configuracoes.php" class="config-icon">⚙️</a>
+        </div>
 </header>
 
 <!-- CAIXA DE LOGIN -->
