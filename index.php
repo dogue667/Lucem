@@ -27,62 +27,55 @@
             overflow-x: hidden;
         }
 
-       /* ---------- MENU ---------- */
-header {
-    background-color: var(--menu);
-    display: flex;
-    justify-content: space-between;  /* ANTES: center */
-    align-items: center;
-    padding: 18px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
+        /* ---------- MENU ---------- */
+        header {
+            background-color: var(--menu);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 40px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
 
-.logo {
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    font-size: 1.7em;
-    color: var(--roxo-escuro);
-    letter-spacing: 1px;
-}
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+            font-size: 1.7em;
+            color: var(--roxo-escuro);
+            letter-spacing: 1px;
+            margin-right: 80px;
+        }
 
-nav {
-    flex: 1;
-    display: flex;
-    justify-content: center; /* centraliza o menu */
-}
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-}
+        nav ul li {
+            position: relative;
+        }
 
-nav ul li a {
-    text-decoration: none;
-    color: var(--roxo-escuro);
-    font-weight: 500;
-    padding: 10px 16px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
+        nav ul li a {
+            text-decoration: none;
+            color: var(--roxo-escuro);
+            font-weight: 500;
+            font-size: 1em;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
 
-nav ul li a:hover {
-    background-color: var(--hover);
-    color: var(--roxo);
-}
-
-/* Ícones à direita */
-.nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
+        nav ul li a:hover {
+            background-color: var(--hover);
+            color: var(--roxo);
+        }
 
         /* Submenu */
         nav ul ul {
