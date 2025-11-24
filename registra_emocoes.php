@@ -16,16 +16,66 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mapa Emocional da Semana</title>
 <style>
+    /* ---------- MENU SUPERIOR ---------- */
+    :root {
+        --menu-bg: #fff3e4;
+        --menu-texto: #4b2b12;
+        --menu-hover: #6d4af0;
+    }
+
     body {
         font-family: 'Arial', sans-serif;
         background-color: #fff8f0;
         color: #4a3b2a;
         margin: 0;
-        padding: 40px;
+        padding-top: 100px; /* Espaço para o menu fixo */
         display: flex;
         justify-content: center;
     }
 
+    header {
+        background-color: var(--menu-bg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .logo {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        font-size: 1.7em;
+        color: var(--menu-texto);
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: var(--menu-texto);
+        font-weight: 500;
+        padding: 8px 14px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+        background-color: var(--menu-hover);
+        color: #fff;
+    }
+
+    /* ---------- CONTAINER ---------- */
     .container {
         background-color: #fff3e6;
         padding: 30px;
@@ -60,9 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         transition: transform 0.2s ease, opacity 0.3s ease;
     }
 
-    .dia:hover {
-        transform: scale(1.05);
-    }
+    .dia:hover { transform: scale(1.05); }
 
     .calmo { background-color: #f2b179; }
     .triste { background-color: #b08bb8; }
@@ -71,11 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     .feliz { background-color: #93b7d3; }
     .outro { background-color: #d4ed9f; }
 
-    /* Cor de destaque quando selecionado */
-    .selecionado {
-        outline: 3px solid #6b3e26;
-        opacity: 0.9;
-    }
+    .selecionado { outline: 3px solid #6b3e26; opacity: 0.9; }
 
     input[type="text"], textarea {
         width: 100%;
@@ -87,19 +131,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         margin-top: 5px;
     }
 
-    textarea {
-        resize: none;
-        height: 80px;
-    }
+    textarea { resize: none; height: 80px; }
 
-    .fatores {
-        margin: 15px 0;
-    }
-
-    label {
-        margin-right: 15px;
-        font-size: 0.95em;
-    }
+    .fatores { margin: 15px 0; }
+    label { margin-right: 15px; font-size: 0.95em; }
 
     button[type="submit"] {
         background-color: #e49b84;
@@ -112,9 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         transition: background-color 0.3s ease;
     }
 
-    button[type="submit"]:hover {
-        background-color: #cf836d;
-    }
+    button[type="submit"]:hover { background-color: #cf836d; }
 
     .mensagem {
         margin-top: 20px;
@@ -123,10 +156,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         padding: 10px;
         color: #3d602c;
     }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+        .semana { flex-direction: column; }
+        nav ul { flex-direction: column; gap: 10px; }
+    }
 </style>
 </head>
 <body>
 
+<!-- MENU SUPERIOR -->
+<header>
+    <div class="logo">🌞 LUCEM</div>
+    <nav>
+        <ul>
+            <li><a href="index.php">Sobre</a></li>
+            <li><a href="registra_emocoes.php" style="color:#6d4af0;">Registrar Emoções</a></li>
+            <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
+            <li><a href="atendimento.php">Atendimento Psicológico</a></li>
+            <li><a href="artigos.php">Artigos</a></li>
+            <li><a href="metas.php">Exercícios & Metas</a></li>
+            <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- CONTEÚDO -->
 <div class="container">
     <h2>Seu Mapa Emocional da Semana</h2>
 
@@ -166,9 +222,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <script>
 let selecionadas = [];
-
 function alternarEmocao(botao, emocao) {
-    // Se a emoção já estiver na lista, remove
     const index = selecionadas.indexOf(emocao);
     if (index > -1) {
         selecionadas.splice(index, 1);
@@ -177,8 +231,6 @@ function alternarEmocao(botao, emocao) {
         selecionadas.push(emocao);
         botao.classList.add('selecionado');
     }
-
-    // Atualiza o campo de texto com todas as emoções
     document.getElementById('emocao').value = selecionadas.join(", ");
 }
 </script>
