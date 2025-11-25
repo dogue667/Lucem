@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LUCEM — Formulário de Bem-Estar</title>
-
+ <link rel="stylesheet" href="darkmode.css">
   <style>
   :root {
     --bg: #f9efe4;
@@ -412,4 +412,29 @@ form:hover {
     <p>Este formulário é importante para agendar sua consulta com psicólogo.<br>
     <div class="alerta-btns">
       <button class="fechar" onclick="fecharAlerta()">Entendido</button>
-      <button class="pular" onclick="irParaAtendimento()"
+      <button class="pular" onclick="irParaAtendimento()"></button>
+      
+      <script>
+  // Salva o dark mode no navegador
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+
+    // Se estiver ativo, salva "1". Se não, salva "0".
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkmode", "1");
+    } else {
+        localStorage.setItem("darkmode", "0");
+    }
+}
+
+// Ao carregar qualquer página, aplica o darkmode salvo
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("darkmode") === "1") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
+ <script src="darkmode.js"></script>
+ 
+</body>
+</html>
