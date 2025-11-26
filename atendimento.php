@@ -1,26 +1,22 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUCEM — Artigos e Inspirações</title>
-
-  <!-- FONTES -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atendimento Psicológico - Lucem</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
     :root {
-      --bg: #f9efe4;
-      --menu: #ffffff;
-      --texto: #5b3a70;
-      --roxo: #9b6bc2;
-      --roxo-escuro: #4d2f68;
-      --hover: #e7d3f5;
-      --degrade: linear-gradient(135deg, #d1b3f1, #a57cd3, #8a68b0);
+      --cor-fundo: #fcefdc;
+      --cor-primaria: #de8c78;
+      --cor-secundaria: #f4c29d;
+      --cor-texto-escuro: #4a3026;
+      --cor-texto-claro: #7c5b4a;
+      --cor-input-fundo: #f9e6db;
+      --cor-input-placeholder: #b78d7a;
+      --cor-borda: #e8bfa9;
+      --cor-depoimento-bg: #f7dfd5;
     }
 
     * {
@@ -29,338 +25,356 @@ session_start();
 
     body {
       margin: 0;
-      font-family: "Inter", sans-serif;
-      background-color: var(--bg);
-      color: var(--texto);
-      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--cor-fundo);
+      color: var(--cor-texto-escuro);
     }
 
-    /* ---------- MENU ---------- */
-    header {
-      background-color: var(--menu);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 18px 40px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      top: 0;
+    /* ============================
+       MENU SUPERIOR
+    =============================== */
+
+    nav.menu {
       width: 100%;
+      background-color: #fdebd3;
+      padding: 0.9rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #f4c29d;
+      position: sticky;
+      top: 0;
       z-index: 100;
-      flex-wrap: wrap;
-      gap: 10px;
     }
 
-    .logo {
-      font-family: "Playfair Display", serif;
+    .menu-left .logo {
+      font-size: 1.6rem;
       font-weight: 700;
-      font-size: clamp(1.4em, 2.5vw, 1.7em);
-      color: var(--roxo-escuro);
-      letter-spacing: 1px;
-      margin-right: 60px;
-      white-space: nowrap;
+      color: #c5745b;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
     }
 
-    nav ul {
+    .menu-links {
       list-style: none;
       display: flex;
+      gap: 1.6rem;
       margin: 0;
       padding: 0;
-      gap: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
     }
 
-    nav ul li {
-      position: relative;
-    }
-
-    nav ul li a {
+    .menu-links li a {
       text-decoration: none;
-      color: var(--roxo-escuro);
-      font-weight: 500;
-      font-size: 1em;
-      padding: 10px 16px;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      white-space: nowrap;
+      color: #7c5b4a;
+      font-weight: 600;
+      transition: 0.2s ease;
     }
 
-    nav ul li a:hover {
-      background-color: var(--hover);
-      color: var(--roxo);
+    .menu-links li a:hover {
+      color: #c5745b;
     }
 
-    nav ul ul {
-      display: none;
-      position: absolute;
-      background-color: var(--menu);
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      top: 45px;
-      padding: 10px 0;
-      min-width: 160px;
+    .menu-links .sair {
+      color: #d25555;
+      font-weight: 700;
     }
 
-    nav ul li:hover > ul {
-      display: block;
+    .menu-links .sair:hover {
+      color: #b44242;
     }
 
-    nav ul ul li a {
-      display: block;
-      padding: 10px 15px;
+    /* Responsivo menu */
+    @media (max-width: 800px) {
+      .menu-links {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        justify-content: flex-end;
+      }
     }
 
-    /* ---------- BANNER ---------- */
-    .banner {
-      margin-top: 130px;
-      text-align: center;
-      background: var(--degrade);
-      color: white;
-      padding: 100px 20px 130px;
-      border-radius: 60px;
-      margin-inline: 20px;
+    /* ============================ */
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem 2rem 3rem 2rem;
+      background: #fff9f5;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgb(0 0 0 / 0.05);
     }
 
-    .banner h1 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.8em, 4vw, 2.6em);
-      margin-bottom: 10px;
-    }
-
-    .banner p {
-      font-size: clamp(1em, 2vw, 1.2em);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* ---------- ARTIGOS ---------- */
-    .artigos {
-      padding: 90px 40px;
-      text-align: center;
-    }
-
-    .artigos h2 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.6em, 3vw, 2em);
-      color: var(--roxo-escuro);
-      margin-bottom: 50px;
-    }
-
-    .lista-artigos {
+    header {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
     }
 
-    .artigo {
-      background-color: var(--menu);
-      border-radius: 20px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-      width: clamp(250px, 30vw, 300px);
-      text-align: left;
-      overflow: hidden;
-      transition: 0.3s;
+    header .logo-sun {
+      width: 30px;
+      height: 30px;
+      fill: var(--cor-primaria);
     }
 
-    .artigo:hover {
-      transform: translateY(-6px);
-      background-color: var(--hover);
+    header h1 {
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--cor-primaria);
+      letter-spacing: 1px;
     }
 
-    .artigo img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .conteudo-artigo {
-      padding: 20px;
-    }
-
-    .conteudo-artigo h3 {
-      color: var(--roxo);
+    main h2 {
+      color: var(--cor-primaria);
       margin-top: 0;
-      margin-bottom: 10px;
-      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
     }
 
-    .conteudo-artigo p {
-      font-size: 0.95em;
-      color: var(--texto);
-      line-height: 1.5;
+    section {
+      margin-bottom: 2.5rem;
     }
 
-    .leia-mais {
-      display: inline-block;
-      margin-top: 12px;
-      color: var(--roxo-escuro);
+    /* Formulário */
+    form {
+      background-color: var(--cor-input-fundo);
+      padding: 1.5rem 1.8rem;
+      border-radius: 6px;
+      border: 1px solid var(--cor-borda);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: var(--cor-texto-claro);
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="tel"],
+    form input[type="date"],
+    form input[type="time"] {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 1.25rem;
+      border: 1.5px solid var(--cor-borda);
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--cor-texto-escuro);
+      background-color: var(--cor-fundo);
+      transition: border-color 0.3s ease;
+    }
+
+    form input::placeholder {
+      color: var(--cor-input-placeholder);
+    }
+
+    form input:focus {
+      outline: none;
+      border-color: var(--cor-primaria);
+      background-color: #fff;
+    }
+
+    form button {
+      background-color: var(--cor-primaria);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    form button:hover {
+      background-color: #c66f60;
+    }
+
+    /* Psicólogo */
+    .psicologo {
+      background-color: var(--cor-input-fundo);
+      padding: 1.5rem 1.8rem;
+      border-radius: 6px;
+      border: 1px solid var(--cor-borda);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .psicologo img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--cor-primaria);
+    }
+
+    .psicologo-info {
+      flex: 1;
+    }
+
+    .psicologo-info h3 {
+      margin: 0 0 0.3rem 0;
+      font-weight: 700;
+      color: var(--cor-primaria);
+      font-size: 1.3rem;
+    }
+
+    .psicologo-info p {
+      margin: 0;
+      color: var(--cor-texto-claro);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    /* Depoimentos */
+    .depoimentos {
+      background-color: var(--cor-depoimento-bg);
+      padding: 1.5rem 1.8rem;
+      border-radius: 6px;
+      border: 1px solid var(--cor-borda);
+    }
+
+    .depoimentos h2 {
+      margin-top: 0;
+    }
+
+    .depoimento-item {
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--cor-primaria);
+      padding-left: 1rem;
+      font-style: italic;
+      color: var(--cor-texto-claro);
+    }
+
+    .depoimento-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .depoimento-autor {
+      font-weight: 600;
+      color: var(--cor-primaria);
+      font-size: 0.95rem;
+    }
+
+    /* Contato */
+    .contato {
+      background-color: var(--cor-input-fundo);
+      padding: 1.5rem 1.8rem;
+      border-radius: 6px;
+      border: 1px solid var(--cor-borda);
+      color: var(--cor-texto-claro);
+    }
+
+    .contato a {
+      color: var(--cor-primaria);
       font-weight: 600;
       text-decoration: none;
-      transition: 0.3s;
     }
 
-    .leia-mais:hover {
-      color: var(--roxo);
+    .contato a:hover {
+      text-decoration: underline;
     }
 
-    /* ---------- CTA ---------- */
-    .cta {
-      background: var(--degrade);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-      border-radius: 50px;
-      margin: 60px 40px;
-    }
-
-    .cta h2 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.6em, 3vw, 2em);
-      margin-bottom: 20px;
-    }
-
-    .cta a {
-      background: white;
-      color: var(--roxo-escuro);
-      padding: 14px 34px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      transition: 0.3s;
-    }
-
-    .cta a:hover {
-      background: var(--roxo-escuro);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    footer {
-      background-color: var(--menu);
-      text-align: center;
-      padding: 25px;
-      font-size: 0.9em;
-      color: #866b95;
-      margin-top: 60px;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    /* ---------- ANIMAÇÕES ---------- */
-    .fade {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
-    }
-
-    .fade.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      nav ul {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .logo {
-        margin: 0 0 10px 0;
-      }
-
-      .artigo {
-        width: 90%;
-      }
-
-      .cta {
-        margin: 40px 20px;
-        border-radius: 30px;
-      }
-
-      .banner {
-        border-radius: 40px;
-        padding: 80px 15px;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <!-- ---------- MENU ---------- -->
-  <header>
-    <div class="logo">🌞 LUCEM</div>
-    <nav>
-      <ul>
-        <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
-
-        <?php if(!isset($_SESSION['usuario_id'])): ?>
-          <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-          <li><a href="login.php" style="color:#d9534f;">Fazer login</a></li>
-        <?php else: ?>
-          <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-          <li><a href="atendimento.php" style="font-weight:600; color:var(--roxo);">Atendimento Psicológico</a></li>
-          <li><a href="artigos.php" style="font-weight:600; color:var(--roxo);">Artigos</a></li>
-          <li><a href="metas.php">Exercícios & Metas</a></li>
-          <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-        <?php endif; ?>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- ---------- BANNER ---------- -->
-  <section class="banner fade">
-    <h1>Artigos e Inspirações 💭</h1>
-    <p>Conteúdos que acolhem, informam e fortalecem sua jornada de autocuidado.</p>
-  </section>
-
-  <!-- ---------- ARTIGOS ---------- -->
-  <section class="artigos">
-    <h2>Explore nossos conteúdos</h2>
-    <div class="lista-artigos">
-      <!-- (seus artigos originais aqui — mantidos idênticos) -->
+  <!-- MENU SUPERIOR ADICIONADO -->
+  <nav class="menu">
+    <div class="menu-left">
+      <span class="logo">🦁 LUCEM</span>
     </div>
-  </section>
 
-  <!-- ---------- CTA ---------- -->
-  <section class="cta fade">
-    <h2>Cuide da sua mente</h2>
-    <p>Encontre conteúdos confiáveis sobre saúde mental no site oficial do Governo Federal.</p>
-    <a href="https://www.gov.br/saude/pt-br" target="_blank">Leia mais artigos em gov.br</a>
-  </section>
+    <ul class="menu-links">
+      <li><a href="#">Sobre</a></li>
+      <li><a href="#">Registrar Emoções</a></li>
+      <li><a href="#">Minhas Emoções</a></li>
+      <li><a href="#">Atendimento Psicológico</a></li>
+      <li><a href="#">Artigos</a></li>
+      <li><a href="#">Exercícios & Metas</a></li>
+      <li><a href="#" class="sair">Sair</a></li>
+    </ul>
+  </nav>
 
-  <!-- ---------- FOOTER ---------- -->
-  <footer>
-    © 2025 LUCEM — Todos os direitos reservados.
-  </footer>
+  <div class="container" role="main">
 
-  <!-- ---------- SCRIPT DE ANIMAÇÃO ---------- -->
+    <header>
+      <svg class="logo-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><g fill="var(--cor-primaria)">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+        </g></svg>
+      <h1>LUCEM</h1>
+    </header>
+
+    <section class="psicologo">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=90&q=80" alt="Foto do psicólogo" />
+      <div class="psicologo-info">
+        <h3>Guilherme Silva, CRP 12345</h3>
+        <p>Psicólogo clínico especializado em terapia cognitivo-comportamental...</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Agende sua consulta</h2>
+      <form id="form-agendamento">
+        <label>Nome completo</label>
+        <input type="text" placeholder="Seu nome completo" required />
+
+        <label>E-mail</label>
+        <input type="email" placeholder="seuemail@exemplo.com" required />
+
+        <label>Telefone</label>
+        <input type="tel" placeholder="(99) 99999-9999" required />
+
+        <label>Data desejada</label>
+        <input type="date" id="data" required />
+
+        <label>Hora desejada</label>
+        <input type="time" required />
+
+        <button type="submit">Enviar Agendamento</button>
+      </form>
+    </section>
+
+    <section class="depoimentos">
+      <h2>Depoimentos</h2>
+      <article class="depoimento-item">
+        <p>"O atendimento com o Guilherme mudou minha vida."</p>
+        <p class="depoimento-autor">- Ana M.</p>
+      </article>
+      <article class="depoimento-item">
+        <p>"Melhora significativa no bem-estar."</p>
+        <p class="depoimento-autor">- João P.</p>
+      </article>
+    </section>
+
+    <section class="contato">
+      <h2>Contato</h2>
+      <p>Telefone: <a href="tel:+5511999999999">(11) 99999-9999</a></p>
+      <p>WhatsApp: <a href="https://wa.me/5511999999999" target="_blank">(11) 99999-9999</a></p>
+      <p>E-mail: <a href="mailto:contato@lucem.com.br">contato@lucem.com.br</a></p>
+    </section>
+
+  </div>
+
   <script>
-    const faders = document.querySelectorAll(".fade");
+    const dataInput = document.getElementById('data');
+    const hoje = new Date().toISOString().split('T')[0];
+    dataInput.min = hoje;
 
-    const appearOptions = {
-      threshold: 0.2,
-      rootMargin: "0px 0px -100px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      });
-    }, appearOptions);
-
-    faders.forEach(fader => {
-      appearOnScroll.observe(fader);
+    document.getElementById('form-agendamento').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Agendamento enviado com sucesso!');
+      this.reset();
     });
   </script>
+
 </body>
 </html>
