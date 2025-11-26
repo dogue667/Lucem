@@ -20,7 +20,7 @@ $id = $_GET["id"] ?? null;
 <head>
 <meta charset="UTF-8">
 <title>Sistema Emocional</title>
-
+ <link rel="stylesheet" href="darkmode.css">
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -157,5 +157,26 @@ if ($id) {
 ?>
 
 </div>
+<script>
+  // Salva o dark mode no navegador
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+
+    // Se estiver ativo, salva "1". Se não, salva "0".
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkmode", "1");
+    } else {
+        localStorage.setItem("darkmode", "0");
+    }
+}
+
+// Ao carregar qualquer página, aplica o darkmode salvo
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("darkmode") === "1") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
+ <script src="darkmode.js"></script>
 </body>
 </html>
