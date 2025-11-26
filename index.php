@@ -27,62 +27,55 @@
             overflow-x: hidden;
         }
 
-       /* ---------- MENU ---------- */
-header {
-    background-color: var(--menu);
-    display: flex;
-    justify-content: space-between;  /* ANTES: center */
-    align-items: center;
-    padding: 18px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
+        /* ---------- MENU ---------- */
+        header {
+            background-color: var(--menu);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 40px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
 
-.logo {
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    font-size: 1.7em;
-    color: var(--roxo-escuro);
-    letter-spacing: 1px;
-}
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+            font-size: 1.7em;
+            color: var(--roxo-escuro);
+            letter-spacing: 1px;
+            margin-right: 80px;
+        }
 
-nav {
-    flex: 1;
-    display: flex;
-    justify-content: center; /* centraliza o menu */
-}
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-}
+        nav ul li {
+            position: relative;
+        }
 
-nav ul li a {
-    text-decoration: none;
-    color: var(--roxo-escuro);
-    font-weight: 500;
-    padding: 10px 16px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
+        nav ul li a {
+            text-decoration: none;
+            color: var(--roxo-escuro);
+            font-weight: 500;
+            font-size: 1em;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
 
-nav ul li a:hover {
-    background-color: var(--hover);
-    color: var(--roxo);
-}
-
-/* Ícones à direita */
-.nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
+        nav ul li a:hover {
+            background-color: var(--hover);
+            color: var(--roxo);
+        }
 
         /* Submenu */
         nav ul ul {
@@ -388,40 +381,43 @@ nav ul li a:hover {
 <body>
     <!-- ---------- MENU SUPERIOR ---------- -->
     <header>
-        <div class="logo">🌞 LUCEM</div>
+    <div class="logo">🌞 LUCEM</div>
 
-        <nav>
-            <ul>
-                <li>
-                    <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
-                </li>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
+            </li>
 
-                <?php if (isset($_SESSION['psicologo_id'])): ?>
-                    <li><a href="painel_psicologo.php">Painel</a></li>
-                    <li><a href="lista_paciente.php">Meus Pacientes</a></li>
-                    <li><a href="artigos.php">Artigos</a></li>
-                    <li><a href="config_psicologo.php">Configurações</a></li>
-                    <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-                <?php elseif (isset($_SESSION['usuario_id'])): ?>
-                    <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-                    <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-                    <li><a href="atendimento.php">Atendimento Psicológico</a></li>
-                    <li><a href="artigos.php">Artigos</a></li>
-                    <li><a href="metas.php">Exercícios & Metas</a></li>
-                    <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-                <?php else: ?>
-                    <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-                    <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-                    <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-                    <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
+            <?php if (isset($_SESSION['psicologo_id'])): ?>
+                <li><a href="agendar.php">Agendar Consultas</a></li>
+                <li><a href="lista_paciente.php">Meus Pacientes</a></li>
+                <li><a href="artigos.php">Artigos</a></li>
+                <li><a href="atendimento.php">Atendimentos</a></li>
+                <li><a href="logout.php" style="color:#d9534f; font-weight:600;">Sair</a></li>
 
-        <div class="nav-icons">
-            <a href="configuracoes.php" class="config-icon">⚙️</a>
-        </div>
-    </header>
+            <?php elseif (isset($_SESSION['usuario_id'])): ?>
+                <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+                <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
+                <li><a href="atendimento_usuario.php">Atendimento Psicológico</a></li>
+                <li><a href="artigos.php">Artigos</a></li>
+                <li><a href="metas.php">Exercícios & Metas</a></li>
+                <li><a href="logout.php" style="color:#d9534f; font-weight:600;">Sair</a></li>
+
+            <?php else: ?>
+                <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+                <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
+                <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+                <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
+    <div class="nav-icons">
+        <a href="configuracoes.php" class="config-icon">⚙️</a>
+    </div>
+</header>
+
 
     <!-- ---------- CONTEÚDO ---------- -->
     <section class="inicio fade">
