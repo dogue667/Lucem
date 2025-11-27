@@ -24,7 +24,7 @@ if (isset($_POST['email'], $_POST['senha'])) {
             $_SESSION['psicologo_email'] = $psicologo['Email_psicologo'];
 
             // Redireciona para página principal (ou página específica)
-            header("Location: painel_psicologo.php");
+            header("Location: index.php");
             exit;
         } else {
             // Senha incorreta

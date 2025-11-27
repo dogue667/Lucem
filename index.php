@@ -28,97 +28,101 @@
         }
 
         /* ---------- MENU ---------- */
-        header {
-            background-color: var(--menu);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 18px 40px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-        }
+      header {
+    background-color: var(--menu);
+    display: flex;
+    justify-content: space-between; /* CENTRALIZA melhor */
+    align-items: center;
+    padding: 18px 40px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
 
-        .logo {
-            font-family: "Playfair Display", serif;
-            font-weight: 700;
-            font-size: 1.7em;
-            color: var(--roxo-escuro);
-            letter-spacing: 1px;
-            margin-right: 80px;
-        }
+.logo {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 1.7em;
+    color: var(--roxo-escuro);
+    letter-spacing: 1px;
+}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-            gap: 25px;
-        }
+/* --- MENU PRINCIPAL --- */
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
 
-        nav ul li {
-            position: relative;
-        }
+nav ul li {
+    position: relative;
+}
 
-        nav ul li a {
-            text-decoration: none;
-            color: var(--roxo-escuro);
-            font-weight: 500;
-            font-size: 1em;
-            padding: 10px 16px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
+nav ul li a {
+    text-decoration: none;
+    color: var(--roxo-escuro);
+    font-weight: 500;
+    font-size: 1em;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
 
-        nav ul li a:hover {
-            background-color: var(--hover);
-            color: var(--roxo);
-        }
+nav ul li a:hover {
+    background-color: var(--hover);
+    color: var(--roxo);
+}
 
-        /* Submenu */
-        nav ul ul {
-            display: none;
-            position: absolute;
-            background-color: var(--menu);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            top: 45px;
-            padding: 10px 0;
-            min-width: 160px;
-        }
+/* --- SUBMENU --- */
+nav ul ul {
+    display: none;
+    position: absolute;
+    background-color: var(--menu);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    top: 45px;
+    left: 0;
+    padding: 10px 0;
+    min-width: 170px;
+}
 
-        nav ul li:hover > ul {
-            display: block;
-        }
+nav ul li:hover > ul {
+    display: block;
+}
 
-        nav ul ul li a {
-            display: block;
-            padding: 10px 15px;
-        }
+nav ul ul li a {
+    padding: 10px 15px;
+    display: block;
+    font-size: 0.95em;
+}
 
-        .nav-icons {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+/* --- ÍCONES DO LADO DIREITO --- */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
 
-        .config-icon a {
-            font-size: 1.5rem;
-            color: var(--roxo-escuro);
-            transition: 0.3s;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
+.config-icon a {
+    font-size: 1.6rem;
+    color: var(--roxo-escuro);
+    transition: 0.3s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
 
-        .config-icon a:hover {
-            transform: rotate(20deg);
-            color: var(--roxo);
-        }
+.config-icon a:hover {
+    transform: rotate(20deg);
+    color: var(--roxo);
+}
 
         /* ---------- SEÇÃO INICIAL ---------- */
         .inicio {
