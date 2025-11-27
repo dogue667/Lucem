@@ -27,19 +27,11 @@
             overflow-x: hidden;
         }
 
-<<<<<<< HEAD
         /* ---------- MENU ---------- */
       header {
     background-color: var(--menu);
     display: flex;
     justify-content: space-between; /* CENTRALIZA melhor */
-=======
-       /* ---------- MENU ---------- */
-header {
-    background-color: var(--menu);
-    display: grid;
-    grid-template-columns: 1fr auto 1fr; /* 3 colunas */
->>>>>>> 22cf3e0ee22eb9a2eb2cd7cb2572b64633a93a85
     align-items: center;
     padding: 18px 40px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -55,7 +47,6 @@ header {
     font-size: 1.7em;
     color: var(--roxo-escuro);
     letter-spacing: 1px;
-<<<<<<< HEAD
 }
 
 /* --- MENU PRINCIPAL --- */
@@ -72,28 +63,6 @@ nav ul li {
     position: relative;
 }
 
-=======
-    margin: 0; /* evita empurrar o centro */
-}
-
-nav {
-    display: flex;
-    justify-content: center; /* centraliza o menu */
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    gap: 25px;
-}
-
-nav ul li {
-    position: relative;
-}
-
->>>>>>> 22cf3e0ee22eb9a2eb2cd7cb2572b64633a93a85
 nav ul li a {
     text-decoration: none;
     color: var(--roxo-escuro);
@@ -101,7 +70,6 @@ nav ul li a {
     font-size: 1em;
     padding: 10px 16px;
     border-radius: 10px;
-<<<<<<< HEAD
     transition: 0.3s ease;
 }
 
@@ -109,49 +77,6 @@ nav ul li a:hover {
     background-color: var(--hover);
     color: var(--roxo);
 }
-=======
-    transition: all 0.3s ease;
-}
-
-nav ul li a:hover {
-    background-color: var(--hover);
-    color: var(--roxo);
-}
-
-/* Ícones e botão Sair à direita */
-.nav-icons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 20px;
-}
-
-/* estilo do botão sair */
-.botao-sair {
-    font-weight: 600;
-    color: #d9534f;
-    text-decoration: none;
-    font-size: 1em;
-}
-
-.botao-sair:hover {
-    text-decoration: underline;
-}
-
-/* ícone de configurações */
-.config-icon {
-    font-size: 1.5rem;
-    color: var(--roxo-escuro);
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.config-icon:hover {
-    transform: rotate(20deg);
-    color: var(--roxo);
-}
-
->>>>>>> 22cf3e0ee22eb9a2eb2cd7cb2572b64633a93a85
 
 /* --- SUBMENU --- */
 nav ul ul {
