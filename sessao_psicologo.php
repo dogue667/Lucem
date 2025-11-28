@@ -1,44 +1,50 @@
 <?php
 session_start();
-include_once('conexao.php');
+require_once "conexao.php";
 
-if (isset($_POST['email'], $_POST['senha'])) {
+if (!empty($_POST['email']) && !empty($_POST['senha'])) {
 
-    // Protege contra injeção de SQL
     $email = mysqli_real_escape_string($conexao, $_POST['email']);
     $senha = $_POST['senha'];
 
-    // Verifica se o e-mail existe na tabela Psicologo
-    $sql = "SELECT * FROM Psicologo WHERE Email_psicologo = '$email' LIMIT 1";
-    $result = mysqli_query($conexao, $sql);
+    // Busca psicólogo
+    $sql = "SELECT Cod_psicologo, Nome_psicologo, Email_psicologo, Senha_psicologo 
+            FROM Psicologo 
+            WHERE Email_psicologo = ? 
+            LIMIT 1";
 
-    if (mysqli_num_rows($result) === 1) {
-        $psicologo = mysqli_fetch_assoc($result);
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
 
-        // Verifica a senha criptografada
+    if ($resultado->num_rows === 1) {
+
+        $psicologo = $resultado->fetch_assoc();
+
+        // Verifica senha criptografada
         if (password_verify($senha, $psicologo['Senha_psicologo'])) {
 
-            // Cria a sessão
+            // Cria sessão do psicólogo
             $_SESSION['psicologo_id'] = $psicologo['Cod_psicologo'];
             $_SESSION['psicologo_nome'] = $psicologo['Nome_psicologo'];
             $_SESSION['psicologo_email'] = $psicologo['Email_psicologo'];
 
-            // Redireciona para página principal (ou página específica)
+            // Redireciona
             header("Location: index.php");
             exit;
+
         } else {
-            // Senha incorreta
             header("Location: login_psicologo.php?erro=Senha incorreta!");
             exit;
         }
+
     } else {
-        // Psicólogo não encontrado
-        header("Location: login_psicologo.php?erro=E-mail não cadastrado!");
+        header("Location: login_psicologo.php?erro=E-mail não encontrado!");
         exit;
     }
 
 } else {
-    // Campos vazios
     header("Location: login_psicologo.php?erro=Preencha todos os campos!");
     exit;
 }

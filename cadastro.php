@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUCEM - Cadastro</title>
+ <link rel="stylesheet" href="darkmode.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* -------- VARIÁVEIS -------- */
+    :root {
+      --bg: #f9efe4;
+      --menu: #ffffff;
+      --texto: #5b3a70;
+      --roxo: #9b6bc2;
+      --roxo-escuro: #4d2f68;
+      --hover: #e7d3f5;
+    }
+
+    /* -------- BODY -------- */
+    body {
+      background-color: #fdf4eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 110px;
+      /* impede que o card fique atrás do menu */
+    }
+
+    /* -------- MENU SUPERIOR -------- */
+    header {
+      background-color: var(--menu);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px 40px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: 1.7em;
+      color: var(--roxo-escuro);
+      margin-right: 80px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--roxo-escuro);
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background-color: var(--hover);
+      color: var(--roxo);
+    }
+
+    /* -------- CARD -------- */
+    .card {
+      background-color: #fff3e4;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 50px 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 26px;
+      color: #4b2b12;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #5a3a1f;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d9b89c;
+      border-radius: 8px;
+      background-color: #fff;
+      /* CORRIGIDO — era // */
+      font-size: 14px;
+    }
+
+    .btn {
+      background-color: #6d4af0;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #5b39d0;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #4b2b12;
+    }
+
+    .login-link a {
+      color: #6d4af0;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- -------- MENU SUPERIOR -------- -->
+  <header>
+    <div class="logo">🌞 LUCEM</div>
+
+    <nav>
+      <ul>
+        <li><a href="index.php">Sobre</a></li>
+        <li><a href="cadastro.php" style="color:#d9534f;">Criar Conta</a></li>
+        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
+        <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+        <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-icons">
+      <a href="configuracoes.php" class="config-icon">⚙️</a>
+    </div>
+  </header>
+
+  <!-- -------- CARD DE CADASTRO -------- -->
+  <div class="card">
+    <h3>Crie sua conta</h3>
+    <p>Crie sua conta grátis e simples.</p>
+
+    <form action="cadastrar.php" method="POST">
+      <input type="text" name="nome" placeholder="Nome" required />
+      <input type="email" name="email" placeholder="E-mail" required />
+      <input type="password" name="senha" placeholder="Senha" required />
+      <button class="btn" type="submit">Cadastrar</button>
+    </form>
+
+    <div class="login-link">
+      Já tem uma conta?
+      <a href="login.php">Entrar</a>
+    </div>
+  </div>
+<script>
+  // Salva o dark mode no navegador
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+
+    // Se estiver ativo, salva "1". Se não, salva "0".
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkmode", "1");
+    } else {
+        localStorage.setItem("darkmode", "0");
+    }
+}
+
+// Ao carregar qualquer página, aplica o darkmode salvo
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("darkmode") === "1") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
+ <script src="darkmode.js"></script>
+</body>
+</html>
