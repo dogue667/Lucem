@@ -28,11 +28,15 @@
         }
 
         /* ---------- MENU ---------- */
+<<<<<<< HEAD
        /* ---------- MENU ---------- */
 header {
+=======
+      header {
+>>>>>>> b71fa4b7fd3120ad49f9197fb1ce2abe112aa3c3
     background-color: var(--menu);
-    display: grid;
-    grid-template-columns: 1fr auto 1fr; /* 3 colunas */
+    display: flex;
+    justify-content: space-between; /* CENTRALIZA melhor */
     align-items: center;
     padding: 18px 40px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -48,20 +52,16 @@ header {
     font-size: 1.7em;
     color: var(--roxo-escuro);
     letter-spacing: 1px;
-    margin: 0; /* evita empurrar o centro */
 }
 
-nav {
-    display: flex;
-    justify-content: center; /* centraliza o menu */
-}
-
+/* --- MENU PRINCIPAL --- */
 nav ul {
     list-style: none;
     display: flex;
+    align-items: center;
+    gap: 25px;
     margin: 0;
     padding: 0;
-    gap: 25px;
 }
 
 nav ul li {
@@ -75,7 +75,7 @@ nav ul li a {
     font-size: 1em;
     padding: 10px 16px;
     border-radius: 10px;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
 nav ul li a:hover {
@@ -83,39 +83,53 @@ nav ul li a:hover {
     color: var(--roxo);
 }
 
-/* Ícones e botão Sair à direita */
+/* --- SUBMENU --- */
+nav ul ul {
+    display: none;
+    position: absolute;
+    background-color: var(--menu);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    top: 45px;
+    left: 0;
+    padding: 10px 0;
+    min-width: 170px;
+}
+
+nav ul li:hover > ul {
+    display: block;
+}
+
+nav ul ul li a {
+    padding: 10px 15px;
+    display: block;
+    font-size: 0.95em;
+}
+
+/* --- ÍCONES DO LADO DIREITO --- */
 .nav-icons {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    gap: 20px;
+    gap: 18px;
 }
 
-/* estilo do botão sair */
-.botao-sair {
-    font-weight: 600;
-    color: #d9534f;
-    text-decoration: none;
-    font-size: 1em;
-}
-
-.botao-sair:hover {
-    text-decoration: underline;
-}
-
-/* ícone de configurações */
-.config-icon {
-    font-size: 1.5rem;
+.config-icon a {
+    font-size: 1.6rem;
     color: var(--roxo-escuro);
-    text-decoration: none;
     transition: 0.3s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
-.config-icon:hover {
+.config-icon a:hover {
     transform: rotate(20deg);
     color: var(--roxo);
 }
 
+<<<<<<< HEAD
         /* Submenu */
         nav ul ul {
             display: none;
@@ -159,6 +173,8 @@ nav ul li a:hover {
             color: var(--roxo);
         }
 
+=======
+>>>>>>> b71fa4b7fd3120ad49f9197fb1ce2abe112aa3c3
         /* ---------- SEÇÃO INICIAL ---------- */
         .inicio {
             margin-top: 130px;
