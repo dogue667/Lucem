@@ -27,6 +27,7 @@
             overflow-x: hidden;
         }
 
+        /* ---------- MENU ---------- */
        /* ---------- MENU ---------- */
 header {
     background-color: var(--menu);
@@ -114,7 +115,6 @@ nav ul li a:hover {
     transform: rotate(20deg);
     color: var(--roxo);
 }
-
 
         /* Submenu */
         nav ul ul {
@@ -419,7 +419,7 @@ nav ul li a:hover {
 
 <body>
     <!-- ---------- MENU SUPERIOR ---------- -->
-   <header>
+    <header>
     <!-- LOGO À ESQUERDA -->
     <div class="logo">🌞 LUCEM</div>
 
@@ -464,7 +464,6 @@ nav ul li a:hover {
         <a href="configuracoes.php" class="config-icon">⚙️</a>
     </div>
 </header>
-
 
 
     <!-- ---------- CONTEÚDO ---------- -->
