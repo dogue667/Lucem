@@ -6,6 +6,71 @@
   <title>LUCEM — Exercícios e Metas</title>
    <link rel="stylesheet" href="darkmode.css">
   <style>
+    /* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #ffffffcc;
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  z-index: 999;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icone {
+  font-size: 28px;
+}
+
+.logo-texto {
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:not(:first-child) {
+  color: #e53935;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.nav-right .btn-dark {
+  border: 2px solid #333;
+  border-radius: 12px;
+  background: transparent;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
     :root {
       --bg: #f9efe4;
       --roxo: #9b6bc2;
@@ -31,7 +96,10 @@
       padding: 40px 20px;
       min-height: 100vh;
       overflow-x: hidden;
-    }
+      padding-top: 110px;
+}
+
+    
 
     h1 {
       color: var(--roxo-escuro);
@@ -238,6 +306,28 @@
   </style>
 </head>
 <body>
+  <nav class="navbar">
+  <div class="nav-left">
+    <span class="logo-icone">🌞</span>
+    <span class="logo-texto">LUCEM</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.php">Sobre</a></li>
+    <li><a href="registra_emocoes.php" style="color:#6d4af0;">Registrar Emoções</a></li>
+    <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
+    <li><a href="atendimento.php">Atendimento Psicológico</a></li>
+    <li><a href="artigos.php">Artigos</a></li>
+    <li><a href="metas.php">Exercícios & Metas</a></li>
+    <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="btn-dark" onclick="toggleDarkMode()">🌗</button>
+  </div>
+</nav>
+
+
 
   <h1>🌞 Exercícios e Metas</h1>
 
