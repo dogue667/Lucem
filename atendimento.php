@@ -206,12 +206,6 @@ function ligar(nome) {
 
 </table>
 </div>
-<<<<<<< HEAD
->>>>>>> dae46c000c1437e266934e29e0a3bb2a7ea41a72
- 
-=======
-
->>>>>>> b71fa4b7fd3120ad49f9197fb1ce2abe112aa3c3
 </body>
 </html>
 

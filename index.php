@@ -28,12 +28,8 @@
         }
 
         /* ---------- MENU ---------- */
-<<<<<<< HEAD
        /* ---------- MENU ---------- */
 header {
-=======
-      header {
->>>>>>> b71fa4b7fd3120ad49f9197fb1ce2abe112aa3c3
     background-color: var(--menu);
     display: flex;
     justify-content: space-between; /* CENTRALIZA melhor */
@@ -129,7 +125,6 @@ nav ul ul li a {
     color: var(--roxo);
 }
 
-<<<<<<< HEAD
         /* Submenu */
         nav ul ul {
             display: none;
@@ -173,8 +168,6 @@ nav ul ul li a {
             color: var(--roxo);
         }
 
-=======
->>>>>>> b71fa4b7fd3120ad49f9197fb1ce2abe112aa3c3
         /* ---------- SEÇÃO INICIAL ---------- */
         .inicio {
             margin-top: 130px;

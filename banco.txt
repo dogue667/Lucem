@@ -1,0 +1,68 @@
+(ainda nao terminado)
+DROP DATABASE IF EXISTS lucem;
+CREATE DATABASE lucem DEFAULT CHARACTER SET utf8mb4;
+USE lucem;
+
+-- ==============================
+-- TABELA USUARIO
+-- ==============================
+CREATE TABLE Usuario (
+    Cod_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    Nome_usuario VARCHAR(100) NOT NULL,
+    Email_usuario VARCHAR(100) NOT NULL UNIQUE,
+    Senha_usuario VARCHAR(255) NOT NULL,
+    Data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ==============================
+-- TABELA PSICOLOGO
+-- ==============================
+CREATE TABLE Psicologo (
+    Cod_psicologo INT AUTO_INCREMENT PRIMARY KEY,
+    Nome_psicologo VARCHAR(100) NOT NULL,
+    Email_psicologo VARCHAR(100) NOT NULL UNIQUE,
+    Senha_psicologo VARCHAR(255) NOT NULL,
+    CRP VARCHAR(20) NOT NULL UNIQUE,
+    Especialidade VARCHAR(100)
+);
+
+-- ==============================
+-- TABELA EMOCAO
+-- ==============================
+CREATE TABLE Emocao (
+    Cod_emocao INT AUTO_INCREMENT PRIMARY KEY,
+    Tipo_emocao VARCHAR(50) NOT NULL,
+    Intensidade TINYINT CHECK (Intensidade BETWEEN 1 AND 5),
+    Causa_emocao TEXT
+);
+
+-- ==============================
+-- TABELA SESSAO
+-- ==============================
+CREATE TABLE Sessao (
+    Cod_sessao INT AUTO_INCREMENT PRIMARY KEY,
+    Data_sessao DATETIME NOT NULL,
+    Status VARCHAR(50),
+    Resumo_atendimento TEXT,
+    Cod_usuario INT NOT NULL,
+    Cod_psicologo INT NOT NULL,
+    FOREIGN KEY (Cod_usuario) REFERENCES Usuario(Cod_usuario)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (Cod_psicologo) REFERENCES Psicologo(Cod_psicologo)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- ==============================
+-- TABELA HISTORICO EMOCAO
+-- ==============================
+CREATE TABLE Historico_emocao (
+    Cod_historico INT AUTO_INCREMENT PRIMARY KEY,
+    Data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Observacao TEXT,
+    Cod_usuario INT NOT NULL,
+    Cod_emocao INT NOT NULL,
+    FOREIGN KEY (Cod_usuario) REFERENCES Usuario(Cod_usuario)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (Cod_emocao) REFERENCES Emocao(Cod_emocao)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
