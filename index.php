@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUCEM — Equilíbrio e Autocuidado</title>
-
+   <!-- DARK MODE CSS -->
+    <link rel="stylesheet" href="darkmode.css">
     <style>
         /* ---------- CORES ---------- */
         :root {
@@ -336,38 +337,6 @@ nav ul ul li a {
             transform: translateY(0);
         }
 
-        /* ---------- DARKMODE ---------- */
-        .dark-mode {
-            background-color: #1a1a1a !important;
-            color: #f5f5f5 !important;
-        }
-
-        .dark-mode header {
-            background-color: #2a2a2a !important;
-        }
-
-        .dark-mode nav a {
-            color: #ddd !important;
-        }
-
-        .dark-mode nav a:hover {
-            background-color: #444 !important;
-            color: white !important;
-        }
-
-        .dark-mode .card {
-            background-color: #2b2b2b !important;
-            color: white !important;
-        }
-
-        .dark-mode .inicio,
-        .dark-mode .sobre,
-        .dark-mode .seguranca,
-        .dark-mode .saude {
-            background: #2c2c2c !important;
-            color: white !important;
-        }
-
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -515,8 +484,14 @@ nav ul ul li a {
             appearOnScroll.observe(fader);
         });
     </script>
-
-    <!-- DARK MODE SCRIPT -->
-   <script src="darkmode.js"></script>
+    <script>
+// Ao carregar qualquer página, aplica o darkmode salvo
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("darkmode") === "1") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
+ <script src="darkmode.js"></script>
 </body>
 </html>

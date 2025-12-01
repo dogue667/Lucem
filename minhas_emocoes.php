@@ -1,156 +1,220 @@
-<!doctype html>
+<?php
+session_start();
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+include_once "conexao.php";
+
+$usuario_id = $_SESSION['usuario_id'];
+
+// Pega mês e ano pela URL (para navegar entre os meses)
+$mes = isset($_GET['mes']) ? intval($_GET['mes']) : date("m");
+$ano = isset($_GET['ano']) ? intval($_GET['ano']) : date("Y");
+
+// Ajusta ano quando muda de 1 para 12 e vice-versa
+if ($mes < 1) { $mes = 12; $ano--; }
+if ($mes > 12) { $mes = 1; $ano++; }
+
+// Buscar dias com emoções registradas
+$sql = "SELECT DATE(Data_registro) AS dia 
+        FROM Historico_emocao 
+        WHERE Cod_usuario = ? 
+        AND MONTH(Data_registro)=? 
+        AND YEAR(Data_registro)=?
+        GROUP BY DATE(Data_registro)";
+$stmt = $conexao->prepare($sql);
+$stmt->bind_param("iii", $usuario_id, $mes, $ano);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$dias_com_emocao = [];
+while ($row = $result->fetch_assoc()) {
+    $dias_com_emocao[] = $row['dia'];
+}
+
+// Dados do calendário
+$primeiroDia = "$ano-$mes-01";
+$inicioSemana = date("w", strtotime($primeiroDia));
+$diasNoMes = date("t", strtotime($primeiroDia));
+
+?>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Página de Emoções — CSS Elaborado</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Minhas Emoções — Calendário</title>
 
-  <style>
-    :root{
-        --bg-1: #4f46e5;
-        --bg-2: #06b6d4;
-        --card-bg: rgba(255,255,255,0.15);
-        --glass-border: rgba(255,255,255,0.35);
-        --text: #ffffff;
-        --neon: #7cf4ff;
-    }
+<style>
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-
-    body{
-        font-family: "Inter", system-ui;
-        background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:2rem;
-        color:var(--text);
-        overflow:hidden;
-        animation: rainbowFlash 0.5s infinite;
-    }
-
-    @keyframes rainbowFlash {
-      0% { background: red; }
-      16% { background: orange; }
-      33% { background: yellow; }
-      50% { background: green; }
-      66% { background: blue; }
-      83% { background: indigo; }
-      100% { background: violet; }
-    }
-
-    .page-card {
-        width: min(950px, 95%);
-        background: var(--card-bg);
-        border-radius:18px;
-        padding:3rem 3.5rem;
-        backdrop-filter: blur(18px) saturate(180%);
-        border:1.5px solid var(--glass-border);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        text-align:center;
-        position: relative;
-        z-index: 5;
-    }
-
-    h1{
-        font-size: clamp(2.2rem, 6vw, 4rem);
-        font-weight:800;
-        letter-spacing:2px;
-        text-shadow: 0 0 12px var(--neon);
-        animation: spin 4s linear infinite;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    .meme {
-      position: absolute;
-      width: 150px;
-      height: auto;
-      animation: floaty 6s infinite ease-in-out;
-      filter: drop-shadow(0 0 10px #000);
-      z-index: 1;
-    }
-.meme {
-  position: absolute;
-  width: 150px;
-  height: auto;
-  animation: floaty 6s infinite ease-in-out;
-  filter: drop-shadow(0 0 10px #000);
-  z-index: 1;
+/* ---------- SUA PALETA DE CORES ---------- */
+:root {
+    --bg: #f9efe4;
+    --menu: #ffffff;
+    --texto: #5b3a70;
+    --roxo: #9b6bc2;
+    --roxo-escuro: #4d2f68;
+    --hover: #e7d3f5;
+    --degrade: linear-gradient(135deg, #d1b3f1, #a57cd3, #8a68b0);
+    --bege: #f3dcc5;
 }
 
-/* CANTO SUPERIOR ESQUERDO */
-.m1 {
-  top: 5%;
-  left: 5%;
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background-color: var(--bg);
+    color: var(--texto);
 }
 
-/* CANTO SUPERIOR DIREITO */
-.m2 {
-  top: 5%;
-  right: 5%;
+/* ---------- TÍTULO ---------- */
+.titulo-calendario {
+    text-align: center;
+    margin-top: 40px;
+    font-family: "Playfair Display", serif;
+    font-size: 2.2em;
+    color: var(--roxo-escuro);
 }
 
-/* CANTO INFERIOR ESQUERDO */
-.m3 {
-  bottom: 5%;
-  left: 5%;
+/* ---------- BOTÕES DE NAVEGAÇÃO ---------- */
+.cal-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 15px 0 25px;
 }
 
-/* CANTO INFERIOR DIREITO */
-.m4 {
-  bottom: 5%;
-  right: 5%;
+.nav-btn {
+    background-color: var(--menu);
+    padding: 10px 22px;
+    border-radius: 25px;
+    color: var(--roxo-escuro);
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
 }
 
-/* LATERAL ESQUERDA CENTRAL (ENTRE TOPO E FUNDO, BEM AFASTADO) */
-.m5 {
-  top: 50%;
-  left: 2%;
-  transform: translateY(-50%);
+.nav-btn:hover {
+    background: var(--hover);
+    transform: translateY(-3px);
 }
 
-    @keyframes floaty {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0); }
-    }
+.central {
+    background: var(--roxo);
+    color: white;
+}
+.central:hover {
+    background: var(--roxo-escuro);
+}
 
-  </style>
+/* ---------- CAIXA DO CALENDÁRIO ---------- */
+.calendario-container {
+    max-width: 650px;
+    margin: auto;
+    background: var(--menu);
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+}
+
+/* Dias da semana */
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    color: var(--roxo-escuro);
+    margin-bottom: 10px;
+}
+
+/* Corpo do calendário */
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+/* Estilo dos dias */
+.dia {
+    padding: 14px;
+    background: var(--bege);
+    border-radius: 12px;
+    text-align: center;
+    color: var(--roxo-escuro);
+    font-weight: 600;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.dia:hover {
+    background: var(--hover);
+}
+
+/* Dia com emoção registrada */
+.emocao {
+    background: var(--roxo);
+    color: white;
+}
+.emocao:hover {
+    background: var(--roxo-escuro);
+}
+
+/* RESPONSIVO */
+@media (max-width: 500px) {
+    .dia { padding: 10px; font-size: 0.9em; }
+}
+
+</style>
 </head>
+<body>
 
-<body class="wf-fallback">
+<h2 class="titulo-calendario">
+    Minhas Emoções — <?php echo str_pad($mes, 2, "0", STR_PAD_LEFT) . "/$ano"; ?>
+</h2>
 
-  <audio id="music" autoplay loop>
-      <source src="SUA_MUSICA_AQUI.mp3" type="audio/mpeg">
-  </audio>
-  <img class="meme m1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqoJFr1uPdWM4chI1mwOOWSAY1xSrLnqOJcg&s">
-    <img class="meme m2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaHNAmPDywsppYJ16z7v9nnBR2teG3E5RpA&s">
-    <img class="meme m3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSskvEwZ7G5_xC2uAWt4LOBIQRx7pm-B_NOYQ&s">
-    <img class="meme m4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC_3eIIzogwsc1YBPmJbnMxGuaYx42eOh-NaThzfBRQNyZSaNOH3al5T1QIyqeoGKLytQ&usqp=CAU">
-    <img class="meme m5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxEZniv09qWG4hvtreZ5qGLnsOOVQ6y4Xjc6aT6sVkeez0HsbTCwwu3dF7ystonQAJKNY&usqp=CAU">
+<!-- Navegação -->
+<div class="cal-nav">
+    <a href="?mes=<?php echo $mes - 1; ?>&ano=<?php echo $ano; ?>" class="nav-btn">◀ Anterior</a>
+    <a href="?mes=<?php echo date('m'); ?>&ano=<?php echo date('Y'); ?>" class="nav-btn central">Hoje</a>
+    <a href="?mes=<?php echo $mes + 1; ?>&ano=<?php echo $ano; ?>" class="nav-btn">Próximo ▶</a>
+</div>
 
-  <main class="page-card">
-    <h1>SE VC DEU A BUNDINHA PARA MIM,SORRIA</h1>
+<!-- Calendário -->
+<div class="calendario-container">
 
-  </main>
+    <div class="dias-semana">
+        <div>Dom</div>
+        <div>Seg</div>
+        <div>Ter</div>
+        <div>Qua</div>
+        <div>Qui</div>
+        <div>Sex</div>
+        <div>Sáb</div>
+    </div>
 
-  <script>
-      document.addEventListener("click", () => {
-          const audio = document.getElementById("music");
-          if (audio.paused) audio.play();
-      });
-  </script>
+    <div class="calendario">
+        <?php
+        for ($i = 0; $i < $inicioSemana; $i++) echo "<div></div>";
+
+        for ($dia = 1; $dia <= $diasNoMes; $dia++) {
+
+            $dataCompleta = "$ano-$mes-" . str_pad($dia, 2, '0', STR_PAD_LEFT);
+
+            $temEmocao = in_array($dataCompleta, $dias_com_emocao);
+
+            $classe = $temEmocao ? "dia emocao" : "dia";
+
+            echo "
+                <a class='$classe' href='registra_emocoes.php?data=$dataCompleta'>
+                    $dia
+                </a>
+            ";
+        }
+        ?>
+    </div>
+
+</div>
 
 </body>
 </html>
