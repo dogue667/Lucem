@@ -8,7 +8,7 @@
   <style>
    /* ---------- MENU ---------- */
 header {
-    background-color: var(--menu);
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -343,7 +343,7 @@ nav ul ul li a {
   </style>
 </head>
 <body>
-  <<header>
+  <header>
     <div class="logo">🌞 LUCEM</div>
 
     <nav>
@@ -386,7 +386,7 @@ nav ul ul li a {
   <section class="intro">
     <h2>Seu espaço de equilíbrio e autocuidado</h2>
     <p>
-      Aqui você encontra atividades que ajudam a <strong>melhorar o bem-estar físico e mental</strong>.  
+      Aqui você encontra atividades que ajudam a <strong>melhorar o bem-estar físico e mental</strong>
       Complete suas metas diárias e ganhe conquistas únicas!  
       <br><br>
       🌿 <strong>Exercício</strong> — movimento e energia<br>
