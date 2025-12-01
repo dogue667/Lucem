@@ -344,6 +344,8 @@ nav ul ul li a {
 </head>
 <body>
   <header>
+    <!-- ---------- MENU SUPERIOR ---------- -->
+<header>
     <div class="logo">🌞 LUCEM</div>
 
     <nav>
@@ -356,15 +358,17 @@ nav ul ul li a {
                 <li><a href="painel_psicologo.php">Painel</a></li>
                 <li><a href="lista_paciente.php">Meus Pacientes</a></li>
                 <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="config_psicologo.php">Configurações</a></li>
+                <li><a href="atendimento.php">Atendimento</a></li>
                 <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
             <?php elseif (isset($_SESSION['usuario_id'])): ?>
                 <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
                 <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-                <li><a href="atendimento.php">Atendimento Psicológico</a></li>
+                <li><a href="ligacao_paciente.php">Atendimento Psicológico</a></li>
                 <li><a href="artigos.php">Artigos</a></li>
                 <li><a href="metas.php">Exercícios & Metas</a></li>
                 <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
             <?php else: ?>
                 <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
                 <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
@@ -378,7 +382,6 @@ nav ul ul li a {
         <a href="configuracoes.php" class="config-icon">⚙️</a>
     </div>
 </header>
-
 
 
   <h1>🌞 Exercícios e Metas</h1>
