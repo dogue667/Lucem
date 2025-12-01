@@ -16,7 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mapa Emocional da Semana</title>
 <style>
- /* ---------- MENU ---------- */
+/* CENTRALIZAÇÃO GERAL */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ffe9d6;
+}
+
+/* ---------- MENU ---------- */
 header {
     background-color: var(--menu);
     display: flex;
@@ -116,94 +128,95 @@ nav ul ul li a {
     .logo { margin: 0 0 10px 0; }
 }
 
+/* ---------- CONTEÚDO CENTRAL ---------- */
+.container {
+    background-color: #fff3e6;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-top: 130px; /* Afasta do header fixo */
+    align-self: center;
+}
 
-    /* ---------- CONTAINER ---------- */
-    .container {
-        background-color: #fff3e6;
-        padding: 30px;
-        border-radius: 20px;
-        width: 90%;
-        max-width: 600px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+h2 {
+    color: #6b3e26;
+    margin-bottom: 20px;
+}
 
-    h2 {
-        color: #6b3e26;
-        margin-bottom: 20px;
-    }
+.semana {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
-    .semana {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
+.dia {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+}
 
-    .dia {
-        flex: 1;
-        text-align: center;
-        padding: 10px 0;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s ease, opacity 0.3s ease;
-    }
+.dia:hover { transform: scale(1.05); }
 
-    .dia:hover { transform: scale(1.05); }
+.calmo { background-color: #f2b179; }
+.triste { background-color: #b08bb8; }
+.grato { background-color: #b4cf8b; }
+.ansioso { background-color: #de8c8c; }
+.feliz { background-color: #93b7d3; }
+.outro { background-color: #d4ed9f; }
 
-    .calmo { background-color: #f2b179; }
-    .triste { background-color: #b08bb8; }
-    .grato { background-color: #b4cf8b; }
-    .ansioso { background-color: #de8c8c; }
-    .feliz { background-color: #93b7d3; }
-    .outro { background-color: #d4ed9f; }
+.selecionado { outline: 3px solid #6b3e26; opacity: 0.9; }
 
-    .selecionado { outline: 3px solid #6b3e26; opacity: 0.9; }
+input[type="text"], textarea {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff2e6;
+    font-size: 1em;
+    margin-top: 5px;
+}
 
-    input[type="text"], textarea {
-        width: 100%;
-        border: none;
-        border-radius: 10px;
-        padding: 10px;
-        background-color: #fff2e6;
-        font-size: 1em;
-        margin-top: 5px;
-    }
+textarea { resize: none; height: 80px; }
 
-    textarea { resize: none; height: 80px; }
+.fatores { margin: 15px 0; }
+label { margin-right: 15px; font-size: 0.95em; }   
 
-    .fatores { margin: 15px 0; }
-    label { margin-right: 15px; font-size: 0.95em; }
+button[type="submit"] {
+    background-color: #e49b84;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-    button[type="submit"] {
-        background-color: #e49b84;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        padding: 10px 25px;
-        font-size: 1em;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+button[type="submit"]:hover { background-color: #cf836d; }
 
-    button[type="submit"]:hover { background-color: #cf836d; }
+.mensagem {
+    margin-top: 20px;
+    background-color: #dff3d9;
+    border-radius: 10px;
+    padding: 10px;
+    color: #3d602c;
+}
 
-    .mensagem {
-        margin-top: 20px;
-        background-color: #dff3d9;
-        border-radius: 10px;
-        padding: 10px;
-        color: #3d602c;
-    }
-
-    /* Responsividade */
-    @media (max-width: 600px) {
-        .semana { flex-direction: column; }
-        nav ul { flex-direction: column; gap: 10px; }
-    }
+/* Responsividade */
+@media (max-width: 600px) {
+    .semana { flex-direction: column; }
+    nav ul { flex-direction: column; gap: 10px; }
+}
 </style>
 </head>
 <body>
@@ -213,9 +226,7 @@ nav ul ul li a {
 
     <nav>
         <ul>
-            <li>
-                <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
-            </li>
+            <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
             <?php if (isset($_SESSION['psicologo_id'])): ?>
                 <li><a href="painel_psicologo.php">Painel</a></li>
@@ -244,7 +255,6 @@ nav ul ul li a {
     </div>
 </header>
 
-<!-- CONTEÚDO -->
 <div class="container">
     <h2>Seu Mapa Emocional da Semana</h2>
 
@@ -276,9 +286,9 @@ nav ul ul li a {
     </form>
 
     <?php if ($mensagem): ?>
-        <div class="mensagem">
-            <?php echo $mensagem; ?>
-        </div>
+    <div class="mensagem">
+        <?php echo $mensagem; ?>
+    </div>
     <?php endif; ?>
 </div>
 
@@ -299,4 +309,3 @@ function alternarEmocao(botao, emocao) {
 
 </body>
 </html>
- 
