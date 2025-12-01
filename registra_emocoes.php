@@ -34,7 +34,7 @@ body {
 
 /* ---------- MENU ---------- */
 header {
-    background-color: var(--menu);
+    background-color:white;
     display: flex;
     justify-content: center;
     align-items: center;
