@@ -1,6 +1,5 @@
-(ainda nao terminado)
 DROP DATABASE IF EXISTS lucem;
-CREATE DATABASE lucem DEFAULT CHARACTER SET utf8mb4;
+CREATE DATABASE lucem DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE lucem;
 
 -- ==============================
@@ -32,8 +31,9 @@ CREATE TABLE Psicologo (
 CREATE TABLE Emocao (
     Cod_emocao INT AUTO_INCREMENT PRIMARY KEY,
     Tipo_emocao VARCHAR(50) NOT NULL,
-    Intensidade TINYINT CHECK (Intensidade BETWEEN 1 AND 5),
-    Causa_emocao TEXT
+    Intensidade TINYINT NOT NULL,
+    Causa_emocao TEXT,
+    CHECK (Intensidade >= 1 AND Intensidade <= 5)
 );
 
 -- ==============================
@@ -46,8 +46,10 @@ CREATE TABLE Sessao (
     Resumo_atendimento TEXT,
     Cod_usuario INT NOT NULL,
     Cod_psicologo INT NOT NULL,
+
     FOREIGN KEY (Cod_usuario) REFERENCES Usuario(Cod_usuario)
         ON DELETE CASCADE ON UPDATE CASCADE,
+
     FOREIGN KEY (Cod_psicologo) REFERENCES Psicologo(Cod_psicologo)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -61,8 +63,10 @@ CREATE TABLE Historico_emocao (
     Observacao TEXT,
     Cod_usuario INT NOT NULL,
     Cod_emocao INT NOT NULL,
+
     FOREIGN KEY (Cod_usuario) REFERENCES Usuario(Cod_usuario)
         ON DELETE CASCADE ON UPDATE CASCADE,
+
     FOREIGN KEY (Cod_emocao) REFERENCES Emocao(Cod_emocao)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
