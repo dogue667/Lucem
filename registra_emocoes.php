@@ -1,4 +1,8 @@
 <?php
+session_start();
+?>
+
+<?php
 // Simulação de registro de emoção (sem banco de dados)
 $mensagem = "";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -128,6 +132,7 @@ nav ul ul li a {
     .logo { margin: 0 0 10px 0; }
 }
 
+
 /* ---------- CONTEÚDO CENTRAL ---------- */
 .container {
     background-color: #fff3e6;
@@ -221,12 +226,15 @@ button[type="submit"]:hover { background-color: #cf836d; }
 </head>
 <body>
 
+<!-- ---------- MENU SUPERIOR ---------- -->
 <header>
     <div class="logo">🌞 LUCEM</div>
 
     <nav>
         <ul>
-            <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
+            <li>
+                <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
+            </li>
 
             <?php if (isset($_SESSION['psicologo_id'])): ?>
                 <li><a href="painel_psicologo.php">Painel</a></li>

@@ -1,7 +1,6 @@
 <?php
 session_start();
-?>
-
+include_once("conexao.php");
 
 // Verifica se o psicólogo está logado
 if (!isset($_SESSION['ID_psicologo'])) {
@@ -28,10 +27,11 @@ $resultado = $sql->get_result();
 <head>
 <meta charset="UTF-8">
 <title>Atendimentos — LUCEM</title>
-<!-- DARK MODE CSS -->
-    <link rel="stylesheet" href="darkmode.css">
+
+<link rel="stylesheet" href="darkmode.css">
+
 <style>
-    body {
+   body {
         font-family: 'Inter', sans-serif;
         background: #fcefdc;
         margin: 0;
@@ -194,12 +194,13 @@ nav ul ul li a {
 </style>
 
 <script>
+// Função do botão Ligar
 function ligar(nome) {
     alert("📞 Iniciando ligação com " + nome + "...");
 }
 </script>
-</head>
 
+</head>
 <body>
 
 <!-- NAVBAR -->
@@ -208,16 +209,15 @@ function ligar(nome) {
 
     <nav>
         <ul>
-            <li>
-                <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
-            </li>
+            <li><a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a></li>
 
-            <?php if (isset($_SESSION['psicologo_id'])): ?>
+            <?php if (isset($_SESSION['ID_psicologo'])): ?>
                 <li><a href="painel_psicologo.php">Painel</a></li>
                 <li><a href="lista_paciente.php">Meus Pacientes</a></li>
                 <li><a href="artigos.php">Artigos</a></li>
                 <li><a href="config_psicologo.php">Configurações</a></li>
                 <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
             <?php elseif (isset($_SESSION['usuario_id'])): ?>
                 <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
                 <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
@@ -225,10 +225,11 @@ function ligar(nome) {
                 <li><a href="artigos.php">Artigos</a></li>
                 <li><a href="metas.php">Exercícios & Metas</a></li>
                 <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+
             <?php else: ?>
                 <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
                 <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-                <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+                <li><a href="login_psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
                 <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
             <?php endif; ?>
         </ul>
@@ -252,42 +253,31 @@ function ligar(nome) {
     <?php while($row = $resultado->fetch_assoc()): ?>
     <tr>
         <td><?= htmlspecialchars($row['Nome_usuario']) ?></td>
-
-        <td>
-            <?= date("d/m/Y H:i", strtotime($row['Data_sessao'])) ?>
-        </td>
-
-        <td>
-            <button class="btn-ligar" onclick="ligar('<?= $row['Nome_usuario'] ?>')">
-                Ligar
-            </button>
-        </td>
+        <td><?= date("d/m/Y H:i", strtotime($row['Data_sessao'])) ?></td>
+        <td><button class="btn-ligar" onclick="ligar('<?= $row['Nome_usuario'] ?>')">Ligar</button></td>
     </tr>
     <?php endwhile; ?>
- <script>
-  // Salva o dark mode no navegador
+
+</table>
+</div>
+
+<!-- DARK MODE -->
+<script>
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
 
-    // Se estiver ativo, salva "1". Se não, salva "0".
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkmode", "1");
-    } else {
-        localStorage.setItem("darkmode", "0");
-    }
+    localStorage.setItem("darkmode",
+        document.body.classList.contains("dark-mode") ? "1" : "0"
+    );
 }
 
-// Ao carregar qualquer página, aplica o darkmode salvo
 document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem("darkmode") === "1") {
         document.body.classList.add("dark-mode");
     }
 });
 </script>
- <script src="darkmode.js"></script>
+<script src="darkmode.js"></script>
 
-</table>
-</div>
 </body>
 </html>
-
