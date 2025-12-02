@@ -206,43 +206,44 @@ session_start();
 
 <body>
 
-    <!-- NAVBAR FINAL LIMPA -->
-    <header>
-        <div class="logo">🌞 LUCEM</div>
+  <!-- ---------- MENU SUPERIOR ---------- -->
+<header>
+    <div class="logo">🌞 LUCEM</div>
 
-        <nav>
-            <ul>
-                <li><a href="index.php">Sobre</a></li>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
+            </li>
 
-                <?php if (isset($_SESSION['psicologo_id'])): ?>
-                    <li><a href="painel_psicologo.php">Painel</a></li>
-                    <li><a href="lista_paciente.php">Meus Pacientes</a></li>
-                    <li><a href="artigos.php">Artigos</a></li>
-                    <li><a href="config_psicologo.php" style="font-weight:600; color:var(--roxo);">Configurações</a></li>
-                    <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+            <?php if (isset($_SESSION['psicologo_id'])): ?>
+                <li><a href="painel_psicologo.php">Painel</a></li>
+                <li><a href="lista_paciente.php">Meus Pacientes</a></li>
+                <li><a href="artigos.php">Artigos</a></li>
+                <li><a href="atendimento.php">Atendimento</a></li>
+                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
 
-                <?php elseif (isset($_SESSION['usuario_id'])): ?>
-                    <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-                    <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-                    <li><a href="atendimento.php">Atendimento Psicológico</a></li>
-                    <li><a href="artigos.php">Artigos</a></li>
-                    <li><a href="metas.php">Exercícios & Metas</a></li>
-                    <li><a href="configuracoes.php" style="font-weight:600; color:var(--roxo);">Configurações</a></li>
-                    <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
+            <?php elseif (isset($_SESSION['usuario_id'])): ?>
+                <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
+                <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
+                <li><a href="ligacao_paciente.php">Atendimento Psicológico</a></li>
+                <li><a href="artigos.php">Artigos</a></li>
+                <li><a href="metas.php">Exercícios & Metas</a></li>
+                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
 
-                <?php else: ?>
-                    <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-                    <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-                    <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-                    <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
+            <?php else: ?>
+                <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
+                <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
+                <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+                <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 
-        <div class="nav-icons">
-            <a href="configuracoes.php">⚙️</a>
-        </div>
-    </header>
+    <div class="nav-icons">
+        <a href="configuracoes.php" class="config-icon">⚙️</a>
+    </div>
+</header>
 
     <!-- CONTEÚDO -->
     <div class="container">

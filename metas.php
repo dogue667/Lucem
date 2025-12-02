@@ -343,7 +343,6 @@ nav ul ul li a {
   </style>
 </head>
 <body>
-  <header>
     <!-- ---------- MENU SUPERIOR ---------- -->
 <header>
     <div class="logo">🌞 LUCEM</div>
