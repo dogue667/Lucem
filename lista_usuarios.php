@@ -42,7 +42,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 18px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     position: fixed;
     top: 0;
     width: 100%;
@@ -80,7 +80,6 @@ nav ul li a:hover {
     color: var(--roxo);
 }
 
-/* Ícone config */
 .nav-icons a {
     font-size: 1.5rem;
     color: var(--roxo-escuro);
@@ -92,28 +91,31 @@ nav ul li a:hover {
     color: var(--roxo);
 }
 
-/* PARA NÃO FICAR ATRÁS DO MENU */
+/* ---------------- BODY / GERAL ---------------- */
 body {
     font-family: "Poppins", sans-serif;
     background: var(--bg);
     color: var(--texto);
-    padding-top: 120px; /* empurra o conteúdo pra baixo */
+    padding-top: 120px;
+    margin: 0;
 }
 
 /* ---------------- LISTA ---------------- */
 h2 {
     text-align: center;
     margin-bottom: 20px;
+    color: var(--roxo-escuro);
+    font-weight: 600;
 }
 
 .tabela {
     width: 90%;
     max-width: 1000px;
     margin: auto;
-    background: #fff;
+    background: #ffffff;
     padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
 table {
@@ -121,34 +123,83 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
 th {
     background: var(--roxo);
     color: #fff;
+    padding: 14px;
+    font-size: 1.05em;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e8e8e8;
 }
 
 tr:hover td {
     background: var(--hover);
 }
 
-.btn {
+/* ---------------- BOTÕES ---------------- */
+/* BOTÕES NAS AÇÕES */
+td .btn {
     background: var(--roxo);
     color: #fff;
     padding: 8px 14px;
     border-radius: 10px;
     text-decoration: none;
     transition: 0.2s;
+    display: inline-block;
 }
 
-.btn:hover {
+/* AGRUPA OS BOTÕES COM ESPAÇAMENTO */
+.btn-group {
+    display: flex;
+    gap: 12px; /* espaço entre os botões */
+}
+
+/* HOVER */
+td .btn:hover {
     background: var(--roxo-escuro);
 }
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .btn-group {
+        flex-direction: column; 
+        gap: 8px;
+    }
+}
+
+/* ---------------- RESPONSIVIDADE ---------------- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 20px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tabela {
+        width: 95%;
+        padding: 15px;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+
+    .btn {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+}
 </style>
+
 </head>
 
 <body>
@@ -188,9 +239,11 @@ tr:hover td {
         <td><?= htmlspecialchars($row['Email_usuario']) ?></td>
         <td><?= date("d/m/Y", strtotime($row['Data_cadastro'])) ?></td>
         <td>
-            <a class="btn" href="ficha_paciente.php?id=<?= $row['Cod_usuario'] ?>">Ver Ficha</a>
-            <a class="btn" href="marcar_sessao.php?usuario_id=<?= $row['Cod_usuario'] ?>">Marcar Sessão</a>
-        </td>
+    <div class="btn-group">
+        <a class="btn" href="ficha_paciente.php?id=<?= $row['Cod_usuario'] ?>">Ver Ficha</a>
+        <a class="btn" href="marcar_sessao.php?usuario_id=<?= $row['Cod_usuario'] ?>">Marcar Sessão</a>
+    </div>
+</td>
     </tr>
     <?php endwhile; ?>
 

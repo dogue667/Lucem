@@ -268,7 +268,6 @@ nav ul ul li a {
 </style>
 </head>
 <body>
-<!-- ---------- MENU SUPERIOR ---------- -->
 <header>
     <div class="logo">🌞 LUCEM</div>
 
@@ -304,6 +303,8 @@ nav ul ul li a {
     <div class="nav-icons">
         <a href="configuracoes.php" class="config-icon">⚙️</a>
     </div>
+</header>
+
 </header>
 <h2 class="titulo-calendario">
     Minhas Emoções — <?php echo str_pad($mes, 2, "0", STR_PAD_LEFT) . "/$ano"; ?>
