@@ -39,7 +39,7 @@ $usuario = $stmt->get_result()->fetch_assoc();
 <head>
 <meta charset="UTF-8">
 <title>Marcar Sessão — <?= htmlspecialchars($usuario['Nome_usuario']) ?></title>
-
+<link rel="stylesheet" href="nav.css">
 <!-- DARK MODE -->
 <link rel="stylesheet" href="darkmode.css">
 
@@ -120,93 +120,15 @@ button:hover { background: var(--roxo-escuro); }
     font-weight: bold; 
 }
 
-/* ------------------ MENU ------------------ */
-header {
-    background-color: var(--menu);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-}
 
-.logo {
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    font-size: 1.7em;
-    color: var(--roxo-escuro);
-    letter-spacing: 1px;
-    margin-right: 60px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--roxo-escuro);
-    font-weight: 500;
-    font-size: 1em;
-    padding: 10px 16px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: var(--hover);
-    color: var(--roxo);
-}
-
-.nav-icons a {
-    font-size: 1.5rem;
-    color: var(--roxo-escuro);
-    text-decoration: none;
-    margin-left: 25px;
-    transition: .3s;
-}
-
-.nav-icons a:hover {
-    transform: rotate(20deg);
-    color: var(--roxo);
-}
-
-/* ------------------ RESPONSIVO ------------------ */
-@media (max-width: 768px) {
-    header { flex-direction: column; }
-    nav ul { flex-direction: column; gap: 10px; }
-    .logo { margin: 0 0 10px 0; }
-}
 </style>
 
 </head>
 <body>
 
-<header>
-    <div class="logo">🌞 LUCEM</div>
-
-    <nav>
-        <ul>
-            <li><a href="index.php">Sobre</a></li>
-            <li><a href="lista_usuarios.php">Pacientes</a></li>
-            <li><a href="artigos.php">Artigos</a></li>
-            <li><a href="atendimento.php">Atendimentos</a></li>
-            <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-        </ul>
-    </nav>
-
-    <div class="nav-icons">
-        <a href="configuracoes.php">⚙️</a>
-    </div>
-</header>
+<!-------------- NAV ---------- -->
+<?php include "nav.php"; ?>
+  
 
 <div class="box">
     <h2>Marcar Sessão</h2>

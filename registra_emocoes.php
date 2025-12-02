@@ -1,26 +1,71 @@
 <?php
 session_start();
-?>
+include_once("conexao.php");
 
-<?php
-// Simulação de registro de emoção (sem banco de dados)
+// Verifica login
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$usuario_id = $_SESSION['usuario_id'];
+
 $mensagem = "";
+
+// Se enviou formulário
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $emocao = $_POST["emocao"] ?? "";
+
+    // Emoções selecionadas
+    $emocaoSelecionada = $_POST["emocao"] ?? "";
     $descricao = $_POST["descricao"] ?? "";
-    $fatores = isset($_POST["fatores"]) ? implode(", ", $_POST["fatores"]) : "Nenhum";
-    $mensagem = "Emoções registradas: $emocao<br>Descrição: $descricao<br>Fatores: $fatores";
+    $fatores = isset($_POST["fatores"]) ? implode(", ", $_POST["fatores"]) : "";
+
+    if ($emocaoSelecionada != "") {
+
+        // --- 1. INSERIR EM TABELA EMOCAO ---
+        $sql_emocao = $conexao->prepare("
+            INSERT INTO Emocao (Tipo_emocao, Intensidade, Causa_emocao)
+            VALUES (?, ?, ?)
+        ");
+        $intensidade_padrao = 3; // você pode mudar depois
+        $causa = $descricao . " | Fatores: " . $fatores;
+
+        $sql_emocao->bind_param("sis",
+            $emocaoSelecionada,
+            $intensidade_padrao,
+            $causa
+        );
+        $sql_emocao->execute();
+
+        $codEmocao = $sql_emocao->insert_id;
+
+        // --- 2. INSERIR EM HISTORICO_EMOCAO ---
+        $sql_hist = $conexao->prepare("
+            INSERT INTO Historico_emocao (Observacao, Cod_usuario, Cod_emocao)
+            VALUES (?, ?, ?)
+        ");
+        $sql_hist->bind_param("sii",
+            $descricao,
+            $usuario_id,
+            $codEmocao
+        );
+        $sql_hist->execute();
+
+        $mensagem = "Registro salvo com sucesso!";
+    } else {
+        $mensagem = "Selecione ao menos uma emoção!";
+    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mapa Emocional da Semana</title>
+<link rel="stylesheet" href="nav.css">
+<link rel="stylesheet" href="darkmode.css">
 <style>
-
 /* ============================= */
 /*           PALETA LUCEM        */
 /* ============================= */
@@ -38,120 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     --ansioso: #de8c8c;
     --feliz: #93b7d3;
     --outro: #d4ed9f;
-}
-
-/* ============================= */
-/*       PADRÃO DA PÁGINA        */
-/* ============================= */
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-    background-color: var(--bg);
-    color: var(--texto);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* ============================= */
-/*             HEADER            */
-/* ============================= */
-
-header {
-    background-color: var(--menu);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-}
-
-.logo {
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    font-size: 1.7em;
-    color: var(--roxo-escuro);
-    letter-spacing: 1px;
-    margin-right: 80px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    gap: 25px;
-}
-
-nav ul li {
-    position: relative;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--roxo-escuro);
-    font-weight: 500;
-    font-size: 1em;
-    padding: 10px 16px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-nav ul li a:hover {
-    background-color: var(--hover);
-    color: var(--roxo);
-}
-
-/* ---------- Submenu ---------- */
-nav ul ul {
-    display: none;
-    position: absolute;
-    background-color: var(--menu);
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    top: 45px;
-    padding: 10px 0;
-    min-width: 160px;
-}
-
-nav ul li:hover > ul {
-    display: block;
-}
-
-nav ul ul li a {
-    display: block;
-    padding: 10px 15px;
-}
-
-/* ---------- Ícone config ---------- */
-.nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.config-icon a {
-    font-size: 1.5rem;
-    color: var(--roxo-escuro);
-    transition: 0.3s;
-}
-
-.config-icon a:hover {
-    transform: rotate(20deg);
-    color: var(--roxo);
-}
-
-/* ---------- RESPONSIVO MENU ---------- */
-@media (max-width: 768px) {
-    header { flex-direction: column; }
-    nav ul { flex-direction: column; gap: 10px; }
-    .logo { margin-bottom: 10px; }
 }
 
 /* ============================= */
@@ -273,43 +204,9 @@ button[type="submit"]:hover {
 </head>
 <body>
 
-<!-- ---------- MENU SUPERIOR ---------- -->
-<header>
-    <div class="logo">🌞 LUCEM</div>
-
-    <nav>
-        <ul>
-            <li>
-                <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
-            </li>
-
-            <?php if (isset($_SESSION['psicologo_id'])): ?>
-                <li><a href="lista_usuarios.php">Pacientes</a></li>
-                <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="atendimento.php">Atendimento</a></li>
-                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-            <?php elseif (isset($_SESSION['usuario_id'])): ?>
-                <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-                <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-                <li><a href="ligacao_paciente.php">Atendimento Psicológico</a></li>
-                <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="metas.php">Exercícios & Metas</a></li>
-                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-            <?php else: ?>
-                <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-                <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-                <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-                <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-
-    <div class="nav-icons">
-        <a href="configuracoes.php" class="config-icon">⚙️</a>
-    </div>
-</header>
+<!-------------- NAV ---------- -->
+<?php include "nav.php"; ?>
+  
 <div class="container">
     <h2>Seu Mapa Emocional da Semana</h2>
 

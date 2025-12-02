@@ -11,13 +11,14 @@ session_start();
 
   <!-- FONTES -->
      <!-- DARK MODE CSS -->
+      <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="darkmode.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #f9efe4;
-      --menu: #ffffff;
+      --menu: #ffffff;423
       --texto: #5b3a70;
       --roxo: #9b6bc2;
       --roxo-escuro: #4d2f68;
@@ -31,107 +32,6 @@ session_start();
       background-color: var(--bg);
       color: var(--texto);
     }
-
-/* ---------- MENU ---------- */
-header {
-    background-color: var(--menu);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-}
-
-.logo {
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    font-size: 1.7em;
-    color: var(--roxo-escuro);
-    letter-spacing: 1px;
-    margin-right: 80px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    gap: 25px;
-}
-
-nav ul li {
-    position: relative;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--roxo-escuro);
-    font-weight: 500;
-    font-size: 1em;
-    padding: 10px 16px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-nav ul li a:hover {
-    background-color: var(--hover);
-    color: var(--roxo);
-}
-
-/* Submenu */
-nav ul ul {
-    display: none;
-    position: absolute;
-    background-color: var(--menu);
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    top: 45px;
-    padding: 10px 0;
-    min-width: 160px;
-}
-
-nav ul li:hover > ul {
-    display: block;
-}
-
-nav ul ul li a {
-    display: block;
-    padding: 10px 15px;
-}
-
-.nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.config-icon a {
-    font-size: 1.5rem;
-    color: var(--roxo-escuro);
-    transition: 0.3s;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
-.config-icon a:hover {
-    transform: rotate(20deg);
-    color: var(--roxo);
-}
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-    header { flex-direction: column; }
-    nav ul { flex-direction: column; gap: 10px; }
-    .logo { margin: 0 0 10px 0; }
-}
-
 
     /* ---------- BANNER ---------- */
     .banner {
@@ -291,45 +191,10 @@ nav ul ul li a {
   </style>
 </head>
 <body>
-
-<header>
-    <div class="logo">🌞 LUCEM</div>
-
-    <nav>
-        <ul>
-            <li>
-                <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
-            </li>
-
-            <?php if (isset($_SESSION['psicologo_id'])): ?>
-                <li><a href="lista_usuarios.php">Pacientes</a></li>
-                <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="atendimento.php">Atendimento</a></li>
-                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-            <?php elseif (isset($_SESSION['usuario_id'])): ?>
-                <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-                <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-                <li><a href="ligacao_paciente.php">Atendimento Psicológico</a></li>
-                <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="metas.php">Exercícios & Metas</a></li>
-                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-            <?php else: ?>
-                <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-                <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-                <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-                <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-
-    <div class="nav-icons">
-        <a href="configuracoes.php" class="config-icon">⚙️</a>
-    </div>
-</header>
-
-  <!-- ---------- BANNER ---------- -->
+<!-------------- NAV ---------- -->
+<?php include "nav.php"; ?>
+  
+  <!---------- BANNER ---------- -->
   <section class="banner fade">
     <h1>Artigos e Inspirações 💭</h1>
     <p>Conteúdos que acolhem, informam e fortalecem sua jornada de autocuidado.</p>

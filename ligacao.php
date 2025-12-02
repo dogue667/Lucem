@@ -15,7 +15,7 @@ $id = $_GET['id'] ?? 0;
 <head>
 <meta charset="UTF-8">
 <title>LUCEM — Ligação com <?= htmlspecialchars($nome) ?></title>
-
+<link rel="stylesheet" href="nav.css">
 <link rel="stylesheet" href="darkmode.css">
 
 <style>
@@ -27,67 +27,6 @@ body {
     margin: 0;
     padding-top: 120px;
     text-align: center;
-}
-
-/* ======= NAVBAR ======= */
-header {
-    background-color: var(--menu, #ffffff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-}
-
-.logo {
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    font-size: 1.7em;
-    color: var(--roxo-escuro, #4d2f68);
-    margin-right: 80px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--roxo-escuro, #4d2f68);
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: var(--hover, #f7dfd5);
-    color: var(--roxo, #9b6bc2);
-}
-
-.config-icon a {
-    font-size: 1.5rem;
-    color: var(--roxo-escuro);
-    transition: 0.3s;
-}
-
-.config-icon a:hover {
-    transform: rotate(20deg);
-    color: var(--roxo);
-}
-
-.nav-icons {
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
 }
 
 /* ======= VÍDEOS ======= */
@@ -128,44 +67,8 @@ h1 {
 </head>
 <body>
 
-<!-- NAVBAR -->
-<header>
-    <div class="logo">🌞 LUCEM</div>
-
-    <nav>
-        <ul>
-
-            <?php if (isset($_SESSION['psicologo_id'])): ?>
-                <li><a href="index.php">Sobre</a></li>
-                <li><a href="painel_psicologo.php">Painel</a></li>
-                <li><a href="lista_paciente.php">Pacientes</a></li>
-                <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="atendimento.php">Atendimentos</a></li>
-                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-            <?php elseif (isset($_SESSION['usuario_id'])): ?>
-                <li><a href="index.php">Sobre</a></li>
-                <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-                <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-                <li><a href="atendimento_usuario.php">Atendimento</a></li>
-                <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-            <?php else: ?>
-                <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-                <li><a href="login.php" style="color:#d9534f;">Login</a></li>
-                <li><a href="login_psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-            <?php endif; ?>
-
-        </ul>
-    </nav>
-
-    <div class="nav-icons">
-        <div class="config-icon">
-            <a href="configuracoes.php">⚙️</a>
-        </div>
-    </div>
-</header>
+<!-------------- NAV ---------- -->
+<?php include "nav.php"; ?>
 
 <h1>Ligação com <?= htmlspecialchars($nome) ?></h1>
 

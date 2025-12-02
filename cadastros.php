@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LUCEM - Cadastro</title>
+        <link rel="stylesheet" href="nav.css">
  <link rel="stylesheet" href="darkmode.css">
   <style>
     * {
@@ -32,48 +33,6 @@
       align-items: center;
       padding-top: 110px;
       /* impede que o card fique atrás do menu */
-    }
-
-    /* -------- MENU SUPERIOR -------- */
-    header {
-      background-color: var(--menu);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 18px 40px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: 1.7em;
-      color: var(--roxo-escuro);
-      margin-right: 80px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 25px;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: var(--roxo-escuro);
-      font-weight: 500;
-      padding: 10px 16px;
-      border-radius: 10px;
-      transition: 0.3s ease;
-    }
-
-    nav ul li a:hover {
-      background-color: var(--hover);
-      color: var(--roxo);
     }
 
     /* -------- CARD -------- */
@@ -147,24 +106,9 @@
 
 <body>
 
-  <!-- -------- MENU SUPERIOR -------- -->
-  <header>
-    <div class="logo">🌞 LUCEM</div>
-
-    <nav>
-      <ul>
-        <li><a href="index.php">Sobre</a></li>
-        <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-        <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-        <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-      </ul>
-    </nav>
-
-    <div class="nav-icons">
-      <a href="configuracoes.php" class="config-icon">⚙️</a>
-    </div>
-  </header>
+ <!-------------- NAV ---------- -->
+<?php include "nav.php"; ?>
+  
 
   <!-- -------- CARD DE CADASTRO -------- -->
   <div class="card">

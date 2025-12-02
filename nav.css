@@ -1,0 +1,105 @@
+:root {
+    --bg: #f9efe4;
+    --menu: #ffffff;
+    --texto: #5b3a70;
+    --roxo: #9b6bc2;
+    --roxo-escuro: #4d2f68;
+    --hover: #e3d3f5;
+}
+
+/* ---------- MENU ---------- */
+header {
+    background-color: var(--menu);
+    display: flex;
+    justify-content: space-between; /* logo esquerda / menu meio / config direita */
+    align-items: center;
+    padding: 18px 40px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+/* Deixa o MENU exatamente no meio */
+nav {
+    flex: 1;                       /* ocupa todo o espaço entre logo e engrenagem */
+    display: flex;
+    justify-content: center;       /* centraliza o UL */
+}
+
+/* Logo */
+.logo {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 1.7em;
+    color: var(--roxo-escuro);
+    letter-spacing: 1px;
+}
+
+/* NAV LISTA */
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 25px;
+    align-items: center;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--roxo-escuro);
+    font-weight: 500;
+    font-size: 1em;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: var(--hover);
+    color: var(--roxo);
+}
+
+/* ÍCONE DE CONFIGURAÇÃO */
+.config-icon {
+    font-size: 1.9rem;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--roxo-escuro);
+    transition: 0.3s ease;
+
+    font-family: "Segoe UI Emoji", "Noto Color Emoji",
+                 "Apple Color Emoji", sans-serif;
+}
+
+.config-icon:hover {
+    color: var(--roxo);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    header { 
+        flex-direction: column; 
+        padding: 10px 20px;
+    }
+
+    nav {
+        flex: none;
+    }
+
+    nav ul { 
+        flex-direction: column; 
+        gap: 10px; 
+        text-align: center;
+    }
+
+    .logo { 
+        margin-bottom: 10px; 
+    }
+}

@@ -11,6 +11,7 @@ if (isset($_SESSION['usuario_id'])) {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Login - LUCEM</title>
+      <link rel="stylesheet" href="nav.css">
  <!-- DARK MODE CSS -->
     <link rel="stylesheet" href="darkmode.css">
 <style>
@@ -33,49 +34,6 @@ body {
   padding-top: 90px; /* IMPORTANTE → evita sobreposição do menu */
 }
 
-/* ---------- MENU ---------- */
-header {
-  background-color: var(--menu);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 18px 40px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.logo {
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  font-size: 1.7em;
-  color: var(--roxo-escuro);
-  letter-spacing: 1px;
-  margin-right: 80px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-  gap: 25px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: var(--roxo-escuro);
-  font-weight: 500;
-  padding: 10px 16px;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-nav ul li a:hover {
-  background-color: var(--hover);
-  color: var(--roxo);
-}
 
 /* ---------- CONTAINER PRINCIPAL ---------- */
 .container {
@@ -144,44 +102,9 @@ nav ul li a:hover {
 
 <body>
 
-<!-- ---------- MENU SUPERIOR ---------- -->
-<header>
-    <div class="logo">🌞 LUCEM</div>
-
-    <nav>
-        <ul>
-            <li>
-                <a href="index.php" style="font-weight:600; color:var(--roxo);">Sobre</a>
-            </li>
-
-            <?php if (isset($_SESSION['psicologo_id'])): ?>
-                <li><a href="painel_psicologo.php">Painel</a></li>
-                <li><a href="lista_paciente.php">Meus Pacientes</a></li>
-                <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="atendimento.php">Atendimento</a></li>
-                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-            <?php elseif (isset($_SESSION['usuario_id'])): ?>
-                <li><a href="registra_emocoes.php">Registrar Emoções</a></li>
-                <li><a href="minhas_emocoes.php">Minhas Emoções</a></li>
-                <li><a href="ligacao_paciente.php">Atendimento Psicológico</a></li>
-                <li><a href="artigos.php">Artigos</a></li>
-                <li><a href="metas.php">Exercícios & Metas</a></li>
-                <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-
-            <?php else: ?>
-                <li><a href="cadastro.html" style="color:#d9534f;">Criar Conta</a></li>
-                <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-                <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-                <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-
-    <div class="nav-icons">
-        <a href="configuracoes.php" class="config-icon">⚙️</a>
-    </div>
-</header>
+<!-------------- NAV ---------- -->
+<?php include "nav.php"; ?>
+  
 
 <!-- CONTEÚDO -->
 <div class="container">

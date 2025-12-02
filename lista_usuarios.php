@@ -21,6 +21,7 @@ $resultado = $sql->get_result();
 <head>
 <meta charset="UTF-8">
 <title>Pacientes — LUCEM</title>
+<link rel="stylesheet" href="nav.css">
 <link rel="stylesheet" href="darkmode.css">
 <style>
 /* ==========================
@@ -33,62 +34,6 @@ $resultado = $sql->get_result();
     --roxo: #9b6bc2;
     --roxo-escuro: #4d2f68;
     --hover: #e3d3f5;
-}
-
-/* ---------------- MENU ---------------- */
-header {
-    background-color: var(--menu);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 40px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-}
-
-.logo {
-    font-family: "Playfair Display", serif;
-    font-weight: 700;
-    font-size: 1.7em;
-    color: var(--roxo-escuro);
-    letter-spacing: 1px;
-}
-
-/* NAV */
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--roxo-escuro);
-    font-weight: 500;
-    padding: 10px 16px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-nav ul li a:hover {
-    background-color: var(--hover);
-    color: var(--roxo);
-}
-
-.nav-icons a {
-    font-size: 1.5rem;
-    color: var(--roxo-escuro);
-    transition: 0.3s;
-}
-
-.nav-icons a:hover {
-    transform: rotate(20deg);
-    color: var(--roxo);
 }
 
 /* ---------------- BODY / GERAL ---------------- */
@@ -204,23 +149,9 @@ td .btn:hover {
 
 <body>
 
-<header>
-    <div class="logo">🌞 LUCEM</div>
-
-    <nav>
-        <ul>
-            <li><a href="index.php">Sobre</a></li>
-            <li><a href="lista_usuarios.php" style="font-weight:600; color:var(--roxo);">Pacientes</a></li>
-            <li><a href="artigos.php">Artigos</a></li>
-            <li><a href="atendimento.php">Atendimento</a></li>
-            <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
-        </ul>
-    </nav>
-
-    <div class="nav-icons">
-        <a href="configuracoes.php">⚙️</a>
-    </div>
-</header>
+<!-------------- NAV ---------- -->
+<?php include "nav.php"; ?>
+  
 
 <h2>Pacientes Cadastrados</h2>
 
