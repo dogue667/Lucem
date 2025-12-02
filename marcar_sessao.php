@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Buscar dados do usuário
+// Buscar dados do usuário<link rel="stylesheet" href="darkmode.css">
 $stmt = $conexao->prepare("SELECT Nome_usuario, Email_usuario FROM Usuario WHERE Cod_usuario = ?");
 $stmt->bind_param("i", $usuario_id);
 $stmt->execute();
@@ -36,6 +36,7 @@ $usuario = $stmt->get_result()->fetch_assoc();
 <meta charset="UTF-8">
 <title>Marcar Sessão — <?= htmlspecialchars($usuario['Nome_usuario']) ?></title>
 <style>
+<link rel="stylesheet" href="darkmode.css">
 body { font-family: "Poppins", sans-serif; background:#f9efe4; color:#4d2f68; padding:30px;}
 .box { background:#fff; padding:25px; border-radius:15px; max-width:400px; margin:auto; box-shadow:0 3px 10px rgba(0,0,0,0.08);}
 label { display:block; margin:15px 0 5px; }
@@ -57,6 +58,27 @@ button:hover { background:#4d2f68; }
     </form>
     <?php if(isset($msg)) echo "<p class='msg'>$msg</p>"; ?>
 </div>
+ <script>
+  // Salva o dark mode no navegador
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+
+    // Se estiver ativo, salva "1". Se não, salva "0".
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkmode", "1");
+    } else {
+        localStorage.setItem("darkmode", "0");
+    }
+}
+
+// Ao carregar qualquer página, aplica o darkmode salvo
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("darkmode") === "1") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
+ <script src="darkmode.js"></script>
 
 </body>
 </html>
