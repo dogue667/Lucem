@@ -269,7 +269,6 @@ nav ul ul li a {
 </head>
 <body>
 <!-- ---------- MENU SUPERIOR ---------- -->
-<!-- ---------- MENU SUPERIOR ---------- -->
 <header>
     <div class="logo">🌞 LUCEM</div>
 
@@ -280,8 +279,7 @@ nav ul ul li a {
             </li>
 
             <?php if (isset($_SESSION['psicologo_id'])): ?>
-                <li><a href="painel_psicologo.php">Painel</a></li>
-                <li><a href="lista_paciente.php">Meus Pacientes</a></li>
+                <li><a href="lista_usuarios.php">Pacientes</a></li>
                 <li><a href="artigos.php">Artigos</a></li>
                 <li><a href="atendimento.php">Atendimento</a></li>
                 <li><a href="logout.php" style="color:#d9534f;">Sair</a></li>
