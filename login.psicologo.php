@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (isset($_SESSION['psicologo_id'])) {
-  header("Location: painel_psicologo.php");
-  exit;
+    header("Location: painel_psicologo.php");
+    exit;
 }
 ?>
 
@@ -12,31 +12,19 @@ if (isset($_SESSION['psicologo_id'])) {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Login Psicólogo - LUCEM</title>
-       <link rel="stylesheet" href="nav.css">
-<!-- DARK MODE CSS -->
-    <link rel="stylesheet" href="darkmode.css">
-<style>
-/* ---------- CORES ---------- */
-:root {
-  --bg: #f9efe4;
-  --menu: #ffffff;
-  --texto: #5b3a70;
-  --roxo: #9b6bc2;
-  --roxo-escuro: #4d2f68;
-  --hover: #e7d3f5;
-}
+<link rel="stylesheet" href="nav.css"> <!-- apenas nav CSS -->
+<link rel="stylesheet" href="darkmode.css">
 
-/* ---------- AJUSTES GERAIS ---------- */
+<style>
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: var(--bg);
-  padding-top: 90px; /* impede sobreposição do menu */
+  background: #f9efe4;
+  padding-top: 90px; /* não sobrepõe o menu */
   display: flex;
   justify-content: center;
 }
 
-/* ---------- LOGIN BOX ---------- */
 .container {
   display: flex;
   background: #fff7ef;
@@ -88,27 +76,16 @@ body {
   cursor: pointer;
 }
 
-.btn:hover {
-  background: #523c91;
-}
+.btn:hover { background: #523c91; }
 
-.erro {
-  color: red;
-  margin-bottom: 15px;
-}
+.erro { color: red; margin-bottom: 15px; }
 </style>
-
 </head>
 
 <body>
-
-<!-------------- NAV ---------- -->
 <?php include "nav.php"; ?>
-  
 
-<!-- CAIXA DE LOGIN -->
 <div class="container">
-
   <div class="left">
     <img src="lucem.png" alt="Logo Lucem" />
     <h1>Login de Psicólogo ☀️</h1>
@@ -133,29 +110,8 @@ body {
       <a href="cadastro_psicologo.html">Cadastrar</a>
     </p>
   </div>
-
 </div>
- <script>
-  // Salva o dark mode no navegador
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
 
-    // Se estiver ativo, salva "1". Se não, salva "0".
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkmode", "1");
-    } else {
-        localStorage.setItem("darkmode", "0");
-    }
-}
-
-// Ao carregar qualquer página, aplica o darkmode salvo
-document.addEventListener("DOMContentLoaded", () => {
-    if (localStorage.getItem("darkmode") === "1") {
-        document.body.classList.add("dark-mode");
-    }
-});
-</script>
- <script src="darkmode.js"></script>
-
+<script src="darkmode.js"></script>
 </body>
 </html>

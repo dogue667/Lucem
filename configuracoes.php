@@ -8,7 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUCEM — Configurações</title>
-      <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="darkmode.css">
     <style>
         /* ===================== CORES PADRÃO ===================== */
@@ -32,7 +32,6 @@ session_start();
             transition: 0.3s ease;
         }
 
-       
         /* ===================== ACORDEÃO ===================== */
         .acordeon {
             background: var(--menu);
@@ -63,24 +62,34 @@ session_start();
             padding: 0 22px;
         }
 
+        /* ===================== FORMULÁRIOS ===================== */
         .painel form,
         .painel div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px 0;
+            gap: 12px;
         }
 
         label {
             font-weight: 600;
             display: block;
             margin: 12px 0 6px;
+            width: 100%;
+            max-width: 400px;
         }
 
-        input {
+        input,
+        button.salvar {
             width: 100%;
+            max-width: 400px;
             padding: 12px;
             border-radius: 12px;
             border: 1px solid #d1b3f1;
             font-size: 1em;
             outline: none;
+            box-sizing: border-box;
         }
 
         input:focus {
@@ -88,29 +97,38 @@ session_start();
         }
 
         button.salvar {
-            margin-top: 20px;
             background: var(--roxo);
             color: white;
-            padding: 12px 22px;
-            border-radius: 12px;
-            border: none;
             cursor: pointer;
             font-weight: 600;
             transition: 0.3s;
+            border: none;
         }
 
         button.salvar:hover {
             background: var(--roxo-escuro);
+        }
+
+        /* ===================== TITULOS ===================== */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 25px 0;
         }
     </style>
 </head>
 
 <body>
 
-  <!-- ---------- MENU SUPERIOR ---------- -->
-<!-------------- NAV ---------- -->
-<?php include "nav.php"; ?>
-  
+    <!-- NAV -->
+    <?php include "nav.php"; ?>
+
     <!-- CONTEÚDO -->
     <div class="container">
 
@@ -159,7 +177,7 @@ session_start();
                 <button class="salvar" type="submit">Atualizar Senha</button>
             </form>
 
-            <hr style="border:0;height:1px;background:#ddd;margin:25px 0;">
+            <hr>
 
             <h3>📧 Trocar E-mail</h3>
 
@@ -210,5 +228,5 @@ session_start();
     </script>
 
 </body>
-</html>
 
+</html>

@@ -22,7 +22,7 @@
         <?php else: ?>
             <li><a href="cadastro.php" style="color:#d9534f;">Criar Conta</a></li>
             <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-            <li><a href="login_psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
+            <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
             <li><a href="cadastrar_psicologo.php" style="color:#d9534f;">Cadastro Psicólogo</a></li>
         <?php endif; ?>
 

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LUCEM - Cadastro</title>
- <link rel="stylesheet" href="darkmode.css">
+  <link rel="stylesheet" href="nav.css">
   <style>
     * {
       margin: 0;
@@ -147,25 +147,9 @@
 
 <body>
 
-  <!-- -------- MENU SUPERIOR -------- -->
-  <header>
-    <div class="logo">🌞 LUCEM</div>
-
-    <nav>
-      <ul>
-        <li><a href="index.php">Sobre</a></li>
-        <li><a href="cadastro.php" style="color:#d9534f;">Criar Conta</a></li>
-        <li><a href="login.php" style="color:#d9534f;">Fazer Login</a></li>
-        <li><a href="login.psicologo.php" style="color:#d9534f;">Login Psicólogo</a></li>
-        <li><a href="cadastrar_psicologo.html" style="color:#d9534f;">Cadastro Psicólogo</a></li>
-      </ul>
-    </nav>
-
-    <div class="nav-icons">
-      <a href="configuracoes.php" class="config-icon">⚙️</a>
-    </div>
-  </header>
-
+  <!-------------- NAV ---------- -->
+<?php include "nav.php"; ?>
+  
   <!-- -------- CARD DE CADASTRO -------- -->
   <div class="card">
     <h3>Crie sua conta</h3>
