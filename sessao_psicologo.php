@@ -7,7 +7,6 @@ if (!empty($_POST['email']) && !empty($_POST['senha'])) {
     $email = mysqli_real_escape_string($conexao, $_POST['email']);
     $senha = $_POST['senha'];
 
-    // Busca psicólogo
     $sql = "SELECT Cod_psicologo, Nome_psicologo, Email_psicologo, Senha_psicologo 
             FROM Psicologo 
             WHERE Email_psicologo = ? 
@@ -22,15 +21,12 @@ if (!empty($_POST['email']) && !empty($_POST['senha'])) {
 
         $psicologo = $resultado->fetch_assoc();
 
-        // Verifica senha criptografada
         if (password_verify($senha, $psicologo['Senha_psicologo'])) {
 
-            // Cria sessão do psicólogo
             $_SESSION['psicologo_id'] = $psicologo['Cod_psicologo'];
             $_SESSION['psicologo_nome'] = $psicologo['Nome_psicologo'];
             $_SESSION['psicologo_email'] = $psicologo['Email_psicologo'];
 
-            // Redireciona
             header("Location: index.php");
             exit;
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['psicologo_id'])) {
-    header("Location: painel_psicologo.php");
+    header("Location: index.php");
     exit;
 }
 ?>
@@ -100,7 +100,7 @@ body {
       <p class="erro"><?= htmlspecialchars($_GET['erro']) ?></p>
     <?php endif; ?>
 
-    <form action="sessao_psicologo.php" method="POST">
+   <form action="sessao_psicologo.php" method="POST">
       <input type="email" name="email" placeholder="E-mail" required />
       <input type="password" name="senha" placeholder="Senha" required />
       <button class="btn" type="submit">Entrar</button>
@@ -111,7 +111,16 @@ body {
     </p>
   </div>
 </div>
+<script>
+// Ao carregar qualquer página, aplica o darkmode salvo
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("darkmode") === "1") {
+        document.body.classList.add("dark-mode");
+    }
+});
+</script>
 
 <script src="darkmode.js"></script>
+
 </body>
 </html>

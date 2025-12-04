@@ -88,42 +88,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 /* ============================= */
 /*       CONTAINER PRINCIPAL     */
 /* ============================= */
-
 .container {
-    background-color: #fff3e6;
-    padding: 30px;
+    background-color: var(--menu);
+    padding: 30px 25px;
     border-radius: 20px;
     width: 90%;
-    max-width: 600px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    margin-top: 130px; 
+    max-width: 550px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+    margin: 130px auto 50px;
 }
 
 /* ============================= */
 /*         EMOÇÕES — BOTÕES      */
 /* ============================= */
-
 .semana {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .dia {
-    flex: 1;
+    flex: 1 1 48%;
     text-align: center;
-    padding: 12px 0;
-    border-radius: 10px;
+    padding: 10px 0;
+    border-radius: 12px;
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.3s ease;
+    transition: transform 0.2s ease, opacity 0.3s ease, box-shadow 0.3s ease;
     border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.dia:hover { transform: scale(1.05); }
+.dia:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
 .calmo { background-color: var(--calmo); }
 .triste { background-color: var(--triste); }
@@ -140,51 +142,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 /* ============================= */
 /*           INPUTS/TEXTOS       */
 /* ============================= */
-
 input[type="text"], textarea {
     width: 100%;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 12px;
-    background-color: #ffe7d0;
-    font-size: 1em;
+    background-color: #fff4eb;
+    font-size: 0.95rem;
     margin-top: 5px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
 textarea { height: 90px; resize: none; }
-
-label { font-size: 1em; }
+label { font-size: 1rem; font-weight: 500; margin-top: 12px; display: block; }
 
 /* ============================= */
 /*             CHECKBOX          */
 /* ============================= */
-
-.fatores { margin: 15px 0; }
-.fatores label { margin-right: 15px; }
+.fatores { margin: 15px 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.fatores label { font-weight: 500; cursor: pointer; }
 
 /* ============================= */
 /*             BOTÃO             */
 /* ============================= */
-
 button[type="submit"] {
     background-color: var(--roxo);
     color: white;
     border: none;
     border-radius: 12px;
     padding: 12px 25px;
-    font-size: 1em;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.3s ease, transform 0.2s ease;
 }
 
 button[type="submit"]:hover {
     background-color: var(--roxo-escuro);
+    transform: scale(1.02);
 }
 
 /* ============================= */
 /*          MENSAGEM RETORNO     */
 /* ============================= */
-
 .mensagem {
     margin-top: 20px;
     background-color: #dff3d9;
@@ -192,11 +192,13 @@ button[type="submit"]:hover {
     padding: 12px;
     color: #3d602c;
     font-weight: 500;
+    text-align: center;
 }
 
 /* RESPONSIVIDADE */
-@media (max-width: 600px) {
-    .semana { flex-direction: column; }
+@media (max-width: 500px) {
+    .dia { flex: 1 1 100%; }
+    .container { padding: 20px; margin-top: 100px; }
 }
 
 </style>

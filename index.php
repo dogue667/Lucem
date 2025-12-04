@@ -250,7 +250,7 @@
     <p>Seu espaço de equilíbrio e autocuidado.<br>Cuide da mente, respire fundo e comece hoje.</p>
 
     <?php if (!isset($_SESSION['usuario_id'])): ?>
-        <a href="cadastro.html" class="botao">Comece agora</a>
+        <a href="cadastro.php" class="botao">Comece agora</a>
     <?php endif; ?>
 </section>
 
